@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+
+const ProductSearch = () => {
+  const [query, setQuery] = useState('');
+  const [products] = useState([
+    { id: 1, title: 'iPhone 15' },
+    { id: 2, title: 'Samsung Galaxy S24' },
+    { id: 3, title: 'OnePlus 12' },
+  ]);
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(query.toLowerCase())
+  );
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{ padding: '8px', width: '300px' }}
+      />
+      <ul>
+        {filteredProducts.map((product) => (
+          <li key={product.id}>{product.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductSearch;
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      {product?.data?.images?.map((img, index) => (
+            <div key={index} style={{ marginBottom: "10px" }}>
+              <img class="d-block w-100" src={axios.defaults.baseURL + img} alt="First slide" />
+            </div>
+          ))}
+      
+    </div>
+    
+   
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

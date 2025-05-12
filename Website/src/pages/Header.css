@@ -1,0 +1,135 @@
+@media (min-width: 646px) and (max-width: 1149px) {
+  .header {
+    text-decoration: none;
+    color: white;
+    margin-top: 2%;
+  }
+  .header-base {
+    margin-top: 2%;
+    text-decoration: none;
+    color: #c26afc;
+    font-size: small;
+  }
+  .menu-button {
+    display: none;
+  }
+
+  .dropdown {
+    position: relative;
+    list-style: none;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    color: #c26afc;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li {
+    list-style: none;
+    padding: 10px 20px;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu li a {
+    text-decoration: none;
+    color: #c26afc;
+  }
+
+  .dropdown-menu li a:hover {
+    color: #007bff;
+  }
+}
+
+@media (min-width: 1150px) {
+  .header {
+    text-decoration: none;
+    color: white;
+    margin-top: 2%;
+  }
+  .header-base {
+    text-decoration: none;
+    color: #c26afc;
+    font-size: large;
+  }
+  .menu-button {
+    display: none;
+  }
+  /* Make sure to include these styles globally or in the component's CSS file */
+  .dropdown {
+    position: relative;
+    list-style: none;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    color: #c26afc;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu li {
+    list-style: none;
+    padding: 10px 20px;
+    white-space: nowrap;
+  }
+
+  .dropdown-menu li a {
+    text-decoration: none;
+    color: #c26afc;
+  }
+
+  .dropdown-menu li a:hover {
+    color: #007bff;
+  }
+}
+
+@media (min-width: 100px) and (max-width: 645px) {
+  .header {
+    display: none;
+  }
+  .header-base {
+    /* text-decoration: none;
+        color: #c26afc;
+        font-size: x-small;
+        margin-top: 10%;
+        gap: 5px; */
+    display: none;
+  }
+  .menu-button {
+    display: block;
+    position: absolute;
+    /* top: 10px; */
+    right: 15px;
+  }
+  .menu-link {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: flex-start;
+    text-decoration: none;
+    color: #c26afc;
+    margin-top: 10%;
+    margin-left: 2px;
+  }
+}

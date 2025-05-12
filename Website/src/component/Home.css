@@ -1,0 +1,31 @@
+.carousel-container {
+    width: auto;
+    height: 500px;
+    overflow: hidden;
+    margin-top: 1%;
+  }
+  
+  .carousel-container img {
+    height: 100%;
+    object-fit: cover;
+  }
+  .carousel-control-prev,
+.carousel-control-next {
+  /* top: 50%; */
+  transform: translateY(-30%);
+  /* height: 40px; optional: to control button size */
+  /* width: 40px; */
+  /* background-color: rgba(0, 0, 0, 0.5); optional: for better visibility */
+  /* border-radius: 50%; */
+}
+.img-style{
+  margin-left: 35%; 
+  width:250px;
+    height:250px;
+}
+.title{
+ align-content: start;
+ text-align: center;
+}
+
+
