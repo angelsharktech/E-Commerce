@@ -79,7 +79,7 @@ const searchProduct = async() =>{
       <Link className='menu-link' to={'/'}>
         <ShoppingCartIcon /> Cart
       </Link>
-      <Link className='menu-link' to={'/'}>
+      <Link className='menu-link' to={'/login'}>
         <LoginIcon /> Login
       </Link>
       <Link className='menu-link' to={'/'}>
@@ -126,7 +126,7 @@ const searchProduct = async() =>{
                <Link className='header' to={'/'}>{user.name} </Link>
             ) : (
 
-            <Link className='header' to={'/'}>Login </Link>
+            <Link className='header' to={'/login'}>Login </Link>
             )}
             <Link className='header' to={'/'}>SignUp</Link>
 

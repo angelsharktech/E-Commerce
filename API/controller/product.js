@@ -2,8 +2,6 @@ import product from "../model/product.js";
 
 export const addProduct = async (req, res, next) => {
   try {
-    console.log(req.body);
-    
     const singleFile = req.files['thumbnail'] ? req.files['thumbnail'][0] : null;
     const multipleFiles = req.files["images"] || [];
 

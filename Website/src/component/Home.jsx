@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../pages/Header'
 import './Home.css'
 import useFetch from '../hooks/useFetch'
@@ -8,6 +8,19 @@ import { Link } from 'react-router-dom'
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
   console.log(data);
+    const [productsWithDiscount, setProductsWithDiscount] = useState([]);
+  
+    useEffect(() => {
+      if (data && Array.isArray(data)) {
+        const updatedProducts = data.map((prod) => {
+          const actual = parseFloat(prod.actual_price);
+          const selling = parseFloat(prod.selling_price);
+          const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
+          return { ...prod, discount };
+        });
+        setProductsWithDiscount(updatedProducts);
+      }
+    }, [data]);
   
   return (
     <>
@@ -38,18 +51,21 @@ const Home = () => {
         </div>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '1%' }}>
+      <div style={{ textAlign: 'center', marginTop: '2%' }}>
         <h1>Products</h1>
 
 
-        <Grid container spacing={12} >
-          {data?.map((prod) => (
+        <Grid container spacing={12} sx={{marginTop: '2%'
+          
+        }}>
+          {productsWithDiscount?.map((prod) => (
 
             <Grid item key={prod._id} >
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                 <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
-                <p className='title'>{prod.title}</p>
-                {/* <p className='title'>Rating:{data.vote_average}</p> */}
+                <p className='title'>{prod.title}</p>  
+                <p className='title' style={{marginLeft:'35%'}}>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
+               
               </Link>
             </Grid>
           ))}

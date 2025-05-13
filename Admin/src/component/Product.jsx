@@ -47,13 +47,13 @@ const Product = () => {
         product.refetch('/product/getproduct')
         setData({
           title: '',
-          category:'',
+          // category:'',
           description: '',
           actual_price: '',
           selling_price: '',
           avail_qty: '',
-          thumbnail: '',
-          images: [],
+          // thumbnail: '',
+          // images: [],
         })
       }
     } catch (error) {
@@ -67,8 +67,8 @@ const Product = () => {
        const result = axios.put(`/product/updateProduct/${newRow._id}`,newRow)
        
        if(result){
-        product.refetch('/product/getProduct')
-        alert('Product Updated Successfully')
+         alert('Product Updated Successfully')
+         product.refetch('/product/getProduct')
        }
     } catch (error) {
       console.log(error);
@@ -108,11 +108,11 @@ const Product = () => {
 
         <div className='product' >
           <Stack direction={'row'} gap={'5px'}>
-            <TextField variant='outlined' label='Title' name={'title'} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Description' name={'description'} onChange={(e) => setData({ ...data, description: e.target.value })} size='small' multiline />
-            <TextField variant='outlined' label='Actual Price' name={'actual_price'} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Selling Price' name={'selling_price'} onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Quantity Available' name={'avail_qty'} onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Title' name={'title'} value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Description' name={'description'}  value={data.description}  onChange={(e) => setData({ ...data, description: e.target.value })} size='small' multiline />
+            <TextField variant='outlined' label='Actual Price' name={'actual_price'}  value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Selling Price' name={'selling_price'} value={data.selling_price}  onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Quantity Available' name={'avail_qty'} value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' />
 
           </Stack>
           <Stack direction={'row'} gap={'5px'}>
@@ -126,12 +126,12 @@ const Product = () => {
             />
             <label>Select Thumbnail image</label>
             <input type='file' name='thumbnail'
-              onChange={(e) => setData({ ...data, thumbnail: e.target.files[0] })} />
+              onChange={(e) => setData({ ...data, thumbnail: e.target.files[0] })}  />
             <label>Select Multiple Files</label>
             <input type='file' multiple name='images' onChange={(e) =>
               setData({ ...data, images: Array.from(e.target.files) })
             } />
-            <Button variant='contained' onClick={() => onSubmit()} sx={{ backgroundColor: '#c26afc', color: 'whitesmoke' }}>Add</Button>
+            <Button variant='contained' onClick={() => onSubmit()} sx={{ backgroundColor: '#c26afc', color: 'whitesmoke' }} >Add</Button>
           </Stack>
 
         </div>

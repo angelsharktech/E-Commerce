@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Header from '../pages/Header'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import axios from 'axios'
 import AliceCarousel from 'react-alice-carousel'
@@ -12,6 +12,8 @@ import { useForm } from 'react-hook-form'
 
 const ProductDetail = () => {
   const { user } = useContext(userInformation)
+  const {dispatch} = useContext(userInformation)
+  const navigate = useNavigate()
   const { id } = useParams()
   const product = useFetch(`/product/getProductById/${id}`)
   const [open, setOpen] = useState(false)
@@ -20,14 +22,20 @@ const ProductDetail = () => {
 
   const addToCart = () => {
     try {
+      
+      
+      console.log(user);
+      
       if (user) {
         console.log('user is logged in');
+         navigate(`/cart/${id}`)
 
       } else {
         setOpen(true)
       }
     } catch (error) {
-
+      console.log(error);
+      
     }
   }
 
@@ -53,11 +61,15 @@ const ProductDetail = () => {
           password : data.password 
         }
         const res = await axios.post('/webuser/login',cred)
+        if(res.data.msg ==="Login Successfully"){
+          dispatch({type: 'Login Successfully' , payload: res.data.details})
+          res.data.details ? navigate(`/cart/${id}`) : alert(res.data.msg)
+        }
         console.log('res::',res);
-        // addToCart()
       }
 
     } catch (error) {
+      console.log(error);
       
     }
   }
@@ -119,6 +131,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
+      {/* Login Button */}
       <Modal open={open}  style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
 
         <div >
@@ -128,11 +141,11 @@ const ProductDetail = () => {
             </div>
             <h1 style={{ color: '#c26afc' }}>Login</h1>
             <form >
-            <Stack item direction={'column'} spacing={2} style={{ justifyContent:'center',alignItems:'center',marginTop: '15px' }}>
+            <Stack  direction={'column'} spacing={2} style={{ justifyContent:'center',alignItems:'center',marginTop: '15px' }}>
 
               <TextField variant='standard' label='Email Address' name={'email'}  sx={{ width: 300 }} />
               <TextField variant='standard' label='Password' type='password' name={'password'}  sx={{ width: 300 }} />
-              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }}>LOGIN</Button>
+              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }} onClick={() => addToCart()}>LOGIN</Button>
               <Button variant="text" sx={{  color: '#c26afc' }} onClick={() => signUp()}>Register For New User</Button>
               </Stack>
 
@@ -142,6 +155,7 @@ const ProductDetail = () => {
 
       </Modal>
 
+      {/* Register button */}
       <Modal open={signup}  style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
 
         <div >

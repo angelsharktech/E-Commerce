@@ -8,12 +8,9 @@ const upload = multer({
     storage : multer.diskStorage({
 
         destination : (req, file,cb) =>{
-            console.log('manasi');
-            
             cb(null, 'gallery');
         },
         filename : (req, file,cb ) =>{
-            console.log('gallery');
             let prefix = file.fieldname === "thumbnail" ? "thumbnail" : "images";
             cb(null, prefix +'_' + file.originalname)
         } 

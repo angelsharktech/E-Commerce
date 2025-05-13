@@ -7,8 +7,6 @@ import ContactUs from './ContactUs';
 import { useNavigate } from 'react-router-dom';
 import { userInformation } from '../context/AuthContext';
 
-
-
 const selected = {
   display: 'flex',
   flexGrow: 1,
@@ -35,7 +33,7 @@ const Dashboard = () => {
 
   const logOut = () =>{
       dispatch({ type: 'LOGOUT' })
-    // navigate('/')
+    navigate('/')
   }
   return (
     <>
@@ -46,7 +44,7 @@ const Dashboard = () => {
           <AppBar position='static'>
             <Toolbar sx={{ backgroundColor: '#c26afc' }}>
               <Typography variant='h5' component="div" sx={{ color: 'whitesmoke', flexGrow: 1 }}>
-                Dashboard-Admin
+                {user.shop_name} Dashboard-Admin
               </Typography>
               <Button variant='text' style={{ color: 'whitesmoke' }} onClick={()=> logOut()}>Logout</Button>
             </Toolbar>
