@@ -1,13 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Header from '../pages/Header'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { userInformation } from '../context/AuthContext'
+import axios from 'axios'
 
 const Cart = () => {
-    const {user} = useContext(userInformation)
-    const {id } = useParams()
+    const { webuser} = useContext(userInformation)
+    const { data } = useParams()
+    const location = useLocation();
+    const product = location.state?.prod;
 
-    console.log('cart::',id , user);
+console.log('Product in cart:', product);
+
+   
     
   return (
     <>

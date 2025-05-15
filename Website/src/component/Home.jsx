@@ -51,23 +51,20 @@ const Home = () => {
         </div>
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: '2%' }}>
+      <div  style={{ marginLeft:'2% ',textAlign: 'center', marginTop: '2%' }}>
         <h1>Products</h1>
 
-
-        <Grid container spacing={12} sx={{marginTop: '2%'
-          
-        }}>
+        <Grid container spacing={12} sx={{marginTop: '2%'}} >
           {productsWithDiscount?.map((prod) => (
-
-            <Grid item key={prod._id} >
+            
+            <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                 <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
                 <p className='title'>{prod.title}</p>  
-                <p className='title' style={{marginLeft:'35%'}}>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
-               
+                <p className='title'>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
               </Link>
             </Grid>
+
           ))}
         </Grid>
       </div>

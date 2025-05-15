@@ -25,15 +25,15 @@ const Product = () => {
     <Header />
     
 
-    <div style={{ textAlign: 'center', marginTop: '2%' }}>
+    <div  style={{ textAlign: 'center', marginTop: '2%', marginLeft:'3%' }}>
         <Grid container spacing={12} >
           {productsWithDiscount?.map((prod) => (
 
-            <Grid item key={prod._id} >
+            <Grid item xs={12} sm={6} md={3} key={prod._id} className='box' >
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                 <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
                 <h5 >{prod.title}</h5>
-                <p className='title' style={{marginLeft:'35%'}}>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
+                <p className='title' style={{marginLeft:'35%'}}>Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
                 <p className='title' ></p>
               </Link>
             </Grid>

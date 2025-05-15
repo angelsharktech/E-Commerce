@@ -28,6 +28,8 @@ try {
 
 export const login =async(req,res,next) =>{
     try {
+        console.log('login::',req.body);
+        
         const User = await user.findOne({username : req.body.username})
         if(!User){
             return res.status(200).json({msg:'user does not exist'})
@@ -40,7 +42,7 @@ export const login =async(req,res,next) =>{
                   res.status(200).json({ msg: "Login Successfully", details: restOfDetails });    
         }
     } catch (error) {
-        console.log(error);
+        next(error);
         
     }
 }

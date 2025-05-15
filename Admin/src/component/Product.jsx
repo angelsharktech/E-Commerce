@@ -110,9 +110,9 @@ const Product = () => {
           <Stack direction={'row'} gap={'5px'}>
             <TextField variant='outlined' label='Title' name={'title'} value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' />
             <TextField variant='outlined' label='Description' name={'description'}  value={data.description}  onChange={(e) => setData({ ...data, description: e.target.value })} size='small' multiline />
-            <TextField variant='outlined' label='Actual Price' name={'actual_price'}  value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Selling Price' name={'selling_price'} value={data.selling_price}  onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Quantity Available' name={'avail_qty'} value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Actual Price' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Selling Price' name={'selling_price'}  type='Number' value={data.selling_price}  onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
+            <TextField variant='outlined' label='Quantity Available' name={'avail_qty'}  type='Number' value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' />
 
           </Stack>
           <Stack direction={'row'} gap={'5px'}>

@@ -8,6 +8,7 @@ import userRoute from './routes/user.js'
 import productRoute from './routes/product.js'
 import categoryRoute from './routes/category.js'
 import webuserRoute from './routes/webuser.js'
+import cartRoute from './routes/cart.js'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use('/api/product',productRoute)
 app.use('/api/category', categoryRoute)
 
 app.use('/api/webuser', webuserRoute)
+app.use('/api/cart', cartRoute)
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({

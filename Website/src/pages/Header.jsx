@@ -1,5 +1,5 @@
 import { AppBar, Button, Drawer, InputAdornment, TextField } from '@mui/material'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
 import './Header.css';
@@ -15,34 +15,46 @@ import AddToHomeScreenIcon from '@mui/icons-material/AddToHomeScreen';
 import useFetch from '../hooks/useFetch';
 import axios from 'axios'
 import { userInformation } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
-   const { user } = useContext(userInformation)
+  const { webuser } = useContext(userInformation)
   const [menu, setMenu] = useState({ right: false });
-  const [query , setQuery] = useState('')
-   const category = useFetch('/category/getCategory')
+  const [query, setQuery] = useState('')
+  const category = useFetch('/category/getCategory')
   const prod = useFetch('/product/getProduct')
 
   const navigate = useNavigate()
+  const {cartCount ,setCartCount} = useCart()
 
-  const handleChange = (e) =>{
+  useEffect(() => {
+  const fetchCount = async () => {
+    if (webuser?._id) {
+      const res = await axios.get(`cart/getCartItemCount/${webuser._id}`);
+      setCartCount(res.data.count);
+    }
+  };
+  fetchCount();
+}, [webuser?._id]);
+
+  const handleChange = (e) => {
     try {
-      console.log('search::',e.target.value);
+      console.log('search::', e.target.value);
       setQuery(e.target.value)
     } catch (error) {
       console.log(error);
-      
+
     }
   }
-const searchProduct = async() =>{
-  try {
-    
-    navigate(`/searchProduct/${query}`)
-    
-  } catch (error) {
-    
+  const searchProduct = async () => {
+    try {
+
+      navigate(`/searchProduct/${query}`)
+
+    } catch (error) {
+
+    }
   }
-}
 
 
 
@@ -121,14 +133,25 @@ const searchProduct = async() =>{
             marginRight: '10%', marginTop: '-4%',
             gap: '20px', alignItems: 'center'
           }}>
-            <Link className='header' to={'/'}>cart</Link>
-            {user ? (
-               <Link className='header' to={'/'}>{user.name} </Link>
+            {webuser ? (
+              <>
+              <Link className='header' to={'/'}>cart <sup>{cartCount}</sup></Link>
+                <li className="header dropdown">
+                  {/* <Link className='header' >{webuser.name}</Link> */}
+                  <h6 className="header">{webuser.name}</h6>
+                  <ul className="dropdown-menu">
+                    <li><Link to={`/`}>Profile</Link></li>
+                    <li><Link to={`/signOut`} >SignOut</Link></li>
+                  </ul>
+                </li>
+              </>
             ) : (
-
-            <Link className='header' to={'/login'}>Login </Link>
+              <>
+               <Link className='header' to={'/'}>cart</Link>
+                <Link className='header' to={'/login'}>Login</Link>
+                <Link className='header' to={'/'}>SignUp</Link>
+              </>
             )}
-            <Link className='header' to={'/'}>SignUp</Link>
 
           </div>
         </AppBar>
@@ -139,7 +162,7 @@ const searchProduct = async() =>{
           <Link className='header-base' to={'/product'}>Products</Link>
           {/* <Link className='header-base' to={'/category'}>Category</Link> */}
           <li className="header-base dropdown">
-            <h5 className="header-base" to="/category">Category</h5>
+            <h5 className="header-base">Category</h5>
             <ul className="dropdown-menu">
               {category.data?.map((category) => (
 
@@ -152,18 +175,18 @@ const searchProduct = async() =>{
           <Link className='header-base' to={'/'}>About Us</Link>
           <Link className='header-base' to={'/'}>Contact Us</Link>
           <div>
-<div className="input-group">
-  <div className="form-outline" data-mdb-input-init>
-    <input type="search" className="form-control" placeholder='Search' onChange={handleChange}/>
-    {/* <label className="form-label" for="form1"></label> */}
-  </div>
-  <Button type="button" style={{backgroundColor:'#c26afc'}} onClick={()=>searchProduct()}>
-    <SearchIcon style={{color:'white'}}></SearchIcon>
-  </Button>
-</div>
-</div>
+            <div className="input-group">
+              <div className="form-outline" data-mdb-input-init>
+                <input type="search" className="form-control" placeholder='Search' onChange={handleChange} />
+                {/* <label className="form-label" for="form1"></label> */}
+              </div>
+              <Button type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
+                <SearchIcon style={{ color: 'white' }}></SearchIcon>
+              </Button>
+            </div>
+          </div>
         </div>
-        
+
         {/* </div> */}
       </div>
     </>

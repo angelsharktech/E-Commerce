@@ -9,26 +9,27 @@ import { Box, Button, Modal, Stack, TextField } from '@mui/material'
 import { userInformation } from '../context/AuthContext'
 import { Close } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
+import { useCart } from '../context/CartContext'
 
 const ProductDetail = () => {
-  const { user } = useContext(userInformation)
+  const { webuser } = useContext(userInformation)
   const {dispatch} = useContext(userInformation)
   const navigate = useNavigate()
-  const { id } = useParams()
-  const product = useFetch(`/product/getProductById/${id}`)
+  const { pid } = useParams()
+  const product = useFetch(`/product/getProductById/${pid}`)
   const [open, setOpen] = useState(false)
   const [signup ,setSignup] = useState(false)
  const { register, handleSubmit } = useForm()
+ const {setCartCount} = useCart();
 
-  const addToCart = () => {
+  const addToCart = async(data) => {
     try {
-      
-      
-      console.log(user);
-      
-      if (user) {
-        console.log('user is logged in');
-         navigate(`/cart/${id}`)
+
+      if (webuser) {
+         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
+        //  navigate(`/cart/`, { state: { prod: data } })
+         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
+        setCartCount(res.data.count)
 
       } else {
         setOpen(true)
@@ -63,7 +64,7 @@ const ProductDetail = () => {
         const res = await axios.post('/webuser/login',cred)
         if(res.data.msg ==="Login Successfully"){
           dispatch({type: 'Login Successfully' , payload: res.data.details})
-          res.data.details ? navigate(`/cart/${id}`) : alert(res.data.msg)
+          res.data.details ? navigate(`/cart/${pid}`) : alert(res.data.msg)
         }
         console.log('res::',res);
       }
@@ -126,7 +127,7 @@ const ProductDetail = () => {
 
         )}
         <div style={{ display: 'flex', justifyContent: 'ceneter', flexDirection: 'row', gap: '10px', marginLeft: '25%' }}>
-          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={() => addToCart()}>Add To cart</Button>
+          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={() => addToCart(product.data)}>Add To cart</Button>
           <Button variant='contained' sx={{ backgroundColor: '#c26afc' }}>Buy Now </Button>
         </div>
       </div>

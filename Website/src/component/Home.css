@@ -19,15 +19,25 @@
   /* border-radius: 50%; */
 }
 .img-style{
-  margin-left: 35%; 
-  width:250px;
-    height:250px;
-    border: 1px solid grey;
-    padding: 12px;
+  /* margin-left: 35%;  */
+   /* border: 1px solid #131212; */
+  width:150px;
+    height:150px;
+   
 }
 .title{
  /* align-content: start; */
- text-align: center;
+ text-align: start;
+}
+.box{
+  border: 1px solid #131212;
+    /* padding: 12px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 12px;
+     width:250px;
+    height:250px;
 }
 
 
