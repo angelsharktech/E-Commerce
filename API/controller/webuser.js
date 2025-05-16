@@ -46,10 +46,3 @@ export const login =async(req,res,next) =>{
     }
 }
 
-export const updateCart = (req,res,next) =>{
-    try {
-        
-    } catch (error) {
-       next(error) 
-    }
-}

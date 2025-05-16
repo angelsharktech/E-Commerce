@@ -1,4 +1,5 @@
 import cart from "../model/cart.js";
+import prod from "../model/product.js";
 
 export const addToCart = async (req, res, next) => {
   try {
@@ -17,6 +18,7 @@ export const addToCart = async (req, res, next) => {
     
      if (existingProduct) {
         existingProduct.quantity += 1;
+        existingProduct.price = existingProduct.price + product.price
       }else {
         // Push new product with quantity 1
         userCart.cart.push({ ...product, quantity: 1 });
@@ -41,7 +43,7 @@ export const addToCart = async (req, res, next) => {
 
 export const getCartItemCount = async (req, res, next) => {
   try {
-    console.log('wid::',req.params.wid);
+    // console.log('wid::',req.params.wid);
     
     const userId = req.params.wid;
     const userCart = await cart.findOne({ webuser: userId });
@@ -49,10 +51,40 @@ export const getCartItemCount = async (req, res, next) => {
     if (!userCart) return res.json({ count: 0 });
 
     // Total count: sum of quantities
-    const totalCount = userCart.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const totalCount = userCart.cart.length;
+
+    // const totalCount = userCart.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
 
     res.status(200).json({ count: totalCount });
   } catch (error) {
     next(error);
   }
 };
+
+export const getCartItem = async(req,res,next) =>{
+  try {
+    console.log('cart item:',req.params.wid);
+    
+    const result = await cart.findOne({webuser : req.params.wid}) 
+    res.status(200).json(result)
+
+  } catch (error) {
+    next(error)
+  }
+}
+export const UpdateCart = async(req,res,next) =>{
+  try {
+    console.log('cart item:',req.params.wid);
+    console.log('cart:',req.body);
+    const product = await prod.findOne({_id: req.body._id})
+    // console.log(product);
+    
+    const result = await cart.findOneAndUpdate({webuser: req.params.wid, 'cart._id': req.body._id  },
+       { $set: { 'cart.$.quantity' : req.body.quantity ,'cart.$.price':(product.selling_price * req.body.quantity) } },
+      { new: true }) 
+    res.status(200).json(result)
+
+  } catch (error) {
+    next(error)
+  }
+}

@@ -29,6 +29,7 @@ const ProductDetail = () => {
          const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
          const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
+         
         setCartCount(res.data.count)
 
       } else {
@@ -146,7 +147,7 @@ const ProductDetail = () => {
 
               <TextField variant='standard' label='Email Address' name={'email'}  sx={{ width: 300 }} />
               <TextField variant='standard' label='Password' type='password' name={'password'}  sx={{ width: 300 }} />
-              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }} onClick={() => addToCart()}>LOGIN</Button>
+              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }} >LOGIN</Button> 
               <Button variant="text" sx={{  color: '#c26afc' }} onClick={() => signUp()}>Register For New User</Button>
               </Stack>
 

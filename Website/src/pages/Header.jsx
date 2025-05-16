@@ -16,6 +16,10 @@ import useFetch from '../hooks/useFetch';
 import axios from 'axios'
 import { userInformation } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Header = () => {
   const { webuser } = useContext(userInformation)
@@ -135,19 +139,19 @@ const Header = () => {
           }}>
             {webuser ? (
               <>
-              <Link className='header' to={'/'}>cart <sup>{cartCount}</sup></Link>
+              <Link className='header' to={'/cart'}><AddShoppingCartRoundedIcon /> cart <sup>{cartCount}</sup></Link>
                 <li className="header dropdown">
                   {/* <Link className='header' >{webuser.name}</Link> */}
-                  <h6 className="header">{webuser.name}</h6>
+                  <h6 className="header"><AccountCircleIcon/>{webuser.name}</h6>
                   <ul className="dropdown-menu">
-                    <li><Link to={`/`}>Profile</Link></li>
-                    <li><Link to={`/signOut`} >SignOut</Link></li>
+                    <li><Link to={`/`}><PermIdentityIcon/>Profile</Link></li>
+                    <li><Link to={`/signOut`} ><ExitToAppIcon/>SignOut</Link></li>
                   </ul>
                 </li>
               </>
             ) : (
               <>
-               <Link className='header' to={'/'}>cart</Link>
+               <Link className='header' to={'/'}><AddShoppingCartRoundedIcon />cart</Link>
                 <Link className='header' to={'/login'}>Login</Link>
                 <Link className='header' to={'/'}>SignUp</Link>
               </>

@@ -7,7 +7,7 @@ const webuserSchema = mongoose.Schema({
   email: String,
   address: String,
   pincode: String,
-  cart: [String],
+  // cart: [String],
 });
 
 export default mongoose.model("webuser", webuserSchema);
