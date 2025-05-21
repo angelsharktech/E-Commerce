@@ -4,6 +4,7 @@ import './Home.css'
 import useFetch from '../hooks/useFetch'
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
@@ -59,7 +60,7 @@ const Home = () => {
             
             <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
+                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
                 <p className='title'>{prod.title}</p>  
                 <p className='title'>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
               </Link>

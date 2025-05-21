@@ -10,6 +10,7 @@ import axios from 'axios'
 
 const Cart = () => {
   const { webuser } = useContext(userInformation)
+  console.log('web::',webuser);
   const data = useFetch(`/cart/getCartItem/${webuser._id}`)
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);

@@ -1,27 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../pages/Header'
 import useFetch from '../hooks/useFetch'
 import { Grid } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import './Home.css'
+import axios from 'axios'
 
 const Category = () => {
   const { name } = useParams()
   const product = useFetch(`/product/getProductByCategory/${name}`)
+  const [productsWithDiscount, setProductsWithDiscount] = useState([]);
   console.log('product:', product);
+    useEffect(() => {
+      if (product.data && Array.isArray(product.data)) {
+        const updatedProducts = product.data.map((prod) => {
+          const actual = parseFloat(prod.actual_price);
+          const selling = parseFloat(prod.selling_price);
+          const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
+          return { ...prod, discount };
+        });
+        setProductsWithDiscount(updatedProducts);
+      }
+    }, [product]);
 
   return (
     <>
       <Header />
-      {product.data && product.data.length > 0 ? (
+      {productsWithDiscount && productsWithDiscount.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: '1%', marginLeft: '3%' }}>
           <Grid container spacing={12} >
-            {product.data?.map((prod) => (
+            {productsWithDiscount.map((prod) => (
 
               <Grid item xs={12} sm={6} md={3} key={prod._id} className='box' >
                 <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                  <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
+                  <img src={axios.defaults.baseURL+ prod.thumbnail } className='img-style' alt="" />
                   <p className='title'>{prod.title}</p>
+                  <p className='title' >Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
                 </Link>
               </Grid>
             ))}

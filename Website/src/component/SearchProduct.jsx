@@ -3,6 +3,7 @@ import Header from '../pages/Header'
 import { Grid } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
+import axios from 'axios'
 
 const SearchProduct = () => {
   const { name } = useParams()
@@ -29,7 +30,7 @@ console.log(uniqueData);
 
             <Grid item key={prod._id} >
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                <img src={`http://localhost:3000/api${prod.thumbnail}`} className='img-style' alt="" />
+                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
                 <p className='title'>{prod.title}</p>
               </Link>
             </Grid>
