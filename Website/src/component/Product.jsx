@@ -26,7 +26,7 @@ const Product = () => {
     <Header />
     
 
-    <div  style={{ textAlign: 'center', marginTop: '2%', marginLeft:'3%' }}>
+    <div  className='product-style'>
         <Grid container spacing={12} >
           {productsWithDiscount?.map((prod) => (
 

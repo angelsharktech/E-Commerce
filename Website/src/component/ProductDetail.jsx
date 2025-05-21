@@ -62,7 +62,7 @@ const ProductDetail = () => {
         setSignup(false)
         setOpen(false)
        
-          setEmail( data.email)
+          setEmail(data.email)
           setPassword(data.password)
         loginUser()
       }
@@ -138,6 +138,7 @@ const ProductDetail = () => {
           mouseTracking
           items={items}
           disableButtonsControls={true}
+          
         />
         {product.data && (
 

@@ -1,0 +1,47 @@
+upload mern project on vps hostinger 
+https://github.com/GreatStackDev/notes/tree/main
+
+
+upload new changes on server:
+
+ssh root@69.62.81.214
+Go to your project directory:
+
+Copy
+cd /var/www/E-Commerce/API
+Pull the latest changes from your Git repository:
+
+Copy
+git pull
+Install any new dependencies (if package.json changed):
+
+Copy
+npm install
+Restart your backend with PM2:
+
+Copy
+pm2 restart project-backend
+
+
+
+
+
+mongodbconnection:
+2. Using MongoDB Compass from Your Computer
+If you want to use Compass, you must allow remote connections:
+
+In /etc/mongod.conf, change:
+Copy
+bindIp: 127.0.0.1
+to
+Copy
+bindIp: 0.0.0.0
+Restart MongoDB:
+Copy
+sudo systemctl restart mongod
+Make sure port 27017 is open in your firewall:
+Copy
+sudo ufw allow 27017
+In Compass, connect using:
+Copy
+mongodb://69.62.81.214:27017

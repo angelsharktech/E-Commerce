@@ -1,4 +1,4 @@
-import { AppBar, Button, Drawer, InputAdornment, TextField } from '@mui/material'
+import { AppBar, Button, Drawer, InputAdornment, TextField,List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
@@ -20,6 +20,9 @@ import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRound
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 const Header = () => {
   const { webuser } = useContext(userInformation)
@@ -27,6 +30,8 @@ const Header = () => {
   const [query, setQuery] = useState('')
   const category = useFetch('/category/getCategory')
   const prod = useFetch('/product/getProduct')
+  const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
+const [openUserDropdown, setOpenUserDropdown] = useState(false);
 
   const navigate = useNavigate()
   const {cartCount ,setCartCount} = useCart()
@@ -71,38 +76,106 @@ const Header = () => {
 
   const list = (anchor) => (
     <div
-      style={{ width: 250, padding: 20, marginTop: '70px' }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+    style={{ width: 250, marginTop: '70px' }}
+    role="presentation"
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+  >
+    <List>
+      <ListItem disablePadding>
+        <ListItemButton component={Link} to="/home">
+          <ListItemIcon><HomeIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+          <ListItemText className='menu-link' primary="Home" />
+        </ListItemButton>
+      </ListItem>
 
-      <Link className='menu-link' to={'/home'}>
-        <HomeIcon /> Home
-      </Link>
-      <Link className='menu-link' to={'/product'}>
-        <AppsIcon /> Product
-      </Link>
-      <Link className='menu-link' to={'/'}>
-        <CategoryIcon /> Category
-      </Link>
-      <Link className='menu-link' to={'/'}>
-        <InfoOutlineIcon /> About Us
-      </Link>
-      <Link className='menu-link' to={'/'}>
-        <PhoneIcon />  Contact Us
-      </Link>
-      <Link className='menu-link' to={'/'}>
-        <ShoppingCartIcon /> Cart
-      </Link>
-      <Link className='menu-link' to={'/login'}>
-        <LoginIcon /> Login
-      </Link>
-      <Link className='menu-link' to={'/'}>
-        <AddToHomeScreenIcon />  Sign Up
-      </Link>
-      {/* <p>Menu Item 3</p> */}
-    </div>
+      <ListItem disablePadding>
+        <ListItemButton component={Link} to="/product">
+          <ListItemIcon><AppsIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+          <ListItemText className='menu-link' primary="Product" />
+        </ListItemButton>
+      </ListItem>
+
+      {/* Category Dropdown */}
+      <ListItemButton  onClick={() => setOpenCategoryDropdown(true)}>
+        <ListItemIcon ><CategoryIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+        <ListItemText className='menu-link' primary="Category" />
+        {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
+      </ListItemButton>
+      <Collapse in={openCategoryDropdown} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {category.data?.map((cat) => (
+            <ListItemButton
+              key={cat._id}
+              sx={{ pl: 4 }}
+              component={Link}
+              to={`/category/${cat.categoryName}`}
+            >
+              <ListItemText className='menu-link' primary={cat.categoryName} />
+            </ListItemButton>
+          ))}
+        </List>
+      </Collapse>
+
+      <ListItem disablePadding>
+        <ListItemButton component={Link} to="/">
+          <ListItemIcon><InfoOutlineIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+          <ListItemText className='menu-link' primary="About Us" />
+        </ListItemButton>
+      </ListItem>
+
+      <ListItem disablePadding>
+        <ListItemButton component={Link} to="/">
+          <ListItemIcon><PhoneIcon sx={{color:'#c26afc'}} /></ListItemIcon>
+          <ListItemText className='menu-link' primary="Contact Us" />
+        </ListItemButton>
+      </ListItem>
+
+      {/* Auth Section */}
+      {webuser ? (
+        <>
+          <ListItemButton component={Link} to="/cart">
+            <ListItemIcon><AddShoppingCartRoundedIcon sx={{color:'#c26afc'}} /></ListItemIcon>
+            <ListItemText className='menu-link' primary={`Cart (${cartCount})`} />
+          </ListItemButton>
+
+          <ListItemButton onClick={() => setOpenUserDropdown(true)}>
+            <ListItemIcon><AccountCircleIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+            <ListItemText className='menu-link' primary={webuser.name} />
+            {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
+                <ListItemIcon><PermIdentityIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+                <ListItemText className='menu-link' primary="Profile" />
+              </ListItemButton>
+              <ListItemButton sx={{ pl: 4 }} component={Link} to="/signOut">
+                <ListItemIcon><ExitToAppIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+                <ListItemText className='menu-link' primary="Sign Out" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </>
+      ) : (
+        <>
+          <ListItemButton component={Link} to="/cart">
+            <ListItemIcon><AddShoppingCartRoundedIcon sx={{color:'#c26afc'}}/></ListItemIcon>
+            <ListItemText className='menu-link' primary="Cart" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="/login">
+          <ListItemIcon><LoginIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
+            <ListItemText  className='menu-link' primary="Login" />
+          </ListItemButton>
+          <ListItemButton component={Link} to="/">
+          <ListItemIcon><PersonAddAltIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
+            <ListItemText className='menu-link' primary="Sign Up" />
+          </ListItemButton>
+        </>
+      )}
+    </List>
+  </div>
+
 
   );
 
@@ -170,21 +243,19 @@ const Header = () => {
             <ul className="dropdown-menu">
               {category.data?.map((category) => (
 
-                <li><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>
+                <li  key={category.categoryName}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>
               ))}
-              {/* <li><Link to="/health-checkup">Cycle</Link></li>
-              <li><Link to="/health-checkup">Game</Link></li> */}
             </ul>
           </li>
           <Link className='header-base' to={'/'}>About Us</Link>
           <Link className='header-base' to={'/'}>Contact Us</Link>
-          <div>
+          <div className='search-style' >
             <div className="input-group">
               <div className="form-outline" data-mdb-input-init>
                 <input type="search" className="form-control" placeholder='Search' onChange={handleChange} />
                 {/* <label className="form-label" for="form1"></label> */}
               </div>
-              <Button type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
+              <Button  type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
                 <SearchIcon style={{ color: 'white' }}></SearchIcon>
               </Button>
             </div>

@@ -62,7 +62,7 @@ const Home = () => {
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                 <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
                 <p className='title'>{prod.title}</p>  
-                <p className='title'>Price:<text style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</text>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
+                <p className='title'>Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
               </Link>
             </Grid>
 
