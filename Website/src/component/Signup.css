@@ -1,6 +1,6 @@
 
 @media (min-width: 100px) and (max-width: 645px) {
-  .login-container{
+  .signup-container{
     display: flex;
   justify-content: center; 
   align-items: center;     
@@ -21,7 +21,7 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 646px) and (max-width: 1149px) {
-  .login-container{
+  .signup-container{
     display: flex;
   justify-content: center; 
   align-items: center;     
@@ -42,12 +42,12 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 1150px) {
-  .login-container{
+  .signup-container{
     display: flex;
   justify-content: center; 
   align-items: center;     
   /* height: 100vh; */
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .box-style {

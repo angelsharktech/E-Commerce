@@ -1,0 +1,26 @@
+@media (min-width: 100px) and (max-width: 645px) {
+     .stack-style {
+   
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10%;
+  }
+}
+
+@media (min-width: 646px) and (max-width: 1149px) {
+     .stack-style {
+   
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 8%;
+  }
+}
+
+@media (min-width: 1150px) {
+  .stack-style {
+   
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 15px;
+  }
+}

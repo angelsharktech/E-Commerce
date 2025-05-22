@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Header from '../pages/Header'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import axios from 'axios'
 import AliceCarousel from 'react-alice-carousel'
@@ -14,14 +14,14 @@ import { useCart } from '../context/CartContext'
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
   const { dispatch } = useContext(userInformation)
+  const navigate = useNavigate()
   const { pid } = useParams()
   const [open, setOpen] = useState(false)
+  const [signup, setSignup] = useState(false)
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  const [signup, setSignup] = useState(false)
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm()
-  const navigate = useNavigate()
   const product = useFetch(`/product/getProductById/${pid}`)
 
   const addToCart = async (data) => {
@@ -49,7 +49,7 @@ const ProductDetail = () => {
       setSignup(true)
     } catch (error) {
       console.log(error);
-      
+
     }
   }
   const registerUser = async (data) => {
@@ -57,25 +57,36 @@ const ProductDetail = () => {
       console.log('webData::', data);
 
       const result = await axios.post('/webuser/register', data)
-      if (result) {
-        console.log(result);
-        setSignup(false)
+      if (result.data.msg === 'User Created Successfully') {
         setOpen(false)
-       
-          setEmail(data.email)
-          setPassword(data.password)
-        loginUser()
+        setSignup(false)
+        const cred = {
+          email: data.email,
+          password: data.password,
+        }
+        const res = await axios.post('/webuser/login', cred)
+        console.log('res::', res);
+        if (res.data.msg === 'Login Successfully') {
+          dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
+          res.data.details ? navigate('/home') : alert(res.data.msg)
+        } else {
+          alert(res.data.msg)
+        }
+      } else {
+        alert(result.data.msg)
       }
+
 
     } catch (error) {
       console.log(error);
 
     }
   }
-  const loginUser = async() => {
+
+  const loginUser = async () => {
     try {
-      console.log('login::',email,password);
-      
+      console.log('login::', email, password);
+
       const cred = {
         email: email,
         password: password,
@@ -86,16 +97,29 @@ const ProductDetail = () => {
       if (result.data.msg === 'Login Successfully') {
 
         dispatch({ type: 'LOGIN_SUCCESS', payload: result.data.details })
-        result.data.details ? navigate('/home') : alert(result.data.msg)
+        alert(result.data.msg)
+        setOpen(false)
       }
       else {
         alert(result.data.msg)
       }
     } catch (error) {
       console.log(error);
-      
+
     }
   }
+
+const buyNow = async(prdodData) =>{
+try {
+    if (webuser) {
+      navigate(`/buynow/${prdodData._id}`)
+    }else{
+      setOpen(true)
+    }
+} catch (error) {
+  console.log(error); 
+}
+} 
 
   const items = product.data?.images.map((item, index) => {
     const isVideo = item.endsWith('.mp4')
@@ -138,7 +162,7 @@ const ProductDetail = () => {
           mouseTracking
           items={items}
           disableButtonsControls={true}
-          
+
         />
         {product.data && (
 
@@ -151,7 +175,11 @@ const ProductDetail = () => {
         )}
         <div style={{ display: 'flex', justifyContent: 'ceneter', flexDirection: 'row', gap: '10px', marginLeft: '25%' }}>
           <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={() => addToCart(product.data)}>Add To cart</Button>
-          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }}>Buy Now </Button>
+          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={()=>buyNow(product.data)}>
+            {/* <Link to={'/buynow'} style={{textDecoration:'none' ,color:'whitesmoke'}}>
+            </Link> */}
+            Buy Now
+            </Button>
         </div>
       </div>
 
@@ -169,7 +197,7 @@ const ProductDetail = () => {
 
               <TextField variant='standard' label='Email Address' name={'email'} onChange={(e) => setEmail(e.target.value)} sx={{ width: 300 }} />
               <TextField variant='standard' label='Password' type='password' name={'password'} onChange={(e) => setPassword(e.target.value)} sx={{ width: 300 }} />
-              <Button variant='contained' sx={{ backgroundColor: '#c26afc', color: 'white' }}  onClick={loginUser} >LOGIN</Button>
+              <Button variant='contained' sx={{ backgroundColor: '#c26afc', color: 'white' }} onClick={loginUser} >LOGIN</Button>
               <Button variant="text" sx={{ color: '#c26afc' }} onClick={() => signUp()}>Register For New User</Button>
             </Stack>
 

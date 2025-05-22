@@ -12,6 +12,8 @@ import Login from './component/Login'
 import SignOut from './component/SignOut'
 import Home from './component/Home'
 import { CartProvider } from './context/CartContext'
+import Signup from './component/Signup'
+import Buynow from './component/Buynow'
 
 function App() {
 
@@ -32,6 +34,8 @@ function App() {
             <Route path='/category/:name' element={<Category />} />
             <Route path='/searchProduct/:name' element={<SearchProduct />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/buynow/:pid' element={<Buynow />} />
           </Routes>
         </BrowserRouter>
         </CartProvider>

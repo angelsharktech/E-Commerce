@@ -167,7 +167,7 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
           <ListItemIcon><LoginIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
             <ListItemText  className='menu-link' primary="Login" />
           </ListItemButton>
-          <ListItemButton component={Link} to="/">
+          <ListItemButton component={Link} to="/signup">
           <ListItemIcon><PersonAddAltIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
             <ListItemText className='menu-link' primary="Sign Up" />
           </ListItemButton>
@@ -226,7 +226,7 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
               <>
                <Link className='header' to={'/'}><AddShoppingCartRoundedIcon />cart</Link>
                 <Link className='header' to={'/login'}>Login</Link>
-                <Link className='header' to={'/'}>SignUp</Link>
+                <Link className='header' to={'/signup'}>SignUp</Link>
               </>
             )}
 
