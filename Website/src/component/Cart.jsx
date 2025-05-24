@@ -58,6 +58,30 @@ const Cart = () => {
   }
   }
 
+   const decreaseCount = async(cartId) =>{
+    // setCartCount
+     const updatedCart = cartItems.map(item =>
+    item._id === cartId ? { ...item, quantity: item.quantity - 1 } : item
+  );
+  
+  setCartItems(updatedCart);
+  console.log('updatedCart::',updatedCart);
+  
+  try {
+     const updatedItem = updatedCart.find(item => item._id === cartId);
+    const result =await axios.put(`/cart/UpdateCart/${webuser._id}`, 
+      {
+      _id: updatedItem._id,
+      quantity: updatedItem.quantity,
+      price : updatedItem.price
+    });
+    data.refetch(`/cart/getCartItem/${webuser._id}`)
+    // console.log('updatedCart::',updatedCart);
+  } catch (error) {
+    console.log(error);
+  }
+  }
+
   return (
     <>
       <Header />
@@ -91,7 +115,7 @@ const Cart = () => {
 
                     <Button onClick={()=>increaseCount(cart._id)} size='small' ><AddCircleOutlineIcon/></Button>
                     <label>{cart.quantity}</label>
-                    <Button size='small'> <RemoveCircleOutlineRoundedIcon/> </Button>
+                    <Button onClick={()=>decreaseCount(cart._id)} size='small'> <RemoveCircleOutlineRoundedIcon/> </Button>
                     </Box>
                     </th>
                     <th>{cart.price}</th>

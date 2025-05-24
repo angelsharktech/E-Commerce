@@ -60,10 +60,13 @@
   border: 1px solid #131212;
     display: flex;
     flex-direction: row;
+    /* justify-content: center; */
+    /* align-items: center; */
     flex-wrap: wrap;
     padding: 12px;
-     width:250px;
-    height:260px;
+     width:280px;
+     margin-left: 15%;
+    /* height:300px; */
 }
 .product-style{
 text-align: center;
@@ -104,7 +107,7 @@ text-align: center;
     flex-wrap: wrap;
     padding: 12px;
      width:250px;
-    height:260px;
+    /* height:260px; */
 }
 .product-style{
 text-align: center;
@@ -145,7 +148,7 @@ text-align: center;
     flex-wrap: wrap;
     padding: 12px;
      width:250px;
-    height:260px;
+    height:280px;
 }
 .product-style{
 text-align: center;

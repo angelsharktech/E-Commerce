@@ -26,12 +26,15 @@ const ProductDetail = () => {
 
   const addToCart = async (data) => {
     try {
+console.log('cart::',data);
 
       if (webuser) {
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
-
+        console.log('result:',result);
+        console.log('res:',res);
+        
         setCartCount(res.data.count)
 
       } else {

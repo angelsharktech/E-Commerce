@@ -24,7 +24,7 @@ const Signup = () => {
       }
       const res = await axios.post('/webuser/login', cred)
       console.log('res::',res);
-      if (res.data.msg==='Login Successfully') {
+      if (res.data.msg ==='Login Successfully') {
          dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
         res.data.details ? navigate('/home') : alert(res.data.msg)
       }else{

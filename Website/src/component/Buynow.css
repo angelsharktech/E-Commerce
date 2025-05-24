@@ -5,6 +5,10 @@
     align-items: center;
     margin-top: 10%;
   }
+  .title{
+    margin-left: 10%;
+    margin-top: 15%;
+  }
 }
 
 @media (min-width: 646px) and (max-width: 1149px) {
@@ -14,6 +18,10 @@
     align-items: center;
     margin-top: 8%;
   }
+  .title{
+    margin-left: 12%;
+    margin-top: 5%;
+  }
 }
 
 @media (min-width: 1150px) {
@@ -22,5 +30,9 @@
     justify-content: space-evenly;
     align-items: center;
     margin-top: 15px;
+  }
+  .title{
+    margin-left: 12%;
+    margin-top: 5%;
   }
 }

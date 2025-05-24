@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch'
 import { Grid } from '@mui/material'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Footer from '../pages/Footer'
 
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
@@ -69,7 +70,7 @@ const Home = () => {
           ))}
         </Grid>
       </div>
-
+          <Footer/>
 
     </>
   )
