@@ -10,6 +10,7 @@ import { userInformation } from '../context/AuthContext'
 import { Close } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
 import { useCart } from '../context/CartContext'
+import Footer from '../pages/Footer'
 
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
@@ -236,6 +237,8 @@ try {
         </div>
 
       </Modal>
+
+      <Footer/>
     </>
   )
 }

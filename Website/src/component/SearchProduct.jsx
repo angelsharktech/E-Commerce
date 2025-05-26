@@ -4,6 +4,7 @@ import { Grid } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import axios from 'axios'
+import Footer from '../pages/Footer'
 
 const SearchProduct = () => {
   const { name } = useParams()
@@ -11,19 +12,19 @@ const SearchProduct = () => {
   const category = useFetch(`/product/getProductByCategory/${name}`)
   const mergedData = [...(product.data || []), ...(category.data || [])];
 
-  
-// Remove duplicates by _id
-const uniqueData = Array.from(
-  new Map(mergedData.map(item => [item._id, item])).values()
-);
-console.log(uniqueData);
+
+  // Remove duplicates by _id
+  const uniqueData = Array.from(
+    new Map(mergedData.map(item => [item._id, item])).values()
+  );
+  console.log(uniqueData);
 
   return (
-   <>
-    <Header />
-    
+    <>
+      <Header />
 
-    <div style={{ textAlign: 'center', marginTop: '1%' }}>
+
+      <div style={{ textAlign: 'center', marginTop: '1%' }}>
         <Grid container spacing={12} >
 
           {uniqueData?.map((prod) => (
@@ -38,7 +39,8 @@ console.log(uniqueData);
         </Grid>
       </div>
 
-   </>
+      <Footer />
+    </>
   )
 }
 

@@ -5,6 +5,7 @@ import { Grid } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import './Home.css'
 import axios from 'axios'
+import Footer from '../pages/Footer'
 
 const Category = () => {
   const { name } = useParams()
@@ -65,6 +66,7 @@ console.log('updatedProducts:',productsWithDiscount);
         </div>
       )}
 
+      <Footer/>
     </>
   )
 }

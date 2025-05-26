@@ -6,13 +6,14 @@
     text-align: center;
   }
   .header-base {
-    margin-top: 2%;
+    margin-top: 5%;
     text-decoration: none;
     color: #c26afc;
     font-size: small;
   }
   .menu-button {
     display: none;
+    /* margin-top: 5%; */
   }
 
   .dropdown {
@@ -52,7 +53,7 @@
     color: #007bff;
   }
   .search-style{
-    display: none;
+    margin-top: 4%;
   }
 }
 

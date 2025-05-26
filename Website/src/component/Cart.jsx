@@ -7,6 +7,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
 import { useCart } from '../context/CartContext'
 import axios from 'axios'
+import Footer from '../pages/Footer'
 
 const Cart = () => {
   const { webuser } = useContext(userInformation)
@@ -137,6 +138,7 @@ const Cart = () => {
           </>}
          
       </div>
+      <Footer/>
     </>
   )
 }

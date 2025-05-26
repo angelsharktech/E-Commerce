@@ -9,6 +9,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
 import axios from 'axios';
 import './Buynow.css'
+import Footer from '../pages/Footer'
 
 
 const Buynow = () => {
@@ -135,7 +136,7 @@ const Buynow = () => {
           </div>
         </Stack>
       </Stack>
-     
+     <Footer />
     </>
   )
 }

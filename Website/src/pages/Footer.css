@@ -1,0 +1,29 @@
+
+@media (min-width: 100px) and (max-width: 645px) {
+.footer1{
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+     justify-content: space-between;     
+}
+}
+
+
+@media (min-width: 646px) and (max-width: 1149px) {
+  .footer1{
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+     justify-content: space-between;     
+}
+}
+
+
+@media (min-width: 1150px) {
+ .footer1{
+    display: flex;
+    flex-direction: row;
+     align-items: center;
+     justify-content: space-evenly;   
+}
+}

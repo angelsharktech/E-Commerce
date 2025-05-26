@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import './Home.css'
 import axios from 'axios'
+import Footer from '../pages/Footer'
 
 const Product = () => {
     const { data } = useFetch('/product/getProduct')
@@ -41,6 +42,8 @@ const Product = () => {
           ))}
         </Grid>
       </div>
+
+      <Footer/>
     </>
   )
 }
