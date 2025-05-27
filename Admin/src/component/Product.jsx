@@ -16,7 +16,7 @@ const Product = () => {
     description: '',
     actual_price: '',
     selling_price: '',
-    avail_qty: '',
+    // avail_qty: '',
     category: '',
     thumbnail: '',
     images: [],
@@ -31,7 +31,7 @@ const Product = () => {
       formData.append('description', data.description)
       formData.append('actual_price', data.actual_price)
       formData.append('selling_price', data.selling_price)
-      formData.append('avail_qty', data.avail_qty)
+      // formData.append('avail_qty', data.avail_qty)
       formData.append('thumbnail', data.thumbnail)
       data.images?.forEach((images) => {
         formData.append('images', images)
@@ -51,7 +51,7 @@ const Product = () => {
           description: '',
           actual_price: '',
           selling_price: '',
-          avail_qty: '',
+          // avail_qty: '',
           // thumbnail: '',
           // images: [],
         })
