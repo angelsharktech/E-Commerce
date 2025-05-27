@@ -97,7 +97,7 @@ const Product = () => {
     { field: 'description', headerName: 'Description', width: 190,editable:true },
     { field: 'actual_price', headerName: 'MRP', width: 120 ,editable:true},
     { field: 'selling_price', headerName: 'Price', width: 120 ,editable:true},
-    { field: 'avail_qty', headerName: 'Quantity', width: 120,editable:true },
+    // { field: 'avail_qty', headerName: 'Quantity', width: 120,editable:true },
     { field: 'action', headerName: 'Delete',renderCell: (params) => <><Button  sx={{ color: ' #c26afc' }} onClick={() => deleteProduct(params?.row)}><DeleteIcon  /></Button></>, width: 120 },
     
   ]
@@ -112,7 +112,7 @@ const Product = () => {
             <TextField variant='outlined' label='Description' name={'description'}  value={data.description}  onChange={(e) => setData({ ...data, description: e.target.value })} size='small' multiline />
             <TextField variant='outlined' label='Actual Price' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
             <TextField variant='outlined' label='Selling Price' name={'selling_price'}  type='Number' value={data.selling_price}  onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Quantity Available' name={'avail_qty'}  type='Number' value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' />
+            {/* <TextField variant='outlined' label='Quantity Available' name={'avail_qty'}  type='Number' value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' /> */}
 
           </Stack>
           <Stack direction={'row'} gap={'5px'}>
