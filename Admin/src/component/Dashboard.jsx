@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Accordion, AccordionSummary, AppBar, Box, Button, Card, CardContent, Grid, Toolbar, Typography } from '@mui/material'
+import { Accordion, AccordionSummary, AppBar, Box, Button, Card, CardContent, Grid, Paper, Toolbar, Typography } from '@mui/material'
 import Product from './Product';
 import Category from './Category';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userInformation } from '../context/AuthContext';
+import './Dashboard.css'
+import Home from './Home';
 
 const selected = {
   display: 'flex',
@@ -22,19 +24,20 @@ const unSelected = { color: ' #c26afc', p: "5px", cursor: "pointer" };
 
 const Dashboard = () => {
   const { user, dispatch } = useContext(userInformation)
-  const [comp, setComp] = useState()
+  const [comp, setComp] = useState('Home')
   const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/')
-        }
-    })
+  useEffect(() => {
+    if (!user) {
+      navigate('/')
+    }
+  })
 
-  const logOut = () =>{
-      dispatch({ type: 'LOGOUT' })
+  const logOut = () => {
+    dispatch({ type: 'LOGOUT' })
     navigate('/')
   }
+
   return (
     <>
       {/* <Header /> */}
@@ -46,7 +49,12 @@ const Dashboard = () => {
               <Typography variant='h5' component="div" sx={{ color: 'whitesmoke', flexGrow: 1 }}>
                 {user.shop_name} Dashboard-Admin
               </Typography>
-              <Button variant='text' style={{ color: 'whitesmoke' }} onClick={()=> logOut()}>Logout</Button>
+              <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => setComp('Home')}>
+                Home
+              </Button>
+              <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => logOut()}>
+                Logout
+              </Button>
             </Toolbar>
           </AppBar>
         </Box>
@@ -77,41 +85,15 @@ const Dashboard = () => {
                       id="panel1-header"
                     >
                       <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Category'? selected : unSelected} onClick={()=> setComp('Category')} >
+                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Category' ? selected : unSelected} onClick={() => setComp('Category')} >
                           Add Category
                         </Box>
                       </Typography>
                     </AccordionSummary>
                   </Accordion>
-
-                  {/* <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'About'? selected : unSelected} onClick={()=>setComp('About')}>
-                          About Us
-                        </Box>
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion> */}
-
-                  {/* <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Contact' ? selected : unSelected} onClick={()=> setComp('Contact')}>
-                          Contact Us
-                        </Box>
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion> */}
-                  
                 </CardContent>
               </Card>
+
             </Grid>
 
             <Grid item>
@@ -119,6 +101,7 @@ const Dashboard = () => {
                 <br />
                 {
                   {
+                    Home: <Home />,
                     Product: <Product />,
                     Category: <Category />,
                     About: <AboutUs />,
@@ -127,6 +110,7 @@ const Dashboard = () => {
                 }
               </Box>
             </Grid>
+
 
           </Grid>
         </Box>
