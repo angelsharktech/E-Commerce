@@ -25,7 +25,7 @@ const unSelected = { color: ' #c26afc', p: "5px", cursor: "pointer" };
 
 const Dashboard = () => {
   const { user, dispatch } = useContext(userInformation)
-  const [comp, setComp] = useState('Home')
+  const [comp, setComp] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -50,9 +50,9 @@ const Dashboard = () => {
               <Typography variant='h5' component="div" sx={{ color: 'whitesmoke', flexGrow: 1 }}>
                 {user.shop_name} Dashboard-Admin
               </Typography>
-              <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => setComp('Home')}>
+              {/* <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => setComp('Home')}>
                 Home
-              </Button>
+              </Button> */}
               <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => logOut()}>
                 Logout
               </Button>
