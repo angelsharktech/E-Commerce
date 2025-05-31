@@ -1,22 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Autocomplete, Button, Grid, Stack, TextField } from '@mui/material'
 import './product.css'
 import axios from 'axios'
 import useFetch from '../hooks/useFetch'
 import { DataGrid } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { userInformation } from '../context/AuthContext'
 
 const Product = () => {
-
+  const {user} = useContext(userInformation)
   const product = useFetch('/product/getProduct')
   const category = useFetch('/category/getCategory')
+console.log('product:',user);
 
   const [data, setData] = useState({
     title: '',
     description: '',
     actual_price: '',
     selling_price: '',
-    // avail_qty: '',
+    avail_qty: '',
+    productBy:'',
     category: '',
     thumbnail: '',
     images: [],
@@ -24,14 +27,15 @@ const Product = () => {
  
   const onSubmit = async () => {
     try {
-
+      data.productBy = user?.shop_name
       const formData = new FormData()
       formData.append('title', data.title)
       formData.append('category', data.category)
+      formData.append('productBy', data.productBy)
       formData.append('description', data.description)
       formData.append('actual_price', data.actual_price)
       formData.append('selling_price', data.selling_price)
-      // formData.append('avail_qty', data.avail_qty)
+      formData.append('avail_qty', data.avail_qty)
       formData.append('thumbnail', data.thumbnail)
       data.images?.forEach((images) => {
         formData.append('images', images)
@@ -47,11 +51,11 @@ const Product = () => {
         product.refetch('/product/getproduct')
         setData({
           title: '',
-          // category:'',
+          category:'',
           description: '',
           actual_price: '',
           selling_price: '',
-          // avail_qty: '',
+          avail_qty: '',
           // thumbnail: '',
           // images: [],
         })
@@ -120,6 +124,7 @@ const Product = () => {
             <Autocomplete
             sx={{width:'160px'}}
             options={category.data} 
+            // value={data.category}
             getOptionLabel= {(option) => option?.categoryName}
             onChange={(e, newValue) => setData({ ...data, category: newValue.categoryName })}
             renderInput={(params) => <TextField {...params}  name='category' label="Category"  />}

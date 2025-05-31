@@ -4,7 +4,7 @@ export const addCategory = async(req,res,next) =>{
     try {
         // console.log(req.body);
         
-        const categoryCheck = await category.findOne({categoryName : req.body.categoryName})
+        const categoryCheck = await category.findOne({categoryName : req.body.categoryName , categoryBy : req.body.categoryBy})
         // console.log(categoryCheck);
          
         if(categoryCheck){
@@ -50,3 +50,14 @@ try {
 }
 }
 
+export const getCategoryByShop = async(req,res,next) =>{
+  try {
+    const result = await category.find({categoryBy: req.params.shop})
+    res.status(200).json({result , count:result.length})
+    
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}

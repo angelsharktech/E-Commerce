@@ -1,7 +1,8 @@
 import mongoose  from "mongoose";
 
 const categorySchema = mongoose.Schema({
-    categoryName : String
+    categoryName : String,
+    categoryBy : String
 })
 
 export default mongoose.model('category',categorySchema)

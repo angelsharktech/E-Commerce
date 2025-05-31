@@ -2,10 +2,14 @@ import React, { useContext } from 'react'
 import { Box, Paper, Typography } from '@mui/material'
 import './Home.css'
 import { userInformation } from '../context/AuthContext'
+import useFetch from '../hooks/useFetch'
 
 const Home = () => {
     const { user } = useContext(userInformation)
-    console.log('Home:', user);
+    const total_product = useFetch(`/product/getProductByShop/${user.shop_name}`)
+    const total_category = useFetch(`/category/getCategoryByShop/${user.shop_name}`)
+    console.log('total_product',total_product);
+    
 
     return (
         <>
@@ -30,28 +34,27 @@ const Home = () => {
                         manasi
                         <MailIcon fontSize="small" />
                     </Box> */}
-                    <p style={{ color: 'whitesmoke' }}>
-                        <h3>Total Products</h3>
-                        <h1>50</h1>
-                    </p>
+                    {/* <p style={{ color: 'whitesmoke' }}> */}
+                        <h2 style={{color:'whitesmoke'}}>Total Products</h2>
+                        <h1 style={{color:'whitesmoke'}} >{total_product.data?.count}</h1>
+                    {/* </p> */}
                 </Paper>
                 <Paper elevation={12} className='paper-style' style={{
                     background: 'linear-gradient(135deg,rgb(72, 237, 243),rgb(39, 121, 243))'
                 }}
                 >
-                    <p style={{ color: 'whitesmoke' }}>
-                        <h3>Total Categories</h3>
-                        <h1>50</h1>
-                    </p>
+                    
+                        <h2 style={{ color: 'whitesmoke' }}>Total Categories</h2>
+                        <h1 style={{ color: 'whitesmoke' }}>{total_category.data?.count}</h1>
+                   
                 </Paper>
                 <Paper elevation={12} className='paper-style' style={{
                     background: 'linear-gradient(135deg,rgb(140, 241, 228),rgb(56, 240, 133))'
                 }}
                 >
-                    <p style={{ color: 'whitesmoke' }}>
-                        <h3>Orders</h3>
-                        <h1>50</h1>
-                    </p>
+                        <h2 style={{ color: 'whitesmoke' }}>Orders</h2>
+                        <h1 style={{ color: 'whitesmoke' }}>0</h1>
+                    
                 </Paper>
             </div>
         </>

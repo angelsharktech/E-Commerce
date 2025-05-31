@@ -1,11 +1,13 @@
 import { Button, TextField } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import useFetch from '../hooks/useFetch'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import { userInformation } from '../context/AuthContext';
 
 const Category = () => {
+  const {user} = useContext(userInformation)
   const [category, setCategory] = useState({ categoryName: '' })
   const data = useFetch('/category/getCategory')
 
@@ -21,6 +23,8 @@ const Category = () => {
   }
   const addCategory = async () => {
     try {
+      category.categoryBy = user.shop_name
+      console.log('category::',category);
       const result = await axios.post('/category/addCategory', category)
       if (result.data.msg === 'Category Added') {
         alert(result.data.msg)
@@ -72,7 +76,7 @@ const Category = () => {
     <>
     <div container>
       <h3> Category </h3>
-      <TextField variant='outlined' label='Category' name={'categoryName'} onChange={handleChange} size='small' />
+      <TextField variant='outlined' label='Category' value={category.categoryName} name={'categoryName'} onChange={handleChange} size='small' />
       <Button variant='contained'
         sx={{ backgroundColor: '#c26afc', color: 'whitesmoke', marginLeft: '5px' }}
         onClick={() => addCategory()}

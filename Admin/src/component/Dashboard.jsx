@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { userInformation } from '../context/AuthContext';
 import './Dashboard.css'
 import Home from './Home';
+import Profile from './Profile';
 
 const selected = {
   display: 'flex',
@@ -91,6 +92,18 @@ const Dashboard = () => {
                       </Typography>
                     </AccordionSummary>
                   </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      aria-controls="panel1-content"
+                      id="panel1-header"
+                    >
+                      <Typography component="span">
+                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Profile' ? selected : unSelected} onClick={() => setComp('Profile')} >
+                          Profile Manager
+                        </Box>
+                      </Typography>
+                    </AccordionSummary>
+                  </Accordion>
                 </CardContent>
               </Card>
 
@@ -105,7 +118,8 @@ const Dashboard = () => {
                     Product: <Product />,
                     Category: <Category />,
                     About: <AboutUs />,
-                    Contact: <ContactUs />
+                    Contact: <ContactUs />,
+                    Profile: <Profile />,
                   }[comp]
                 }
               </Box>

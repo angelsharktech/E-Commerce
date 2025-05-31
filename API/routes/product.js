@@ -1,5 +1,5 @@
 import express from 'express'
-import { addProduct, deleteProduct, getProduct, getProductByCategory, getProductById, getProductByName, updateProduct } from '../controller/product.js'
+import { addProduct, deleteProduct, getProduct, getProductByCategory, getProductById, getProductByName, getProductByShop, updateProduct } from '../controller/product.js'
 import multer from 'multer'
 
 const router = express.Router() 
@@ -25,6 +25,7 @@ router.get('/getProduct',getProduct)
 router.get('/getProductById/:id',getProductById)
 router.get('/getProductByName/:name',getProductByName)
 router.get('/getProductByCategory/:name',getProductByCategory)
+router.get('/getProductByShop/:shop',getProductByShop)
 router.put('/updateProduct/:id',updateProduct)
 router.delete('/deleteProduct/:id',deleteProduct)
 export default router
