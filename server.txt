@@ -31,6 +31,8 @@ mongodbconnection:
 If you want to use Compass, you must allow remote connections:
 
 In /etc/mongod.conf, change:
+sudo nano /etc/mongod.conf
+
 Copy
 bindIp: 127.0.0.1
 to
