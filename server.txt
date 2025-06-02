@@ -30,17 +30,18 @@ mongodbconnection:
 2. Using MongoDB Compass from Your Computer
 If you want to use Compass, you must allow remote connections:
 
-In /etc/mongod.conf, change:
+change:
 sudo nano /etc/mongod.conf
 
-Copy
 bindIp: 127.0.0.1
 to
-Copy
+
 bindIp: 0.0.0.0
 Restart MongoDB:
-Copy
+
 sudo systemctl restart mongod
+sudo service mongod restart
+
 Make sure port 27017 is open in your firewall:
 Copy
 sudo ufw allow 27017
