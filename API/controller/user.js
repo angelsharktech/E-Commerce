@@ -21,7 +21,8 @@ try {
       }
     }
 } catch (error) {
-    console.log(error);
+    console.log('error occured::',error);
+     next(error);
     
 }
 }
