@@ -48,7 +48,7 @@ const Dashboard = () => {
           <AppBar position='static'>
             <Toolbar sx={{ backgroundColor: '#c26afc' }}>
               <Typography variant='h5' component="div" sx={{ color: 'whitesmoke', flexGrow: 1 }}>
-                {user.shop_name} Dashboard-Admin
+                {user?.shop_name} Dashboard-Admin
               </Typography>
               {/* <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => setComp('Home')}>
                 Home

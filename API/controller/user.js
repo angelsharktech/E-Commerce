@@ -47,12 +47,19 @@ export const login =async(req,res,next) =>{
     }
 }
 
+export const getUserById = async(req,res,next) =>{
+try {
+   const result = await user.findById({_id : req.params.id})   
+    res.status(200).json(result)
+} catch (error) {
+    next(error)
+}
+}
 export const updateUser = async(req,res,next) =>{
 try {
-    console.log('***');
-    const result = await user.findByIdAndUpdate({_id : req.params.id},req.body , {new:true})
+    const result = await user.findByIdAndUpdate({_id:req.params.id},req.body,{new:true})
     
-    res.status(200).json({msg : 'Data Updated Successfully...'})
+    res.status(200).json({msg : 'Data Updated Successfully...',data:result})
 } catch (error) {
     next(error)
 }
