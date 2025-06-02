@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(
     cors({
       credentials: true,
-      origin: true,
+      origin: "https://admin.toyshop.sbs",
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
     })
   );
