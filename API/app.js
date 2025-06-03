@@ -16,8 +16,8 @@ const port = process.env.PORT || 3000;
 const corsOptions = {
   origin: function(origin, callback) {
     const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
     } else {
       callback(new Error('Not allowed by CORS'));
     }
@@ -29,8 +29,25 @@ const corsOptions = {
   exposedHeaders: ['Content-Range', 'X-Content-Range']
 };
 
-// Apply CORS middleware before other middleware
+// Ensure CORS is the first middleware
 app.use(cors(corsOptions));
+
+// Error handling for CORS errors
+app.use((err, req, res, next) => {
+  if (err.message === 'Not allowed by CORS') {
+    res.status(403).json({
+      msg: 'Not allowed by CORS',
+      status: 403
+    });
+  } else {
+    res.status(err.status || 500).json({
+      msg: err.msg || err.message,
+      status: err.status || 500,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
+  }
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -45,14 +62,6 @@ app.use('/api/category', categoryRoute)
 
 app.use('/api/webuser', webuserRoute)
 app.use('/api/cart', cartRoute)
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
-    msg: err.msg,
-    status: err.status,
-    stack: err.stack,
-  });
-});
 
 const conncetDB = () => {
   try {
