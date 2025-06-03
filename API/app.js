@@ -13,34 +13,25 @@ import cartRoute from './routes/cart.js'
 const app = express();
 const port = process.env.PORT || 3000;
 
-// const allowedOrigins = ['https://toyshop.sbs', ];
+const allowedOrigins = [
+  'https://admin.toyshop.sbs',
+  'https://toyshop.sbs'
+];
 
-app.use(cors({
-  origin: true,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range'],
-}));
-// Ensure CORS is the first middleware
-// app.use(cors(corsOptions));
-
-// Error handling for CORS errors
-app.use((err, req, res, next) => {
-  if (err.message === 'Not allowed by CORS') {
-    res.status(403).json({
-      msg: 'Not allowed by CORS',
-      status: 403
-    });
-  } else {
-    res.status(err.status || 500).json({
-      msg: err.msg || err.message,
-      status: err.status || 500,
-      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
-    });
-  }
-});
-
+app.use(
+    cors({
+      credentials: true,
+      // origin: "https://admin.toyshop.sbs",
+      origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+    })
+  );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -55,6 +46,14 @@ app.use('/api/category', categoryRoute)
 
 app.use('/api/webuser', webuserRoute)
 app.use('/api/cart', cartRoute)
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    msg: err.msg,
+    status: err.status,
+    stack: err.stack,
+  });
+});
 
 const conncetDB = () => {
   try {
