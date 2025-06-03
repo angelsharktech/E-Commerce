@@ -16,55 +16,72 @@ const app = express();
 const port = process.env.PORT || 3000;
 const httpsPort = process.env.HTTPS_PORT || 443;
 
-// Parse CORS allowed origins from environment variable
-const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
-console.log('Configured CORS allowed origins:', allowedOrigins);
-
-// CORS configuration
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  console.log(`Incoming request from origin: ${origin} to path: ${req.path}`);
-  next();
-});
-
-app.use(cors({
+// Configure CORS settings
+const corsOptions = {
   origin: function(origin, callback) {
-    console.log('Request origin:', origin);
+    // Check if origin is in allowed list
+    const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
     
-    // Allow requests with no origin (like mobile apps, curl requests)
-    if (!origin) {
-      console.log('No origin header - allowing request');
-      return callback(null, true);
-    }
-
-    if (allowedOrigins.includes(origin)) {
-      console.log(`Origin ${origin} is allowed`);
+    if (!origin || allowedOrigins.includes(origin)) {
+      // Allow the request
       callback(null, true);
     } else {
-      console.log(`Origin ${origin} is not allowed`);
+      // Log the blocked origin
+      console.log(`Blocked request from unauthorized origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range', 'Access-Control-Allow-Origin'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
   maxAge: 86400 // 24 hours
-}));
+};
+
+// Enable pre-flight requests for all routes
+app.options('*', cors(corsOptions));
+
+// Apply CORS to all routes
+app.use(cors(corsOptions));
+
+// Add CORS headers to all responses
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && corsOptions.origin) {
+    corsOptions.origin(origin, (err, allowed) => {
+      if (allowed) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
+      }
+    });
+  }
+  next();
+});
   
 
 // Handle pre-flight requests
 app.options('*', cors());
 
-// Add error handler for CORS errors
+// Global error handler
 app.use((err, req, res, next) => {
+  console.error('Error details:', {
+    message: err.message,
+    path: req.path,
+    origin: req.headers.origin,
+    method: req.method
+  });
+
   if (err.message === 'Not allowed by CORS') {
-    console.error(`CORS Error: ${req.headers.origin} tried to access ${req.path}`);
+    // Handle CORS errors
     res.status(403).json({
-      msg: 'CORS not allowed for this origin',
+      success: false,
+      msg: 'CORS Error: This origin is not allowed to access this resource',
       status: 403
     });
   } else {
+    // Handle other errors
     next(err);
   }
 });
