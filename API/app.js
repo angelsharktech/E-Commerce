@@ -21,14 +21,14 @@ const allowedOrigins = [
 app.use(
     cors({
       credentials: true,
-      // origin: "https://admin.toyshop.sbs",
-      origin: function(origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
+      origin: "https://admin.toyshop.sbs",
+      // origin: function(origin, callback) {
+      //   if (!origin || allowedOrigins.includes(origin)) {
+      //     callback(null, true);
+      //   } else {
+      //     callback(new Error('Not allowed by CORS'));
+      //   }
+      // },
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
     })
   );
