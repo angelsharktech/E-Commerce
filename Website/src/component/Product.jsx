@@ -9,6 +9,8 @@ import Footer from '../pages/Footer'
 
 const Product = () => {
     const { data } = useFetch('/product/getProduct')
+    console.log('product data:', data);
+    
     const [productsWithDiscount, setProductsWithDiscount] = useState([]);
 
   useEffect(() => {
