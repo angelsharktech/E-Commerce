@@ -26,8 +26,6 @@ app.use(
       },
       credentials: true,
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
-      exposedHeaders: ['Content-Range', 'X-Content-Range'],
     })
   );
 app.use(express.urlencoded({ extended: true }));
