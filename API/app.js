@@ -13,13 +13,21 @@ import cartRoute from './routes/cart.js'
 const app = express();
 const port = process.env.PORT || 3000;
 
-
+const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 
 app.use(
     cors({
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, origin); // return the specific origin string
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
-      // origin: "*",
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+      exposedHeaders: ['Content-Range', 'X-Content-Range'],
     })
   );
 app.use(express.urlencoded({ extended: true }));
