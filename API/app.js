@@ -15,19 +15,18 @@ const port = process.env.PORT || 3000;
 
 const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 
-app.use(
-    cors({
+const corsOptions = {
       origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, origin); // return the specific origin string
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+          callback(null, true); // return the specific origin string
         } else {
           callback(new Error('Not allowed by CORS'));
         }
       },
       credentials: true,
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-    })
-  );
+    }
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
