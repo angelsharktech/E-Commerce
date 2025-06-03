@@ -14,12 +14,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: ['https://toyshop.sbs', 'https://another-domain.com'],
+  origin: ['https://toyshop.sbs', 'https://admin.toyshop.sbs'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true,
   optionsSuccessStatus: 200
 };
 
+// Apply CORS middleware before other middleware
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
