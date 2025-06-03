@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
 // const allowedOrigins = ['https://toyshop.sbs', ];
 
 app.use(cors({
-  origin:'https://admin.toyshop.sbs',
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
