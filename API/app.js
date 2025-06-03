@@ -20,29 +20,38 @@ const httpsPort = process.env.HTTPS_PORT || 443;
 const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 console.log('Configured CORS allowed origins:', allowedOrigins);
 
-app.use(
-    cors({
-      credentials: true,
-      origin: function(origin, callback) {
-        // Allow requests with no origin (like mobile apps, curl requests)
-        if (!origin) {
-          return callback(null, true);
-        }
+// CORS configuration
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  console.log(`Incoming request from origin: ${origin} to path: ${req.path}`);
+  next();
+});
 
-        if (allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          console.log(`Blocked request from origin: ${origin}`);
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
-      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-      exposedHeaders: ['Content-Range', 'X-Content-Range'],
-      maxAge: 600,
-      credentials: true
-    })
-  );
+app.use(cors({
+  origin: function(origin, callback) {
+    console.log('Request origin:', origin);
+    
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) {
+      console.log('No origin header - allowing request');
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      console.log(`Origin ${origin} is allowed`);
+      callback(null, true);
+    } else {
+      console.log(`Origin ${origin} is not allowed`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range', 'Access-Control-Allow-Origin'],
+  maxAge: 86400 // 24 hours
+}));
+  
 
 // Handle pre-flight requests
 app.options('*', cors());
