@@ -18,7 +18,7 @@ const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      callback(null, origin); // <-- FIXED: return origin, not true
     } else {
       callback(new Error('Not allowed by CORS'));
     }
