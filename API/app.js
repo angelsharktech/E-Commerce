@@ -128,15 +128,15 @@ app.listen(port, () => {
 });
 
 // Start HTTPS server if SSL certificates exist
-try {
-  const privateKey = fs.readFileSync(process.env.SSL_KEY_PATH, 'utf8');
-  const certificate = fs.readFileSync(process.env.SSL_CERT_PATH, 'utf8');
-  const credentials = { key: privateKey, cert: certificate };
+// try {
+//   const privateKey = fs.readFileSync(process.env.SSL_KEY_PATH, 'utf8');
+//   const certificate = fs.readFileSync(process.env.SSL_CERT_PATH, 'utf8');
+//   const credentials = { key: privateKey, cert: certificate };
   
-  const httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(httpsPort, () => {
-    console.log(`HTTPS Server listening on port ${httpsPort}`);
-  });
-} catch (error) {
-  console.log('SSL certificates not found, HTTPS server not started:', error.message);
-}
+//   const httpsServer = https.createServer(credentials, app);
+//   httpsServer.listen(httpsPort, () => {
+//     console.log(`HTTPS Server listening on port ${httpsPort}`);
+//   });
+// } catch (error) {
+//   console.log('SSL certificates not found, HTTPS server not started:', error.message);
+// }
