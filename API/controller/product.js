@@ -4,10 +4,12 @@ export const addProduct = async (req, res, next) => {
   try {
     const singleFile = req.files['thumbnail'] ? req.files['thumbnail'][0] : null;
     const multipleFiles = req.files["images"] || [];
-
+    
+    const baseUrl = process.env.API_URL || 'https://api.toyshop.sbs';
+    
     const images = [];
     multipleFiles.forEach((image) => {
-      images.push("/gallery/" + image.filename);
+      images.push(`${baseUrl}/api/gallery/${image.filename}`);
     });
 
     const obj = {
@@ -18,7 +20,7 @@ export const addProduct = async (req, res, next) => {
       actual_price: req.body.actual_price,
       selling_price: req.body.selling_price,
       avail_qty: req.body. avail_qty,
-      thumbnail: "/gallery/" + singleFile.filename,
+      thumbnail: `${baseUrl}/api/gallery/${singleFile.filename}`,
       images: images,
     };
 
