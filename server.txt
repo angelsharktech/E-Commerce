@@ -24,8 +24,6 @@ pm2 restart project-backend
 
 
 
-
-
 mongodbconnection:
 2. Using MongoDB Compass from Your Computer
 If you want to use Compass, you must allow remote connections:

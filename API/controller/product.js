@@ -3,8 +3,11 @@ import product from "../model/product.js";
 export const addProduct = async (req, res, next) => {
   try {
     const singleFile = req.files['thumbnail'] ? req.files['thumbnail'][0] : null;
+    if (!singleFile) {
+      return res.status(400).json({ msg: 'Thumbnail image is required' });
+    }
+
     const multipleFiles = req.files["images"] || [];
-    
     const baseUrl = process.env.API_URL || 'https://api.toyshop.sbs';
     
     const images = [];
@@ -19,17 +22,27 @@ export const addProduct = async (req, res, next) => {
       productBy: req.body.productBy,
       actual_price: req.body.actual_price,
       selling_price: req.body.selling_price,
-      avail_qty: req.body. avail_qty,
+      avail_qty: req.body.avail_qty,
       thumbnail: `${baseUrl}/api/gallery/${singleFile.filename}`,
       images: images,
     };
 
-    const result = await new product(obj).save()
-    res.status(200).json({msg:'Product Added'})
+    // Validate required fields
+    if (!obj.title || !obj.category || !obj.actual_price || !obj.selling_price) {
+      return res.status(400).json({ msg: 'Missing required fields' });
+    }
+
+    const newProduct = new product(obj);
+    const result = await newProduct.save({ w: 'majority', j: true, wtimeout: 5000 });
+    
+    if (result) {
+      console.log('Product saved successfully:', result._id);
+      res.status(200).json({ msg: 'Product Added', productId: result._id });
+    }
 
   } catch (error) {
-    console.log(error);
-    
+    console.error('Error adding product:', error);
+    next(error);
   }
 };
 

@@ -62,20 +62,57 @@ app.use((err, req, res, next) => {
   });
 });
 
-const conncetDB = () => {
+const connectDB = () => {
   try {
-    mongoose.connect(process.env.URI);
-    console.log("Connecting Database...");
+    mongoose.connect(process.env.URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      retryWrites: true,
+      w: "majority",
+      wtimeout: 2500,
+      journal: true,
+      writeConcern: {
+        w: "majority",
+        j: true,
+        wtimeout: 5000
+      }
+    });
+    console.log("Connecting to Database...");
   } catch (error) {
-    console.log("error", error);
+    console.log("MongoDB Connection Error:", error);
   }
 };
+
 mongoose.connection.on("connected", () => {
-  console.log("Database Connected Successful...");
+  console.log("Database Connected Successfully...");
 });
+
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB Error:", err);
+  // Attempt to reconnect on error
+  if (err.name === 'MongoNetworkError') {
+    setTimeout(connectDB, 5000);
+  }
+});
+
 mongoose.connection.on("disconnected", () => {
-  console.log("database not connected...");
+  console.log("Database disconnected. Attempting to reconnect...");
+  setTimeout(connectDB, 5000);
 });
+
+// Handle process termination
+process.on('SIGINT', async () => {
+  try {
+    await mongoose.connection.close();
+    console.log('MongoDB connection closed through app termination');
+    process.exit(0);
+  } catch (err) {
+    console.error('Error during MongoDB disconnection:', err);
+    process.exit(1);
+  }
+});
+
 mongoose.set("strictQuery", true);
 app.listen(port, () => {
   conncetDB();
