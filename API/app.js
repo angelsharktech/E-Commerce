@@ -13,14 +13,14 @@ import cartRoute from './routes/cart.js'
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(
-    cors({
-      credentials: true,
-      origin: true,
-      methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-    })
-  );
+const corsOptions = {
+  origin: ['https://toyshop.sbs', 'https://another-domain.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
