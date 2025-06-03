@@ -16,19 +16,49 @@ const app = express();
 const port = process.env.PORT || 3000;
 const httpsPort = process.env.HTTPS_PORT || 443;
 
+// Parse CORS allowed origins from environment variable
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
+console.log('Configured CORS allowed origins:', allowedOrigins);
+
 app.use(
     cors({
       credentials: true,
       origin: function(origin, callback) {
-        if (!origin || process.env.ALLOWED_ORIGINS.includes(origin)) {
+        // Allow requests with no origin (like mobile apps, curl requests)
+        if (!origin) {
+          return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
           callback(null, true);
         } else {
+          console.log(`Blocked request from origin: ${origin}`);
           callback(new Error('Not allowed by CORS'));
         }
       },
-      methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+      methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+      exposedHeaders: ['Content-Range', 'X-Content-Range'],
+      maxAge: 600,
+      credentials: true
     })
   );
+
+// Handle pre-flight requests
+app.options('*', cors());
+
+// Add error handler for CORS errors
+app.use((err, req, res, next) => {
+  if (err.message === 'Not allowed by CORS') {
+    console.error(`CORS Error: ${req.headers.origin} tried to access ${req.path}`);
+    res.status(403).json({
+      msg: 'CORS not allowed for this origin',
+      status: 403
+    });
+  } else {
+    next(err);
+  }
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
