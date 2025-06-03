@@ -13,17 +13,20 @@ import cartRoute from './routes/cart.js'
 const app = express();
 const port = process.env.PORT || 3000;
 
-const corsOptions = {
-  origin: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range']
-};
+const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 // Ensure CORS is the first middleware
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // Error handling for CORS errors
 app.use((err, req, res, next) => {
