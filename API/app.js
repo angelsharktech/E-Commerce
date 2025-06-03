@@ -12,10 +12,7 @@ import cartRoute from './routes/cart.js'
 
 const app = express();
 const port = process.env.PORT || 3000;
-const allowedOrigins = [
-  'https://admin.toyshop.sbs',
-  'https://toyshop.sbs'
-];
+
 app.use(
     cors({
       credentials: true,
@@ -32,6 +29,15 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use((err, req, res, next) => {
+  console.error("🔥 Unhandled Error:", err); // log full error
+  res.status(err.status || 500).json({
+    msg: err.message || 'Internal Server Error',
+    status: err.status || 500,
+    stack: err.stack,
+  });
+});
 
 app.get("/api/test", (req, res, next) => {
   res.send("<h1>Welcome To Nodejs</h1>");
