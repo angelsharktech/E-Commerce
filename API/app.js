@@ -18,7 +18,7 @@ const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 const corsOptions = {
       origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true); // return the specific origin string
+          callback(null, origin); // return the specific origin string
         } else {
           callback(new Error('Not allowed by CORS'));
         }
@@ -27,6 +27,7 @@ const corsOptions = {
       methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
     }
 app.use(cors(corsOptions));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
