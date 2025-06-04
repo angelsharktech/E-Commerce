@@ -21,16 +21,13 @@ try {
       }
     }
 } catch (error) {
-    console.log('error occured::',error);
-     next(error);
+    console.log(error);
     
 }
 }
 
 export const login =async(req,res,next) =>{
     try {
-        console.log('login::',req.body);
-        
         const User = await user.findOne({username : req.body.username})
         if(!User){
             return res.status(200).json({msg:'user does not exist'})

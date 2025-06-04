@@ -1,38 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Accordion, AccordionSummary, AppBar, Box, Button, Card, CardContent, Grid, Paper, Toolbar, Typography } from '@mui/material'
+import { Accordion, AccordionSummary, AppBar, Box, Button, Card, CardContent, Grid, Toolbar, Typography, Divider, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import Product from './Product';
 import Category from './Category';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { userInformation } from '../context/AuthContext';
-import './Dashboard.css'
 import Home from './Home';
 import Profile from './Profile';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import ProductList from './ProductList';
+
+const menuItems = [
+  { label: 'Product List', value: 'ProductList', icon: <ListAltOutlinedIcon /> },
+  { label: 'Upload Product', value: 'Product', icon: <Inventory2OutlinedIcon /> },
+  { label: 'Add Category', value: 'Category', icon: <CategoryOutlinedIcon /> },
+  { label: 'Profile Manager', value: 'Profile', icon: <PersonOutlineOutlinedIcon /> },
+];
 
 const selected = {
-  display: 'flex',
-  flexGrow: 1,
+  background: "linear-gradient(90deg, #c26afc 0%, #177bad 100%)",
   color: "white",
-  backgroundColor: " #c26afc",
-  p: "5px",
-  cursor: "pointer",
-  height: '40px',
-  justifyContent: 'start',
-  borderRadius: "5px",
+  borderRadius: "8px",
+  fontWeight: 600,
+  boxShadow: 2,
 };
-const unSelected = { color: ' #c26afc', p: "5px", cursor: "pointer" };
+
+const unSelected = {
+  color: "#c26afc",
+  borderRadius: "8px",
+  fontWeight: 500,
+  transition: "background 0.2s",
+  '&:hover': {
+    backgroundColor: "#f3e7e9",
+  }
+};
 
 const Dashboard = () => {
   const { user, dispatch } = useContext(userInformation)
-  const [comp, setComp] = useState()
+  const [comp, setComp] = useState('Home')
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!user) {
       navigate('/')
     }
-  })
+  }, [user, navigate])
 
   const logOut = () => {
     dispatch({ type: 'LOGOUT' })
@@ -40,98 +56,79 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      {/* <Header /> */}
+    <Box
+    >
+      <AppBar position='static' elevation={0} sx={{ background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)' }}>
+        <Toolbar>
+          <Typography variant='h5' sx={{ color: 'whitesmoke', flexGrow: 1, fontWeight: 700 }}>
+            {user?.shop_name} Dashboard-Admin
+          </Typography>
+          <Button variant='outlined' style={{ color: 'white', borderColor: 'white' }} onClick={() => setComp('Home')}>
+            Home
+          </Button>
+          <Button variant='outlined' sx={{ color: 'white', borderColor: 'white',ml:2 }} onClick={logOut}>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-      <Box sx={{ width: '100%' }}>
-        <Box>
-          <AppBar position='static'>
-            <Toolbar sx={{ backgroundColor: '#c26afc' }}>
-              <Typography variant='h5' component="div" sx={{ color: 'whitesmoke', flexGrow: 1 }}>
-                {user?.shop_name} Dashboard-Admin
-              </Typography>
-              {/* <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => setComp('Home')}>
-                Home
-              </Button> */}
-              <Button variant='text' style={{ color: 'whitesmoke' }} onClick={() => logOut()}>
-                Logout
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
+      <Grid container sx={{ minHeight: 'calc(100vh - 100px)' ,overflow: 'hidden' }}>
+        {/* Sidebar */}
+        <Grid item xs={12} sm={3} md={2} sx={{ minWidth: 220 }}>
+          <Card
+            sx={{
+              m: 3, // Only vertical margin
+              borderRadius: 4,
+              boxShadow: 6,
+              background: 'white',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              p: 2,
+              height: 'calc(100vh - 160px)',
+            }}
+          >
+            <Typography variant="h6" sx={{ color: "#c26afc", fontWeight: 700, mb: 2, textAlign: 'center' }}>
+              Menu
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
+            <List>
+              {menuItems.map((item) => (
+                <ListItemButton
+                  key={item.value}
+                  selected={comp === item.value}
+                  onClick={() => setComp(item.value)}
+                  sx={comp === item.value ? selected : unSelected}
+                >
+                  <ListItemIcon sx={{ color: comp === item.value ? "white" : "#c26afc" }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Card>
+        </Grid>
 
-
-        <Box sx={{ width: '100%', marginTop: '5px' }}>
-          <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid itemxs={2}>
-              <Card sx={{ height: '100vh', width: '180px' }} >
-                <CardContent>
-
-                  <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === "Product" ? selected : unSelected} onClick={() => setComp('Product')}>
-                          Upload Product
-                        </Box>
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion>
-
-                  <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Category' ? selected : unSelected} onClick={() => setComp('Category')} >
-                          Add Category
-                        </Box>
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      aria-controls="panel1-content"
-                      id="panel1-header"
-                    >
-                      <Typography component="span">
-                        <Box display={'flex'} justifyContent={'center'} sx={comp === 'Profile' ? selected : unSelected} onClick={() => setComp('Profile')} >
-                          Profile Manager
-                        </Box>
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion>
-                </CardContent>
-              </Card>
-
-            </Grid>
-
-            <Grid item>
-              <Box>
-                <br />
-                {
-                  {
-                    Home: <Home />,
-                    Product: <Product />,
-                    Category: <Category />,
-                    About: <AboutUs />,
-                    Contact: <ContactUs />,
-                    Profile: <Profile />,
-                  }[comp]
-                }
-              </Box>
-            </Grid>
-
-
-          </Grid>
-        </Box>
-      </Box>
-    </>
+        {/* Main Content */}
+        <Grid item xs={12} sm={9} md={10} sx={{ py: 3, pr: 3, pl: 0 }}>
+          <Box sx={{ minHeight: '80vh', width: '100%' }}>
+            {
+              {
+                Home: <Home />,
+                Product: <Product />,
+                ProductList: <ProductList />,
+                Category: <Category />,
+                About: <AboutUs />,
+                Contact: <ContactUs />,
+                Profile: <Profile />,
+              }[comp]
+            }
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   )
 }
 
 export default Dashboard
-

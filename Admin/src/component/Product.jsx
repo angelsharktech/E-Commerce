@@ -1,30 +1,29 @@
 import React, { useContext, useState } from 'react'
-import { Autocomplete, Button, Grid, Stack, TextField } from '@mui/material'
+import { Autocomplete, Button, Card, CardContent, Divider, Grid, Stack, TextField, Typography } from '@mui/material'
 import './product.css'
 import axios from 'axios'
 import useFetch from '../hooks/useFetch'
 import { DataGrid } from '@mui/x-data-grid'
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import { userInformation } from '../context/AuthContext'
 
 const Product = () => {
-  const {user} = useContext(userInformation)
-  const product = useFetch('/product/getProduct')
+  const { user } = useContext(userInformation)
+
   const category = useFetch('/category/getCategory')
-console.log('product:',user);
 
   const [data, setData] = useState({
     title: '',
     description: '',
     actual_price: '',
     selling_price: '',
-    avail_qty: '',
-    productBy:'',
+    // avail_qty: '',
+    productBy: '',
     category: '',
     thumbnail: '',
     images: [],
   })
- 
+
   const onSubmit = async () => {
     try {
       data.productBy = user?.shop_name
@@ -35,7 +34,7 @@ console.log('product:',user);
       formData.append('description', data.description)
       formData.append('actual_price', data.actual_price)
       formData.append('selling_price', data.selling_price)
-      formData.append('avail_qty', data.avail_qty)
+      // formData.append('avail_qty', data.avail_qty)
       formData.append('thumbnail', data.thumbnail)
       data.images?.forEach((images) => {
         formData.append('images', images)
@@ -48,16 +47,14 @@ console.log('product:',user);
       })
       if (result.data.msg === 'Product Added') {
         alert(result.data.msg)
-        product.refetch('/product/getproduct')
+        // product.refetch('/product/getproduct')
         setData({
           title: '',
-          category:'',
+          category: '',
           description: '',
           actual_price: '',
           selling_price: '',
-          avail_qty: '',
-          // thumbnail: '',
-          // images: [],
+          // avail_qty: '',
         })
       }
     } catch (error) {
@@ -66,97 +63,87 @@ console.log('product:',user);
     }
   }
 
-  const updateProduct = async(newRow , oldRow) =>{
-    try {
-       const result = axios.put(`/product/updateProduct/${newRow._id}`,newRow)
-       
-       if(result){
-         alert('Product Updated Successfully')
-         product.refetch('/product/getProduct')
-       }
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
 
-  const deleteProduct = async(row) =>{
-    try {
-      const result = await axios.delete(`/product/deleteProduct/${row._id}`,row)
-      
-      if(result.data.msg === 'Product Deleted successfully...'){
-        alert(result.data.msg)
-        product.refetch('/product/getProduct')
-      }
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
 
-  const prod_columns = [
-    { field: 'thumbnail', headerName: 'Image', renderCell: params => <><img src={axios.defaults.baseURL + params?.row?.thumbnail} height={'50px'} width={'75px'} /></>, width: 150 },
-    { field: 'title', headerName: 'Title', width: 120 ,editable:true},
-    { field: 'category', headerName: 'Category', width: 120,editable:true },
-    { field: 'description', headerName: 'Description', width: 190,editable:true },
-    { field: 'actual_price', headerName: 'MRP', width: 120 ,editable:true},
-    { field: 'selling_price', headerName: 'Price', width: 120 ,editable:true},
-    // { field: 'avail_qty', headerName: 'Quantity', width: 120,editable:true },
-    { field: 'action', headerName: 'Delete',renderCell: (params) => <><Button  sx={{ color: ' #c26afc' }} onClick={() => deleteProduct(params?.row)}><DeleteIcon  /></Button></>, width: 120 },
-    
-  ]
+
+
+
   return (
-    <>
-      {/* <div container> */}
-      
-        <h3> Product Upload </h3>
+    <Grid container
+      justifyContent="center"
+      alignItems="center"
+      sx={{ width: '70vw' }} >
+      <Grid item xs={12} md={10} lg={8}>
+        <Card sx={{ borderRadius: 4, boxShadow: 10, background: 'white', mt: 5 }}>
+          <CardContent>
+            <Typography variant="h5" fontWeight={700} color="#c26afc" gutterBottom>
+              Product Upload
+            </Typography>
+            <Divider sx={{ mb: 3 }} />
+            <Stack spacing={2}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <TextField variant='outlined' label='Title' name={'title'} value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' fullWidth />
+                <TextField variant='outlined' label='Actual Price' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' fullWidth />
+                <TextField variant='outlined' label='Selling Price' name={'selling_price'} type='Number' value={data.selling_price} onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' fullWidth />
+                <Autocomplete
+                  sx={{ minWidth: 160 }}
+                  options={category.data || []}
+                  getOptionLabel={(option) => option?.categoryName || ''}
+                  onChange={(e, newValue) => setData({ ...data, category: newValue?.categoryName || '' })}
+                  renderInput={(params) => <TextField {...params} name='category' label="Category" size="small" />}
+                />
+              </Stack>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <TextField 
+                variant='outlined' 
+                label='Description' 
+                name={'description'} 
+                value={data.description} 
+                onChange={(e) => setData({ ...data, description: e.target.value })} 
+                size='small' 
+                fullWidth 
+                multiline 
+                minRows={4} />
 
-        <div className='product' >
-          <Stack direction={'row'} gap={'5px'}>
-            <TextField variant='outlined' label='Title' name={'title'} value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Description' name={'description'}  value={data.description}  onChange={(e) => setData({ ...data, description: e.target.value })} size='small' multiline />
-            <TextField variant='outlined' label='Actual Price' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' />
-            <TextField variant='outlined' label='Selling Price' name={'selling_price'}  type='Number' value={data.selling_price}  onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' />
-            {/* <TextField variant='outlined' label='Quantity Available' name={'avail_qty'}  type='Number' value={data.avail_qty}  onChange={(e) => setData({ ...data, avail_qty: e.target.value })} size='small' /> */}
-
-          </Stack>
-          <Stack direction={'row'} gap={'5px'}>
-            <Autocomplete
-            sx={{width:'160px'}}
-            options={category.data} 
-            // value={data.category}
-            getOptionLabel= {(option) => option?.categoryName}
-            onChange={(e, newValue) => setData({ ...data, category: newValue.categoryName })}
-            renderInput={(params) => <TextField {...params}  name='category' label="Category"  />}
-            size='small'
-            />
-            <label>Select Thumbnail image</label>
-            <input type='file' name='thumbnail'
-              onChange={(e) => setData({ ...data, thumbnail: e.target.files[0] })}  />
-            <label>Select Multiple Files</label>
-            <input type='file' multiple name='images' onChange={(e) =>
-              setData({ ...data, images: Array.from(e.target.files) })
-            } />
-            <Button variant='contained' onClick={() => onSubmit()} sx={{ backgroundColor: '#c26afc', color: 'whitesmoke' }} >Add</Button>
-          </Stack>
-
-        </div>
-      {/* </div> */}
-
-      <div style={{ marginTop: '55px' }} >
-        {!product ? (<><h2>L O A D I N G</h2></>) :
-          (<>
-            <DataGrid
-              style={{ height: '400px' }}
-              rows={product.data}
-              columns={prod_columns}
-              getRowId={row => row._id}
-             processRowUpdate={updateProduct}
-
-            />
-          </>)}
-      </div>
-    </>
+              </Stack>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center">
+                <label style={{ fontWeight: 500 }}>Select Thumbnail</label>
+                <input type='file' name='thumbnail'
+                  onChange={(e) => setData({ ...data, thumbnail: e.target.files[0] })} style={{ marginRight: 16 }} />
+                <label style={{ fontWeight: 500 }}>Select Images</label>
+                <input type='file' multiple name='images' onChange={(e) =>
+                  setData({ ...data, images: Array.from(e.target.files) })
+                } style={{ marginRight: 16 }} />
+                <Button variant='contained' onClick={onSubmit} sx={{ background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)', color: 'whitesmoke', fontWeight: 600 }}>
+                  Add
+                </Button>
+              </Stack>
+            </Stack>
+            <Divider sx={{ my: 4 }} />
+            {/* <Typography variant="h6" fontWeight={600} color="#177bad" gutterBottom>
+              Product List
+            </Typography>
+            <div style={{ height: '400px', width: '100%' }}>
+              {!product ? (
+                <Typography variant="body1" color="text.secondary">L O A D I N G</Typography>
+              ) : (
+                <DataGrid
+                  rows={product.data}
+                  columns={prod_columns}
+                  getRowId={row => row._id}
+                  processRowUpdate={updateProduct}
+                  sx={{
+                    borderRadius: 2,
+                    boxShadow: 2,
+                    background: '#f9f9fb',
+                  }}
+                />
+              )}
+            </div> */}
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   )
 }
 

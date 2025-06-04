@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material'
+import { Box, Button, Card, Divider, Grid, Stack, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import useFetch from '../hooks/useFetch'
@@ -73,31 +73,68 @@ const Category = () => {
     
   ]
   return (
-    <>
-    <div container>
-      <h3> Category </h3>
-      <TextField variant='outlined' label='Category' value={category.categoryName} name={'categoryName'} onChange={handleChange} size='small' />
-      <Button variant='contained'
-        sx={{ backgroundColor: '#c26afc', color: 'whitesmoke', marginLeft: '5px' }}
-        onClick={() => addCategory()}
-      >
-        Add
-      </Button>
-    </div>
-     <div style={{ marginTop: '55px' }} >
-            {!data ? (<><h2>L O A D I N G</h2></>) :
-              (<>
-                <DataGrid
-                  style={{ height: '400px' }}
-                  rows={data.data}
-                  columns={cat_columns}
-                  getRowId={row => row._id}
-                 processRowUpdate={updateCategory}
-                />
-              </>)}
-          </div>
-          </>
-  )
+  <Grid
+    container
+    justifyContent="center"
+    alignItems="center"
+   
+  >
+    <Grid item xs={12} md={8} lg={6}>
+      <Card sx={{ borderRadius: 4, boxShadow: 6, background: 'white', p: 3 }}>
+        <Typography variant="h5" fontWeight={700} color="#c26afc" gutterBottom>
+          Category Manager
+        </Typography>
+        <Divider sx={{ mb: 3 }} />
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center" mb={2}>
+          <TextField
+            variant='outlined'
+            label='Category'
+            value={category.categoryName}
+            name={'categoryName'}
+            onChange={handleChange}
+            size='small'
+            fullWidth
+          />
+          <Button
+            variant='contained'
+            sx={{
+              background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)',
+              color: 'whitesmoke',
+              fontWeight: 600,
+              px: 4,
+              boxShadow: 2,
+              height: 40
+            }}
+            onClick={addCategory}
+          >
+            Add
+          </Button>
+        </Stack>
+        <Divider sx={{ my: 3 }} />
+        <Typography variant="h6" fontWeight={600} color="#c26afc" gutterBottom>
+          Category List
+        </Typography>
+        <Box sx={{ height: 400, width: '100%' }}>
+          {!data ? (
+            <Typography variant="body1" color="text.secondary">L O A D I N G</Typography>
+          ) : (
+            <DataGrid
+              rows={data.data}
+              columns={cat_columns}
+              getRowId={row => row._id}
+              processRowUpdate={updateCategory}
+              sx={{
+                borderRadius: 2,
+                boxShadow: 1,
+                background: '#f9f9fb',
+              }}
+            />
+          )}
+        </Box>
+      </Card>
+    </Grid>
+  </Grid>
+)
 }
 
 export default Category

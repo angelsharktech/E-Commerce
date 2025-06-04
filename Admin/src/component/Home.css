@@ -1,11 +1,21 @@
-.paper-style{
-     height: 150px;
-    width: 350px;
-    /* margin-top: 3%; */
-    text-align: start;
-    padding-left: 12px;
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px !important;
+.home-paper {
+  height: 175px;
+  width: 220px;
+  border-radius: 20px !important;
+  padding: 4px;
+  text-align: center !important;
+  /* color: 'pink' !important; */
+  box-shadow: 6 !important;
+
+}
+
+.home-background {
+  /* min-height: 100vh; */
+  /* background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%); */
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 48px 0; */
+  width: 70vw;
 }

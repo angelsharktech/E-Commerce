@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Grid, Paper, Typography } from '@mui/material'
 import './Home.css'
 import { userInformation } from '../context/AuthContext'
 import useFetch from '../hooks/useFetch'
@@ -11,54 +11,67 @@ const Home = () => {
     console.log('total_product',total_product);
     
 
-    return (
-        <>
-            <div style={{ marginTop: '3%', display: 'flex', flexDirection: 'row', gap: '12%' }}>
-
-                <Paper elevation={12} className='paper-style'
-                    style={{ background: 'linear-gradient(135deg, #f77062, #fe5196)' }}
-                >
-                    {/* <Box sx={{
-                        position: 'absolute',
-                        top: 110,
-                        width: 60,
-                        height: 60,
-                        borderRadius: 2,
-                        background: 'linear-gradient(145deg,rgb(202, 195, 195),rgb(39, 38, 38))', // dark box
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: 3,
-                        color: 'white',
-                    }}>
-                        manasi
-                        <MailIcon fontSize="small" />
-                    </Box> */}
-                    {/* <p style={{ color: 'whitesmoke' }}> */}
-                        <h2 style={{color:'whitesmoke'}}>Total Products</h2>
-                        <h1 style={{color:'whitesmoke'}} >{total_product.data?.count}</h1>
-                    {/* </p> */}
-                </Paper>
-                <Paper elevation={12} className='paper-style' style={{
-                    background: 'linear-gradient(135deg,rgb(72, 237, 243),rgb(39, 121, 243))'
-                }}
-                >
-                    
-                        <h2 style={{ color: 'whitesmoke' }}>Total Categories</h2>
-                        <h1 style={{ color: 'whitesmoke' }}>{total_category.data?.count}</h1>
-                   
-                </Paper>
-                <Paper elevation={12} className='paper-style' style={{
-                    background: 'linear-gradient(135deg,rgb(140, 241, 228),rgb(56, 240, 133))'
-                }}
-                >
-                        <h2 style={{ color: 'whitesmoke' }}>Orders</h2>
-                        <h1 style={{ color: 'whitesmoke' }}>0</h1>
-                    
-                </Paper>
-            </div>
-        </>
-    )
+  return (
+  <Box
+  className='home-background'
+  >
+    <Grid container spacing={4} justifyContent="center"  alignItems="stretch"
+    maxWidth="md" >
+      <Grid item xs={12} sm={6} md={4}>
+        <Paper
+        className='home-paper'
+          elevation={8}         
+          sx={{
+              color: '#c26afc',
+            // background: 'linear-gradient(135deg,rgb(250, 171, 162), #fe5196)',
+            }}
+        >
+          <Typography variant="h6" fontWeight={600} gutterBottom sx={{marginTop:'30px'}}>
+            Total Products
+          </Typography>
+          <Typography variant="h2" fontWeight={700}>
+            {total_product.data?.count ? total_product.data?.count : 0}
+          </Typography>
+        </Paper>
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <Paper
+          elevation={8}
+          className='home-paper'
+          sx={{
+             color: '#c26afc',
+            // background: 'linear-gradient(135deg,rgb(172, 244, 247), #2779f3)',
+          }}
+        >
+          <Typography variant="h6" fontWeight={600} gutterBottom sx={{marginTop:'30px'}}>
+            Total Categories
+          </Typography>
+          <Typography variant="h2" fontWeight={700}>
+            {total_category.data?.count ? total_category.data?.count : 0}
+          </Typography>
+        </Paper>
+      </Grid>
+      <Grid item xs={12} sm={6} md={4}>
+        <Paper
+          elevation={8}
+            className='home-paper'
+          sx={{
+            // background: 'linear-gradient(90deg,rgb(126, 142, 233) 0%,rgb(172, 72, 238) 100%)',
+            // background: 'linear-gradient(135deg,rgb(128, 228, 133) 0%,rgb(212, 240, 55) 100%)',
+            color: '#c26afc',
+       }}
+        >
+          <Typography variant="h6" fontWeight={600} gutterBottom sx={{marginTop:'30px'}}>
+            Orders
+          </Typography>
+          <Typography variant="h2" fontWeight={700}>
+            0
+          </Typography>
+        </Paper>
+      </Grid>
+    </Grid>
+  </Box>
+)
 }
 
 export default Home
