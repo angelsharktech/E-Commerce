@@ -5,6 +5,7 @@ import axios from 'axios'
 
 // Configure axios defaults
 axios.defaults.baseURL = 'https://api.toyshop.sbs/api';
+// axios.defaults.baseURL = 'http://localhost:3000/api';
 
 
 createRoot(document.getElementById('root')).render(
