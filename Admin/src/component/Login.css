@@ -1,19 +1,26 @@
-.login-style{
-    display:flex;
-     flex-direction:column;
-     justify-content:end;
-     align-items:center;
-     gap:20px;
+.login-box {
+  width: 370px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  background: white;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  position: relative;
 }
 
-.background{
-    background-image: url('/toy13.jpg');
-    opacity: 0.7;
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: right;
-    align-items: center;
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/toy13.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.7; /* Adjust opacity here */
+  z-index: 0;
 }
+ 

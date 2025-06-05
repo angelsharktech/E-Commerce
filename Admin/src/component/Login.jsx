@@ -1,5 +1,5 @@
 
-import { Box, Button, Grid, TextField } from '@mui/material'
+import { Box, Button, Grid, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import './Login-Style.css'
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,41 +35,63 @@ const Login = () => {
             
         }
     }
-    return (
-        <>
-            {/* <div style={{ position: 'relative', height: '100vh', width: '100%' }}> */}
-            <div className='background'>
-                <Box
-                    sx={{
-                        width: '30%',
-                        marginRight: '10%',
-                        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
-                        borderRadius: '12px'
-                    }}>
-                    <div >
-
-                        <div className='login-style' >
-                            <div style={{ textAlign: 'center' }}>
-                                <h1 style={{ color: '#dd25f5' }}>Login</h1>
-                            </div>
-
-                            <TextField variant='standard' label='Username' name={'username'} onChange={handleChange} sx={{ width: 300 }} />
-                            <TextField variant='standard' label='Password' type='password' name={'password'} onChange={handleChange} sx={{ width: 300 }} />
-                            <Button varient='contained' onClick={() => getAuthorize()} sx={{ backgroundColor: '#dd25f5', color: 'white' }}>LOGIN</Button>
-                            {/* <Button sx={{color:'#093de6'}}>FORGOT PASSWORD</Button> */}
-                        </div>
-                        <div style={{ padding: '6%' }}>
-                            <Link to={'/register'} style={{ color: '#dd25f5', marginLeft: '25%' }}>SIGN UP FOR NEW USER </Link>
-                        </div>
-                    </div>
-                </Box>
-
-            </div>
-
-            {/* </div> */}
-        </>
-
-    )
+   return (
+    <div
+    style={{
+    position: 'relative',
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingRight: 150,
+    overflow: 'hidden',
+  }}
+>
+  <div className='background' />
+    <Box className='login-box'>
+      <Typography variant="h4" fontWeight={700} color="#c26afc" mb={3} textAlign="center">
+        Login
+      </Typography>
+      <TextField
+        variant='outlined'
+        label='Username'
+        name='username'
+        onChange={handleChange}
+        sx={{ mb: 2, width: '100%' }}
+      />
+      <TextField
+        variant='outlined'
+        label='Password'
+        type='password'
+        name='password'
+        onChange={handleChange}
+        sx={{ mb: 3, width: '100%' }}
+      />
+      <Button
+        variant='contained'
+        onClick={getAuthorize}
+        sx={{
+          background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)',
+          color: 'white',
+          fontWeight: 600,
+          width: '100%',
+          mb: 2,
+          boxShadow: 2,
+          '&:hover': {
+            background: 'linear-gradient(90deg, #177bad 0%, #c26afc 100%)',
+          },
+        }}
+      >
+        LOGIN
+      </Button>
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        <Link to={'/register'} style={{ color: '#c26afc', textDecoration: 'none', fontWeight: 500 }}>
+          SIGN UP FOR NEW USER
+        </Link>
+      </Typography>
+    </Box>
+  </div>
+)
 }
 
 export default Login
