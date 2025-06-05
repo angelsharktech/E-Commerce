@@ -48,30 +48,69 @@
 .carousel-control-next {
   transform: translateY(-30%);
 }
-.img-style{
-  width:150px;
-    height:150px;
-   
+.img-style {
+  width: 80%;
+  max-width: 110px;
+  height: 100px;
+  /* object-fit: contain; */
+  border-radius: 16px;
+  background: #fff;
+  /* margin-bottom: 6px; */
+  border: 3px solid #f9d423;
+  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
 }
-.title{
- text-align: start;
+.title {
+  font-size: 1.1rem;
+  color: #ff4e50;
+  font-weight: bold;
+  margin: 6px 0;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
 }
-.box{
-  border: 1px solid #131212;
-    display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
-    /* align-items: center; */
-    flex-wrap: wrap;
-    padding: 12px;
-     width:280px;
-     margin-left: 15%;
-    /* height:300px; */
+h1 {
+  font-size: 2.5rem;
+  color: #d844fd;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+}
+.box {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+  margin: 12px;
+  padding: 18px 10px 24px 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  /* min-height: 200px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-2deg);
+  box-shadow: 10 8px 32px rgba(255, 78, 80, 0.22);
 }
 .product-style{
 text-align: center;
- margin-top: 25%;
+ margin-top: 14%;
   margin-left:3%;
+}
+.price-label {
+  color: #888;
+  font-size: 1rem;
+  text-decoration: line-through;
+  margin-right: 6px;
+}
+
+.discount-badge {
+  background: #8632d4;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
 }
 }
 
@@ -93,26 +132,69 @@ text-align: center;
   transform: translateY(-30%);
 }
 .img-style{
-  width:150px;
-    height:150px;
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 12px;
+  border: 3px solid #f9d423;
+  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
    
 }
 .title{
- text-align: start;
+ font-size: 1.1rem;
+  color: #ff4e50;
+  font-weight: bold;
+  margin: 6px 0;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
 }
-.box{
-  border: 1px solid #131212;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 12px;
-     width:250px;
-    /* height:260px; */
+h1 {
+  font-size: 2.5rem;
+  color: #d844fd;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+}
+.box {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+  margin: 18px;
+  padding: 18px 10px 24px 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-2deg);
+  box-shadow: 10 8px 32px rgba(255, 78, 80, 0.22);
 }
 .product-style{
 text-align: center;
- margin-top: 5%;
+ margin-top: 2%;
   margin-left:3%;
+}
+.price-label {
+  color: #888;
+  font-size: 1rem;
+  text-decoration: line-through;
+  margin-right: 6px;
+}
+
+.discount-badge {
+  background: #8632d4;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
 }
 }
 
@@ -133,26 +215,68 @@ text-align: center;
 .carousel-control-next {
   transform: translateY(-30%);
 }
-.img-style{
-  width:150px;
-    height:150px;
-   
+.img-style {
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 12px;
+  border: 3px solid #f9d423;
+  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
 }
-.title{
- text-align: start;
+.title {
+  font-size: 1.1rem;
+  color: #ff4e50;
+  font-weight: bold;
+  margin: 6px 0;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
 }
-.box{
-  border: 1px solid #131212;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 12px;
-     width:250px;
-    height:280px;
+h1 {
+  font-size: 2.5rem;
+  color: #d844fd;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+}
+.box {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+  margin: 18px;
+  padding: 18px 10px 24px 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-2deg);
+  box-shadow: 10 8px 32px rgba(255, 78, 80, 0.22);
 }
 .product-style{
 text-align: center;
  margin-top: 2%;
   margin-left:3%;
+}
+.price-label {
+  color: #888;
+  font-size: 1rem;
+  text-decoration: line-through;
+  margin-right: 6px;
+}
+
+.discount-badge {
+  background: #8632d4;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 2px 10px;
+  margin-left: 8px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
 }
 }

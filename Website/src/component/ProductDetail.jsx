@@ -11,6 +11,7 @@ import { Close } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
 import { useCart } from '../context/CartContext'
 import Footer from '../pages/Footer'
+import './ProductDetail.css'
 
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
@@ -158,35 +159,42 @@ try {
   return (
     <>
       <Header />
-      <div className='container'>
-
+      <div className="product-detail-bg">
+    <div className="product-detail-flex">
+      <div className="product-card">
         <AliceCarousel
           autoHeight
           infinite
           mouseTracking
           items={items}
           disableButtonsControls={true}
-
         />
-        {product.data && (
-
-          <div style={{ marginLeft: '25%' }}>
-            <h5>Title : {product.data.title}</h5>
-            <h5> Description : {product.data.description}</h5>
-            <h5>Price : {product.data.selling_price} Rs.</h5>
-          </div>
-
-        )}
-        <div style={{ display: 'flex', justifyContent: 'ceneter', flexDirection: 'row', gap: '10px', marginLeft: '25%' }}>
-          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={() => addToCart(product.data)}>Add To cart</Button>
-          <Button variant='contained' sx={{ backgroundColor: '#c26afc' }} onClick={()=>buyNow(product.data)}>
-            {/* <Link to={'/buynow'} style={{textDecoration:'none' ,color:'whitesmoke'}}>
-            </Link> */}
-            Buy Now
-            </Button>
-        </div>
       </div>
-
+      {product.data && (
+        <div className="product-info">
+          <div className="product-title">{product.data.title}</div>
+          <div className="product-desc">{product.data.description}</div>
+          <div className="product-price">{product.data.selling_price} Rs.</div>
+          <div className="product-actions">
+            <Button
+              variant="contained"
+              className="product-btn"
+              onClick={() => addToCart(product.data)}
+              >
+              Add To Cart
+            </Button>
+            <Button
+              variant="contained"
+              className="product-btn"
+              onClick={() => buyNow(product.data)}
+            >
+              Buy Now
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
       {/* Login Button */}
       <Modal open={open} style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
 

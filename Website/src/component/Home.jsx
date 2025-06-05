@@ -10,20 +10,20 @@ import Footer from '../pages/Footer'
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
   console.log(data);
-    const [productsWithDiscount, setProductsWithDiscount] = useState([]);
-  
-    useEffect(() => {
-      if (data && Array.isArray(data)) {
-        const updatedProducts = data.map((prod) => {
-          const actual = parseFloat(prod.actual_price);
-          const selling = parseFloat(prod.selling_price);
-          const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
-          return { ...prod, discount };
-        });
-        setProductsWithDiscount(updatedProducts);
-      }
-    }, [data]);
-  
+  const [productsWithDiscount, setProductsWithDiscount] = useState([]);
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      const updatedProducts = data.map((prod) => {
+        const actual = parseFloat(prod.actual_price);
+        const selling = parseFloat(prod.selling_price);
+        const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
+        return { ...prod, discount };
+      });
+      setProductsWithDiscount(updatedProducts);
+    }
+  }, [data]);
+
   return (
     <>
       <Header />
@@ -53,24 +53,28 @@ const Home = () => {
         </div>
       </div>
 
-      <div  style={{ marginLeft:'2% ',textAlign: 'center', marginTop: '2%' }}>
+      <div style={{ marginLeft: '2% ', textAlign: 'center', marginTop: '2%' }}>
         <h1>Products</h1>
 
-        <Grid container spacing={12} sx={{marginTop: '2%'}} >
+        <Grid container spacing={3} sx={{ marginTop: '2%' }} >
           {productsWithDiscount?.map((prod) => (
-            
             <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
-                <p className='title'>{prod.title}</p>  
-                <p className='title'>Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
+                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
+                <p className='title'>{prod.title}</p>
+                <p>
+                  <span className="price-label">{prod.actual_price} RS.</span>
+                  <span style={{ color: '#43a047', fontWeight: 'bold', fontSize: '1.1rem' }}>{prod.selling_price} RS.</span>
+                  {prod.discount > 0 && (
+                    <span className="discount-badge">{prod.discount}% OFF</span>
+                  )}
+                </p>
               </Link>
             </Grid>
-
           ))}
         </Grid>
       </div>
-          <Footer/>
+      <Footer />
 
     </>
   )

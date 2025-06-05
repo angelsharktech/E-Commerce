@@ -1,4 +1,4 @@
-import { AppBar, Button, Drawer, InputAdornment, TextField,List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material'
+import { AppBar, Button, Drawer, InputAdornment, TextField, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchIcon from '@mui/icons-material/Search';
@@ -31,20 +31,20 @@ const Header = () => {
   const category = useFetch('/category/getCategory')
   const prod = useFetch('/product/getProduct')
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
-const [openUserDropdown, setOpenUserDropdown] = useState(false);
+  const [openUserDropdown, setOpenUserDropdown] = useState(false);
 
   const navigate = useNavigate()
-  const {cartCount ,setCartCount} = useCart()
+  const { cartCount, setCartCount } = useCart()
 
   useEffect(() => {
-  const fetchCount = async () => {
-    if (webuser?._id) {
-      const res = await axios.get(`cart/getCartItemCount/${webuser._id}`);
-      setCartCount(res.data.count);
-    }
-  };
-  fetchCount();
-}, [webuser?._id]);
+    const fetchCount = async () => {
+      if (webuser?._id) {
+        const res = await axios.get(`cart/getCartItemCount/${webuser._id}`);
+        setCartCount(res.data.count);
+      }
+    };
+    fetchCount();
+  }, [webuser?._id]);
 
   const handleChange = (e) => {
     try {
@@ -76,105 +76,105 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
 
   const list = (anchor) => (
     <div
-    style={{ width: 250, marginTop: '70px' }}
-    role="presentation"
-    onClick={toggleDrawer(anchor, false)}
-    onKeyDown={toggleDrawer(anchor, false)}
-  >
-    <List>
-      <ListItem disablePadding>
-        <ListItemButton component={Link} to="/home">
-          <ListItemIcon><HomeIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-          <ListItemText className='menu-link' primary="Home" />
-        </ListItemButton>
-      </ListItem>
+      style={{ width: 250, marginTop: '70px' }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/home">
+            <ListItemIcon><HomeIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemText className='menu-link' primary="Home" />
+          </ListItemButton>
+        </ListItem>
 
-      <ListItem disablePadding>
-        <ListItemButton component={Link} to="/product">
-          <ListItemIcon><AppsIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-          <ListItemText className='menu-link' primary="Product" />
-        </ListItemButton>
-      </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/product">
+            <ListItemIcon><AppsIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemText className='menu-link' primary="Product" />
+          </ListItemButton>
+        </ListItem>
 
-      {/* Category Dropdown */}
-      <ListItemButton  onClick={() => setOpenCategoryDropdown(true)}>
-        <ListItemIcon ><CategoryIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-        <ListItemText className='menu-link' primary="Category" />
-        {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
-      </ListItemButton>
-      <Collapse in={openCategoryDropdown} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {category.data?.map((cat) => (
-            <ListItemButton
-              key={cat._id}
-              sx={{ pl: 4 }}
-              component={Link}
-              to={`/category/${cat.categoryName}`}
-            >
-              <ListItemText className='menu-link' primary={cat.categoryName} />
+        {/* Category Dropdown */}
+        <ListItemButton onClick={() => setOpenCategoryDropdown(true)}>
+          <ListItemIcon ><CategoryIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+          <ListItemText className='menu-link' primary="Category" />
+          {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
+        </ListItemButton>
+        <Collapse in={openCategoryDropdown} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {category.data?.map((cat) => (
+              <ListItemButton
+                key={cat._id}
+                sx={{ pl: 4 }}
+                component={Link}
+                to={`/category/${cat.categoryName}`}
+              >
+                <ListItemText className='menu-link' primary={cat.categoryName} />
+              </ListItemButton>
+            ))}
+          </List>
+        </Collapse>
+
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/">
+            <ListItemIcon><InfoOutlineIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemText className='menu-link' primary="About Us" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/contactus">
+            <ListItemIcon><PhoneIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemText className='menu-link' primary="Contact Us" />
+          </ListItemButton>
+        </ListItem>
+
+        {/* Auth Section */}
+        {webuser ? (
+          <>
+            <ListItemButton component={Link} to="/cart">
+              <ListItemIcon><AddShoppingCartRoundedIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemText className='menu-link' primary={`Cart (${cartCount})`} />
             </ListItemButton>
-          ))}
-        </List>
-      </Collapse>
 
-      <ListItem disablePadding>
-        <ListItemButton component={Link} to="/">
-          <ListItemIcon><InfoOutlineIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-          <ListItemText className='menu-link' primary="About Us" />
-        </ListItemButton>
-      </ListItem>
-
-      <ListItem disablePadding>
-        <ListItemButton component={Link} to="/">
-          <ListItemIcon><PhoneIcon sx={{color:'#c26afc'}} /></ListItemIcon>
-          <ListItemText className='menu-link' primary="Contact Us" />
-        </ListItemButton>
-      </ListItem>
-
-      {/* Auth Section */}
-      {webuser ? (
-        <>
-          <ListItemButton component={Link} to="/cart">
-            <ListItemIcon><AddShoppingCartRoundedIcon sx={{color:'#c26afc'}} /></ListItemIcon>
-            <ListItemText className='menu-link' primary={`Cart (${cartCount})`} />
-          </ListItemButton>
-
-          <ListItemButton onClick={() => setOpenUserDropdown(true)}>
-            <ListItemIcon><AccountCircleIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-            <ListItemText className='menu-link' primary={webuser.name} />
-            {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
-                <ListItemIcon><PermIdentityIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-                <ListItemText className='menu-link' primary="Profile" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }} component={Link} to="/signOut">
-                <ListItemIcon><ExitToAppIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-                <ListItemText className='menu-link' primary="Sign Out" />
-              </ListItemButton>
-            </List>
-          </Collapse>
-        </>
-      ) : (
-        <>
-          <ListItemButton component={Link} to="/cart">
-            <ListItemIcon><AddShoppingCartRoundedIcon sx={{color:'#c26afc'}}/></ListItemIcon>
-            <ListItemText className='menu-link' primary="Cart" />
-          </ListItemButton>
-          <ListItemButton component={Link} to="/login">
+            <ListItemButton onClick={() => setOpenUserDropdown(true)}>
+              <ListItemIcon><AccountCircleIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemText className='menu-link' primary={webuser.name} />
+              {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
+                  <ListItemIcon><PermIdentityIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+                  <ListItemText className='menu-link' primary="Profile" />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4 }} component={Link} to="/signOut">
+                  <ListItemIcon><ExitToAppIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+                  <ListItemText className='menu-link' primary="Sign Out" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+          </>
+        ) : (
+          <>
+            <ListItemButton component={Link} to="/cart">
+              <ListItemIcon><AddShoppingCartRoundedIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemText className='menu-link' primary="Cart" />
+            </ListItemButton>
+            {/* <ListItemButton component={Link} to="/login">
           <ListItemIcon><LoginIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
             <ListItemText  className='menu-link' primary="Login" />
-          </ListItemButton>
-          <ListItemButton component={Link} to="/signup">
-          <ListItemIcon><PersonAddAltIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
-            <ListItemText className='menu-link' primary="Sign Up" />
-          </ListItemButton>
-        </>
-      )}
-    </List>
-  </div>
+          </ListItemButton> */}
+            <ListItemButton component={Link} to="/signup">
+              <ListItemIcon><PersonAddAltIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemText className='menu-link' primary="Sign Up" />
+            </ListItemButton>
+          </>
+        )}
+      </List>
+    </div>
 
 
   );
@@ -184,8 +184,9 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
       <div className='container'>
         {/* <div className="header-wrapper" style={{ position: 'fixed', top: 0, zIndex: 1200 }}> */}
         <AppBar style={{ height: '60px', backgroundColor: '#c26afc' }}>
-
-          <h3 style={{ marginTop: '12px', marginLeft: "50px" }}>Website</h3>
+          <h3 style={{ marginTop: '12px', marginLeft: "50px" }}>
+            Website
+          </h3>
 
           <div className='menu-button'>
 
@@ -205,27 +206,23 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
 
           </div>
 
-          <div style={{
-            display: 'flex', flexDirection: 'row', justifyContent: 'right',
-            marginRight: '10%', marginTop: '-4%',
-            gap: '20px', alignItems: 'center'
-          }}>
+          <div className="header-actions">
             {webuser ? (
               <>
-              <Link className='header' to={'/cart'}><AddShoppingCartRoundedIcon /> cart <sup>{cartCount}</sup></Link>
+                <Link className='header' to={'/cart'}><AddShoppingCartRoundedIcon /> cart <sup>{cartCount}</sup></Link>
                 <li className="header dropdown">
                   {/* <Link className='header' >{webuser.name}</Link> */}
-                  <h6 className="header"><AccountCircleIcon/>{webuser.name}</h6>
+                  <h6 className="header"><AccountCircleIcon />{webuser.name}</h6>
                   <ul className="dropdown-menu">
-                    <li><Link to={`/`}><PermIdentityIcon/>Profile</Link></li>
-                    <li><Link to={`/signOut`} ><ExitToAppIcon/>SignOut</Link></li>
+                    <li><Link to={`/`}><PermIdentityIcon />Profile</Link></li>
+                    <li><Link to={`/signOut`} ><ExitToAppIcon />SignOut</Link></li>
                   </ul>
                 </li>
               </>
             ) : (
               <>
-               <Link className='header' to={'/'}><AddShoppingCartRoundedIcon />cart</Link>
-                <Link className='header' to={'/login'}>Login</Link>
+                <Link className='header' to={'/'}><AddShoppingCartRoundedIcon />cart</Link>
+                {/* <Link className='header' to={'/login'}>Login</Link> */}
                 <Link className='header' to={'/signup'}>SignUp</Link>
               </>
             )}
@@ -243,19 +240,19 @@ const [openUserDropdown, setOpenUserDropdown] = useState(false);
             <ul className="dropdown-menu">
               {category.data?.map((category) => (
 
-                <li  key={category.categoryName}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>
+                <li key={category.categoryName}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>
               ))}
             </ul>
           </li>
           <Link className='header-base' to={'/'}>About Us</Link>
-          <Link className='header-base' to={'/'}>Contact Us</Link>
+          <Link className='header-base' to={'/contactus'}>Contact Us</Link>
           <div className='search-style' >
             <div className="input-group">
               <div className="form-outline" data-mdb-input-init>
                 <input type="search" className="form-control" placeholder='Search' onChange={handleChange} />
                 {/* <label className="form-label" for="form1"></label> */}
               </div>
-              <Button  type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
+              <Button type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
                 <SearchIcon style={{ color: 'white' }}></SearchIcon>
               </Button>
             </div>

@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import axios from 'axios'
 import Footer from '../pages/Footer'
+import './Home.css'
 
 const SearchProduct = () => {
   const { name } = useParams()
@@ -24,17 +25,24 @@ const SearchProduct = () => {
       <Header />
 
 
-      <div style={{ textAlign: 'center', marginTop: '1%' }}>
-        <Grid container spacing={12} >
+        <div  className='product-style'>
+            <Grid container spacing={3} sx={{ marginTop: '2%' }} >
 
           {uniqueData?.map((prod) => (
 
-            <Grid item key={prod._id} >
-              <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
-                <p className='title'>{prod.title}</p>
-              </Link>
-            </Grid>
+            <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
+                      <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
+                        <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
+                        <p className='title'>{prod.title}</p>
+                        <p>
+                          <span className="price-label">{prod.actual_price} RS.</span>
+                          <span style={{ color: '#43a047', fontWeight: 'bold', fontSize: '1.1rem' }}>{prod.selling_price} RS.</span>
+                          {prod.discount > 0 && (
+                            <span className="discount-badge">{prod.discount}% OFF</span>
+                          )}
+                        </p>
+                      </Link>
+                    </Grid>
           ))}
         </Grid>
       </div>

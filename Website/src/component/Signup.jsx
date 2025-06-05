@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Header from '../pages/Header'
 import { Button, Stack, TextField } from '@mui/material'
-import './Signup.css'
+import './signup.css'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import { userInformation } from '../context/AuthContext'

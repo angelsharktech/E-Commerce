@@ -17,10 +17,8 @@ const Category = () => {
 
     useEffect(() => {
       if (product.data && Array.isArray(product.data)) {
-        console.log('*****');
         
         const updatedProducts = product.data.map((prod) => {
-          
           
           const actual = parseFloat(prod.actual_price);
           const selling = parseFloat(prod.selling_price);
@@ -30,24 +28,30 @@ const Category = () => {
         setProductsWithDiscount(updatedProducts);
       }
     }, [product.data]);
-console.log('updatedProducts:',productsWithDiscount);
 
   return (
     <>
       <Header />
+       <div  className='product-style'>
       {productsWithDiscount && productsWithDiscount.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: '1%', marginLeft: '3%' }}>
           <Grid container spacing={12} >
             {productsWithDiscount.map((prod) => 
             (
 
-              <Grid item xs={12} sm={6} md={3} key={prod._id} className='box' >
-                <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                  <img src={ axios.defaults.baseURL + prod.thumbnail } className='img-style' alt="" />
-                  <p className='title'>{prod.title}</p>
-                  <p className='title'>Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
-                </Link>
-              </Grid>
+              <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
+                      <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
+                        <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
+                        <p className='title'>{prod.title}</p>
+                        <p>
+                          <span className="price-label">{prod.actual_price} RS.</span>
+                          <span style={{ color: '#43a047', fontWeight: 'bold', fontSize: '1.1rem' }}>{prod.selling_price} RS.</span>
+                          {prod.discount > 0 && (
+                            <span className="discount-badge">{prod.discount}% OFF</span>
+                          )}
+                        </p>
+                      </Link>
+                    </Grid>
             ))}
           </Grid>
         </div>
@@ -65,8 +69,8 @@ console.log('updatedProducts:',productsWithDiscount);
           <img src="/no_data.gif" alt="Loading..." style={{ marginTop: '21%', width: '50%' }} />
         </div>
       )}
-
-      <Footer/>
+      </div>
+      <Footer />
     </>
   )
 }

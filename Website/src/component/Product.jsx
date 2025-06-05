@@ -9,8 +9,6 @@ import Footer from '../pages/Footer'
 
 const Product = () => {
     const { data } = useFetch('/product/getProduct')
-    console.log('product data:', data);
-    
     const [productsWithDiscount, setProductsWithDiscount] = useState([]);
 
   useEffect(() => {
@@ -30,19 +28,23 @@ const Product = () => {
     
 
     <div  className='product-style'>
-        <Grid container spacing={12} >
-          {productsWithDiscount?.map((prod) => (
-
-            <Grid item xs={12} sm={6} md={3} key={prod._id} className='box' >
-              <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
-                <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt="" />
-                <h5 >{prod.title}</h5>
-                <p className='title' style={{marginLeft:'35%'}}>Price:<label style={{textDecoration: 'line-through'}}>{prod.actual_price} RS.</label>  {prod.selling_price} RS. ({prod.discount}% OFF )</p>
-                <p className='title' ></p>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
+        <Grid container spacing={3} sx={{ marginTop: '2%' }} >
+                  {productsWithDiscount?.map((prod) => (
+                    <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
+                      <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
+                        <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
+                        <p className='title'>{prod.title}</p>
+                        <p>
+                          <span className="price-label">{prod.actual_price} RS.</span>
+                          <span style={{ color: '#43a047', fontWeight: 'bold', fontSize: '1.1rem' }}>{prod.selling_price} RS.</span>
+                          {prod.discount > 0 && (
+                            <span className="discount-badge">{prod.discount}% OFF</span>
+                          )}
+                        </p>
+                      </Link>
+                    </Grid>
+                  ))}
+                </Grid>
       </div>
 
       <Footer/>

@@ -1,0 +1,26 @@
+server {
+    listen 443 ssl;
+    server_name api.toyshop.sbs;
+
+    location / {
+        proxy_pass http://localhost:3000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    if ($request_method = 'OPTIONS') {
+        add_header 'Access-Control-Allow-Origin' "$http_origin" always;
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
+        add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization' always;
+        add_header 'Access-Control-Max-Age' 1728000;
+        add_header 'Content-Length' 0;
+        add_header 'Content-Type' 'text/plain charset=UTF-8';
+        return 204;
+    }
+
+    }
+
+    ssl_certificate /etc/letsencrypt/live/toyshop.sbs/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/toyshop.sbs/privkey.pem; # managed by Certbot
+}

@@ -8,43 +8,31 @@ import './Footer.css'
 const Footer = () => {
     return (
         <>
-            <footer style={{ marginTop: '13%', backgroundColor: 'lightgrey', width: '100%' }}>
-
-                <div className="container" >
-                    <div className="footer1">
-                        <h5>The Toy Shop</h5>
-                        
-                        <div className="row py-3">
-                            <div className=" d-flex justify-content-center " >
-                                <div className="d-flex flex-column align-items-center " style={{ minWidth: '300px' }} >
-                                    <Link>Contact us</Link>
-                                    <p style={{ margin: 0, fontSize: '14px', color: '#333' }}>
-                                        83/4A Sahawas colony, Ingawale heights
-                                    </p>
-                                    <p style={{ margin: 0, fontSize: '14px', color: '#333' }}>
-                                        near Karanje naka ,Satara
-                                    </p>
-                                    <Link>Our Policies</Link>
-                                    {/* <p style={{ margin: 0, fontSize: '14px', color: '#333' }}>
-                                        83/4A Sahawas colony, Ingawale heights,near Karanje naka ,Satara
-                                    </p> */}
-                                </div>
-                            </div>
-                        </div>
-                       
-                        <div className="d-flex justify-content-end align-items-center mt-2 " style={{ gap: '25px' }}>
-                            <a href='https://www.facebook.com' target='blank'>
-                            <FontAwesomeIcon icon={faFacebook} style={{ color: 'blue', fontSize: '30px' }} />
+           <footer>
+                <div className="footer-container">
+                    <div className="footer-section about">
+                        <h5>Website</h5>
+                        {/* <p>Fun toys for every kid!</p> */}
+                    </div>
+                    <div className="footer-section contact">
+                        <h6>Contact Us</h6>
+                        <p>83/4A Sahawas colony, Ingawale heights</p>
+                        <p>near Karanje naka, Satara</p>
+                        <p>Email: info@toyshop.com</p>
+                    </div>
+                    <div className="footer-section links">
+                        <Link to="#">Our Policies</Link>
+                        <div className="social-icons">
+                            <a href='https://www.facebook.com' target='_blank' rel="noopener noreferrer">
+                                <FontAwesomeIcon icon={faFacebook} style={{ color: '#4267B2', fontSize: '30px' }} />
                             </a>
-                            <a href='https://instagram.com' target='blank'>
-                            <FontAwesomeIcon icon={faInstagram} style={{ color: 'red', fontSize: '30px' }} />
+                            <a href='https://instagram.com' target='_blank' rel="noopener noreferrer">
+                                <FontAwesomeIcon icon={faInstagram} style={{ color: '#E1306C', fontSize: '30px' }} />
                             </a>
                         </div>
-
                     </div>
                 </div>
-                <hr style={{height:'20px',color:'black',backgroundColor:'black'}}></hr>
-             
+                <hr />
             </footer>
         </>
     )
