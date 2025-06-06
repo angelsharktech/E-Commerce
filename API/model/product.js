@@ -9,6 +9,7 @@ const productSchema = mongoose.Schema({
     category:String,
     productBy:String,
     thumbnail:String,
+    discount : String,
     images:[String]
 })
 

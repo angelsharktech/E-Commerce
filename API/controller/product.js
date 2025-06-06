@@ -17,7 +17,8 @@ export const addProduct = async (req, res, next) => {
       productBy: req.body.productBy,
       actual_price: req.body.actual_price,
       selling_price: req.body.selling_price,
-      avail_qty: req.body. avail_qty,
+      avail_qty: req.body.avail_qty,
+      discount: req.body.discount,
       thumbnail: "/gallery/" + singleFile.filename,
       images: images,
     };

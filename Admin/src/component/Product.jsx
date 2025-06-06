@@ -26,6 +26,11 @@ const Product = () => {
 
   const onSubmit = async () => {
     try {
+       const actual = parseFloat(data.actual_price);
+       const selling = parseFloat(data.selling_price);
+       const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
+       console.log('Discount:', discount);
+       data.discount = discount
       data.productBy = user?.shop_name
       const formData = new FormData()
       formData.append('title', data.title)
@@ -34,6 +39,7 @@ const Product = () => {
       formData.append('description', data.description)
       formData.append('actual_price', data.actual_price)
       formData.append('selling_price', data.selling_price)
+      formData.append('discount', data.discount)
       // formData.append('avail_qty', data.avail_qty)
       formData.append('thumbnail', data.thumbnail)
       data.images?.forEach((images) => {
@@ -62,11 +68,6 @@ const Product = () => {
 
     }
   }
-
-
-
-
-
 
   return (
     <Grid container

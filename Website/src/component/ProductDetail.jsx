@@ -12,6 +12,8 @@ import { useForm } from 'react-hook-form'
 import { useCart } from '../context/CartContext'
 import Footer from '../pages/Footer'
 import './ProductDetail.css'
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
@@ -25,18 +27,17 @@ const ProductDetail = () => {
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm()
   const product = useFetch(`/product/getProductById/${pid}`)
+  console.log(product);
 
   const addToCart = async (data) => {
     try {
-console.log('cart::',data);
-
       if (webuser) {
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
-        console.log('result:',result);
-        console.log('res:',res);
-        
+        console.log('result:', result);
+        console.log('res:', res);
+
         setCartCount(res.data.count)
 
       } else {
@@ -114,17 +115,17 @@ console.log('cart::',data);
     }
   }
 
-const buyNow = async(prdodData) =>{
-try {
-    if (webuser) {
-      navigate(`/buynow/${prdodData._id}`)
-    }else{
-      setOpen(true)
+  const buyNow = async (prdodData) => {
+    try {
+      if (webuser) {
+        navigate(`/buynow/${prdodData._id}`)
+      } else {
+        setOpen(true)
+      }
+    } catch (error) {
+      console.log(error);
     }
-} catch (error) {
-  console.log(error); 
-}
-} 
+  }
 
   const items = product.data?.images.map((item, index) => {
     const isVideo = item.endsWith('.mp4')
@@ -160,41 +161,50 @@ try {
     <>
       <Header />
       <div className="product-detail-bg">
-    <div className="product-detail-flex">
-      <div className="product-card">
-        <AliceCarousel
-          autoHeight
-          infinite
-          mouseTracking
-          items={items}
-          disableButtonsControls={true}
-        />
-      </div>
-      {product.data && (
-        <div className="product-info">
-          <div className="product-title">{product.data.title}</div>
-          <div className="product-desc">{product.data.description}</div>
-          <div className="product-price">{product.data.selling_price} Rs.</div>
-          <div className="product-actions">
-            <Button
-              variant="contained"
-              className="product-btn"
-              onClick={() => addToCart(product.data)}
-              >
-              Add To Cart
-            </Button>
-            <Button
-              variant="contained"
-              className="product-btn"
-              onClick={() => buyNow(product.data)}
-            >
-              Buy Now
-            </Button>
+        <div className="product-detail-flex">
+          <div className="product-card">
+            <AliceCarousel
+              autoHeight
+              infinite
+              mouseTracking
+              items={items}
+              disableButtonsControls={true}
+            />
           </div>
+          {product.data && (
+            <div className="product-info">
+              <div className="product-title">{product.data.title}</div>
+              <div className="product-desc">{product.data.description}</div>
+              {/* <div className="product-price">{product.data.selling_price} Rs.</div> */}
+              <p>
+                <span className="price-label">{product.data.actual_price} RS.</span>
+                <span style={{ color: '#43a047', fontWeight: 'bold', fontSize: '1.3rem' }}>{product.data.selling_price} RS.</span>
+                {product.data.discount > 0 && (
+                  <span className="discount">{product.data.discount}% OFF</span>
+                )}
+              </p>
+              <div className="product-actions">
+                <Button
+                  variant="contained"
+                  className="product-btn"
+                  onClick={() => addToCart(product.data)}
+                >
+                  <ShoppingBagOutlinedIcon style={{ marginRight: '8px' }} />
+                  Add To Bag
+                </Button>
+                <Button
+                  variant="contained"
+                  className="product-btn"
+                  onClick={() => buyNow(product.data)}
+                >
+                  <BoltOutlinedIcon style={{ marginRight: '8px' }} />
+                  Buy Now
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  </div>
+      </div>
       {/* Login Button */}
       <Modal open={open} style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
 
@@ -246,7 +256,7 @@ try {
 
       </Modal>
 
-      <Footer/>
+      <Footer />
     </>
   )
 }

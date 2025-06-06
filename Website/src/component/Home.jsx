@@ -9,21 +9,8 @@ import Footer from '../pages/Footer'
 
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
-  console.log(data);
-  const [productsWithDiscount, setProductsWithDiscount] = useState([]);
-
-  useEffect(() => {
-    if (data && Array.isArray(data)) {
-      const updatedProducts = data.map((prod) => {
-        const actual = parseFloat(prod.actual_price);
-        const selling = parseFloat(prod.selling_price);
-        const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
-        return { ...prod, discount };
-      });
-      setProductsWithDiscount(updatedProducts);
-    }
-  }, [data]);
-
+  console.log('discount data:',data);
+ const displayedProducts = data?.slice(0, 5)
   return (
     <>
       <Header />
@@ -57,8 +44,8 @@ const Home = () => {
         <h1>Products</h1>
 
         <Grid container spacing={3} sx={{ marginTop: '2%' }} >
-          {productsWithDiscount?.map((prod) => (
-            <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
+          {displayedProducts?.map((prod) => (
+            <Grid item xs={6} sm={6} md={3} key={prod._id} className='box'>
               <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                 <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
                 <p className='title'>{prod.title}</p>
@@ -72,8 +59,17 @@ const Home = () => {
               </Link>
             </Grid>
           ))}
+           <Grid item xs={6} sm={6} md={3}style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Link to={'/product'}>View More</Link>
+
+           </Grid>
         </Grid>
       </div>
+
+        <div style={{ marginLeft: '2% ', textAlign: 'center', marginTop: '2%' }}>
+        <h1>category</h1>
+        
+        </div>
       <Footer />
 
     </>
