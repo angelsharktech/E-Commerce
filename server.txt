@@ -53,3 +53,29 @@ mongodb://69.62.81.214:27017/e-commerce
 https://github.com/creativetimofficial/argon-dashboard-react
 
 
+mongodb Authentication :
+Switch to the e-commerce database:
+use e-commerce
+
+Create a new user (replace newuser and newpassword with your desired username and password):
+db.createUser({
+  user: "newuser",
+  pwd: "newpassword",
+  roles: [ { role: "readWrite", db: "e-commerce" } ]
+})
+This user will only have access to the e-commerce database with read and write permissions.
+You can then connect with:
+
+Copy
+mongosh "mongodb://newuser:newpassword@69.62.81.214:27017/e-commerce"
+after this command you will get output like 
+root@srv823979:/var/www/E-Commerce/API# mongosh "mongodb://adminuser:Adminuser22@69.62.81.214:27017/e-commerce"
+Current Mongosh Log ID: 68428d53be1b87e5efc59f34
+Connecting to:          mongodb://<credentials>@69.62.81.214:27017/e-commerce?directConnection=true&appName=mongosh+2.5.1
+Using MongoDB:          7.0.20
+Using Mongosh:          2.5.1
+mongosh 2.5.2 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+e-commerce>
