@@ -1,3 +1,9 @@
+body {
+  /* background: linear-gradient(135deg, #e6dfbe 0%, #e05d5f 100%); */
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+}
+
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
