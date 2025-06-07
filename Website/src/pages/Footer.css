@@ -1,11 +1,17 @@
 footer {
-  background: linear-gradient(90deg, #f9d423 0%, #c26afc 100%);
+  /* background-color: #bec1ca; */
+  /* background-color: #2A3663; */
+  background: url('/public/footer-11.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background: linear-gradient(90deg, #f9d423 0%, #c26afc 100%); */
   border-radius: 32px 32px 0 0;
   box-shadow: 0 -4px 24px rgba(194, 106, 252, 0.10);
   color: #fff;
   padding: 36px 0 12px 0;
   margin-top: 8vw;
   width: 100%;
+  height: 300px;
   font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
 }
 
@@ -31,27 +37,27 @@ footer {
 .footer-section.about h5 {
   font-family: 'Baloo Bhai 2', cursive;
   font-size: 2rem;
-  color: #fff;
+  color: black;
   letter-spacing: 2px;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc;
+  /* text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc; */
 }
 
 .footer-section.about p {
   font-size: 1.1rem;
-  color: #fff;
+  color: black;
   margin-bottom: 0;
 }
 
 .footer-section.contact h6 {
   font-size: 1.2rem;
   margin-bottom: 8px;
-  color: #fff;
+  color: black;
   font-family: 'Baloo Bhai 2', cursive;
 }
 
 .footer-section.contact p {
-  color: #fff;
+  color: black;
   font-size: 1rem;
   margin: 0 0 4px 0;
   letter-spacing: 0.5px;
@@ -63,7 +69,7 @@ footer {
 }
 
 .footer-section.links a, .footer-section.links a:visited {
-  color: #fff;
+  color: black;
   font-weight: bold;
   font-size: 1.1rem;
   text-decoration: none;

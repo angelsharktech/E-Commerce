@@ -1,9 +1,124 @@
+@media (min-width: 100px) and (max-width: 645px) {
+ .container {
+  font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
+}
+.MuiAppBar-root {
+  background:  linear-gradient(90deg, #fc94af 0%, #fac2d1 100% ) !important;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 6px 24px rgba(194, 106, 252, 0.15);
+  min-height: 50px;
+  display: flex;
+  align-items: start;
+  position: relative;
+}
+h3 {
+  font-family: 'Baloo Bhai 2', cursive;
+  color: #fff;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  /* text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc; */
+  margin-left: 30px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+  .header {
+    display: none;
+  }
+  .header-base {
+      display: none;
+  }
+  .menu-button {
+    display: block;
+    position: absolute;
+    right: 15px;
+  }
+  .header-actions {
+ 
+    display: none;
+}
+  .menu-link {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: flex-start;
+    text-decoration: none !important;
+    color: #fc94af;
+    margin-top: 10%;
+    margin-left: 2px;
+  }
+   .search-style{
+    display: none;
+  }
+   .dropdown {
+    position: relative;
+    list-style: none;
+  }
+
+  .dropdown-menu {
+      display: none;
+  position: absolute;
+  background: #fffbe7;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(194, 106, 252, 0.12);
+  top: 120%;
+  left: 0;
+  min-width: 160px;
+  z-index: 100;
+  padding: 8px 0;
+  }
+
+ .dropdown:hover .dropdown-menu,
+.dropdown:hover .dropdown-menu {
+  display: block;
+  animation: bounceIn 0.4s;
+}
+ 
+
+.dropdown-menu li {
+  padding: 8px 18px;
+  color: #fc94af;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+.dropdown-menu li:hover {
+  background: #f9d423;
+  color: #fff;
+}
+
+
+  .dropdown-menu li a {
+    text-decoration: none !important;
+    color: #fc94af;
+  }
+
+  .dropdown-menu li a:hover {
+    color: #fc94af;
+  }
+  .form-control {
+  border-radius: 12px;
+  border: 2px solid #fc94af;
+  padding: 7px 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-control:focus {
+  border: 2px solid #fc94af;
+}
+
+}
+
 @media (min-width: 646px) and (max-width: 1149px) {
 .container {
   font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
 }
 .MuiAppBar-root {
-  background: linear-gradient(90deg, #f9d423 0%, #c26afc 100%) !important;
+  background: linear-gradient(90deg, #fc94af 0%, #fac2d1 100% ) !important;
+  /* background-color:  #afc9a5 !important; */
   border-radius: 0 0 30px 30px;
   box-shadow: 0 6px 24px rgba(194, 106, 252, 0.15);
   min-height: 70px;
@@ -16,7 +131,7 @@ h3 {
   color: #fff;
   font-size: 2.2rem;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc;
+  /* text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc; */
   margin-left: 30px;
   margin-top: 10px;
   display: flex;
@@ -32,7 +147,7 @@ h3 {
 }
 .menu-button button:hover {
   transform: scale(1.1) rotate(-10deg);
-  background: #f9d423;
+  background: #fc94af;
 }
 .header-actions {
   display: flex;
@@ -52,13 +167,13 @@ h3 {
   .header-base {
     margin-top: 9%;
     text-decoration: none !important;
-    color: #c26afc;
+    color: black;
     font-size: small;
     margin-left: 10px;
   }
   .header:hover, .header-base:hover {
-  background: #f9d423;
-  color: #c26afc;
+  /* background: #f9d423; */
+  color: #fc94af;
 }
 .header.dropdown, .header-base.dropdown {
   position: relative;
@@ -94,16 +209,19 @@ h3 {
 
 .dropdown-menu li {
   padding: 8px 18px;
-  color: #c26afc;
+  color: #fc94af;
   font-weight: bold;
   cursor: pointer;
   border-radius: 10px;
   transition: background 0.2s;
 }
-
-.dropdown-menu li:hover {
-  background: #f9d423;
-  color: #fff;
+ .dropdown-menu li a {
+    text-decoration: none;
+    color: black;
+  }
+.dropdown-menu li a:hover {
+  /* background: #f9d423; */
+  color: #fc94af;
 }
 
 .search-style {
@@ -115,7 +233,7 @@ h3 {
 
 .form-control {
   border-radius: 12px;
-  border: 2px solid #c26afc;
+  border: 2px solid #fc94af;
   padding: 7px 12px;
   font-size: 1rem;
   outline: none;
@@ -123,13 +241,10 @@ h3 {
 }
 
 .form-control:focus {
-  border: 2px solid #f9d423;
+  border: 2px solid #fc94af;
 }
 
-  .dropdown-menu li a {
-    text-decoration: none;
-    color: #c26afc;
-  }
+ 
 
 }
 
@@ -138,7 +253,7 @@ h3 {
   font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
 }
 .MuiAppBar-root {
-  background: linear-gradient(90deg, #f9d423 0%, #c26afc 100%) !important;
+  background: linear-gradient(90deg, #fc94af 0%, #fac2d1 100% ) !important;
   border-radius: 0 0 30px 30px;
   box-shadow: 0 6px 24px rgba(194, 106, 252, 0.15);
   min-height: 70px;
@@ -147,11 +262,11 @@ h3 {
   position: relative;
 }
 h3 {
-  font-family: 'Baloo Bhai 2', cursive;
+  /* font-family: 'Baloo Bhai 2', cursive; */
   color: #fff;
   font-size: 2.2rem;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc;
+  /* text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc; */
   margin-left: 30px;
   margin-top: 10px;
   display: flex;
@@ -167,7 +282,7 @@ h3 {
 }
 .menu-button button:hover {
   transform: scale(1.1) rotate(-10deg);
-  background: #f9d423;
+  background: #fc94af;
 }
 .header-actions {
   display: flex;
@@ -186,13 +301,14 @@ h3 {
   }
   .header-base {
     text-decoration: none !important;
-    color: #c26afc;
+    color: black;
+    /* color: #fc94af; */
     font-size: large;
   }
   .header:hover, .header-base:hover {
-  background: #f9d423;
-  color: #c26afc;
- /* transform: scale(1.08) rotate(-2deg); */
+  /* background: #fc94af; */
+  color: #fc94af;
+ /* transform: scale(1.10) ; */
 }
 .header.dropdown, .header-base.dropdown {
   position: relative;
@@ -228,16 +344,21 @@ h3 {
 
 .dropdown-menu li {
   padding: 8px 18px;
-  color: #c26afc;
+  color: #fc94af;
   font-weight: bold;
   cursor: pointer;
   border-radius: 10px;
   transition: background 0.2s;
 }
 
-.dropdown-menu li:hover {
-  background: #f9d423;
-  color: #fff;
+.dropdown-menu li a {
+  text-decoration: none;
+  color:black;
+  font-size: large;
+}
+.dropdown-menu li a:hover {
+  /* background: #eeebec; */
+  color: #fc94af;
 }
 
 .search-style {
@@ -248,7 +369,7 @@ h3 {
 
 .form-control {
   border-radius: 12px;
-  border: 2px solid #c26afc;
+  border: 2px solid #fc94af;
   padding: 7px 12px;
   font-size: 1rem;
   outline: none;
@@ -256,127 +377,11 @@ h3 {
 }
 
 .form-control:focus {
-  border: 2px solid #f9d423;
+  border: 2px solid #fc94af;
 }
 
-  .dropdown-menu li a {
-    text-decoration: none;
-    color: #c26afc;
-  }
 
  
 }
 
-@media (min-width: 100px) and (max-width: 645px) {
- .container {
-  font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
-}
-.MuiAppBar-root {
-  background: linear-gradient(90deg, #f9d423 0%, #c26afc 100%) !important;
-  border-radius: 0 0 30px 30px;
-  box-shadow: 0 6px 24px rgba(194, 106, 252, 0.15);
-  min-height: 50px;
-  display: flex;
-  align-items: start;
-  position: relative;
-}
-h3 {
-  font-family: 'Baloo Bhai 2', cursive;
-  color: #fff;
-  font-size: 2.2rem;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 0 #f9d423, 4px 4px 0 #c26afc;
-  margin-left: 30px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-  .header {
-    display: none;
-  }
-  .header-base {
-      display: none;
-  }
-  .menu-button {
-    display: block;
-    position: absolute;
-    right: 15px;
-  }
-  .header-actions {
- 
-    display: none;
-}
-  .menu-link {
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: flex-start;
-    text-decoration: none !important;
-    color: #c26afc;
-    margin-top: 10%;
-    margin-left: 2px;
-  }
-   .search-style{
-    display: none;
-  }
-   .dropdown {
-    position: relative;
-    list-style: none;
-  }
 
-  .dropdown-menu {
-      display: none;
-  position: absolute;
-  background: #fffbe7;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(194, 106, 252, 0.12);
-  top: 120%;
-  left: 0;
-  min-width: 160px;
-  z-index: 100;
-  padding: 8px 0;
-  }
-
- .dropdown:hover .dropdown-menu,
-.dropdown:hover .dropdown-menu {
-  display: block;
-  animation: bounceIn 0.4s;
-}
- 
-
-.dropdown-menu li {
-  padding: 8px 18px;
-  color: #c26afc;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background 0.2s;
-}
-.dropdown-menu li:hover {
-  background: #f9d423;
-  color: #fff;
-}
-
-
-  .dropdown-menu li a {
-    text-decoration: none !important;
-    color: #c26afc;
-  }
-
-  .dropdown-menu li a:hover {
-    color: #007bff;
-  }
-  .form-control {
-  border-radius: 12px;
-  border: 2px solid #c26afc;
-  padding: 7px 12px;
-  font-size: 1rem;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.form-control:focus {
-  border: 2px solid #f9d423;
-}
-
-}

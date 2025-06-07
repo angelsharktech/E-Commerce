@@ -11,7 +11,7 @@ const Footer = () => {
            <footer>
                 <div className="footer-container">
                     <div className="footer-section about">
-                        <h5>Website</h5>
+                        <h5>Radhakrishn Toy Shop</h5>
                         {/* <p>Fun toys for every kid!</p> */}
                     </div>
                     <div className="footer-section contact">

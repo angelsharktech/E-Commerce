@@ -16,13 +16,14 @@ import useFetch from '../hooks/useFetch';
 import axios from 'axios'
 import { userInformation } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
+// import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 const Header = () => {
   const { webuser } = useContext(userInformation)
@@ -84,21 +85,21 @@ const Header = () => {
       <List>
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/home">
-            <ListItemIcon><HomeIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemIcon><HomeIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Home" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/product">
-            <ListItemIcon><AppsIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemIcon><AppsIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Product" />
           </ListItemButton>
         </ListItem>
 
         {/* Category Dropdown */}
         <ListItemButton onClick={() => setOpenCategoryDropdown(true)}>
-          <ListItemIcon ><CategoryIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+          <ListItemIcon ><CategoryIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
           <ListItemText className='menu-link' primary="Category" />
           {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
         </ListItemButton>
@@ -119,14 +120,14 @@ const Header = () => {
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/">
-            <ListItemIcon><InfoOutlineIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemIcon><InfoOutlineIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="About Us" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/contactus">
-            <ListItemIcon><PhoneIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+            <ListItemIcon><PhoneIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Contact Us" />
           </ListItemButton>
         </ListItem>
@@ -135,23 +136,23 @@ const Header = () => {
         {webuser ? (
           <>
             <ListItemButton component={Link} to="/cart">
-              <ListItemIcon><AddShoppingCartRoundedIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary={`Cart (${cartCount})`} />
             </ListItemButton>
 
             <ListItemButton onClick={() => setOpenUserDropdown(true)}>
-              <ListItemIcon><AccountCircleIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemIcon><AccountCircleIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary={webuser.name} />
               {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
-                  <ListItemIcon><PermIdentityIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+                  <ListItemIcon><PermIdentityIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
                   <ListItemText className='menu-link' primary="Profile" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} component={Link} to="/signOut">
-                  <ListItemIcon><ExitToAppIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+                  <ListItemIcon><ExitToAppIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
                   <ListItemText className='menu-link' primary="Sign Out" />
                 </ListItemButton>
               </List>
@@ -160,15 +161,15 @@ const Header = () => {
         ) : (
           <>
             <ListItemButton component={Link} to="/cart">
-              <ListItemIcon><AddShoppingCartRoundedIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary="Cart" />
             </ListItemButton>
             {/* <ListItemButton component={Link} to="/login">
-          <ListItemIcon><LoginIcon  sx={{color:'#c26afc'}}/></ListItemIcon>
+          <ListItemIcon><LoginIcon  sx={{color:'#fc94af'}}/></ListItemIcon>
             <ListItemText  className='menu-link' primary="Login" />
           </ListItemButton> */}
             <ListItemButton component={Link} to="/signup">
-              <ListItemIcon><PersonAddAltIcon sx={{ color: '#c26afc' }} /></ListItemIcon>
+              <ListItemIcon><PersonAddAltIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary="Sign Up" />
             </ListItemButton>
           </>
@@ -183,9 +184,9 @@ const Header = () => {
     <>
       <div className='container'>
         {/* <div className="header-wrapper" style={{ position: 'fixed', top: 0, zIndex: 1200 }}> */}
-        <AppBar style={{ height: '60px', backgroundColor: '#c26afc' }}>
+        <AppBar style={{ height: '60px' }}>
           <h3 style={{ marginTop: '12px', marginLeft: "50px" }}>
-            Website
+            Radhakrishn Toy Shop
           </h3>
 
           <div className='menu-button'>
@@ -209,7 +210,7 @@ const Header = () => {
           <div className="header-actions">
             {webuser ? (
               <>
-                <Link className='header' to={'/cart'}><AddShoppingCartRoundedIcon /> cart <sup>{cartCount}</sup></Link>
+                <Link className='header' to={'/cart'}><ShoppingBagIcon /> Bag <sup>{cartCount}</sup></Link>
                 <li className="header dropdown">
                   {/* <Link className='header' >{webuser.name}</Link> */}
                   <h6 className="header"><AccountCircleIcon />{webuser.name}</h6>
@@ -221,7 +222,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Link className='header' to={'/'}><AddShoppingCartRoundedIcon />cart</Link>
+                <Link className='header' to={'/'}><ShoppingBagOutlinedIcon />Bag</Link>
                 {/* <Link className='header' to={'/login'}>Login</Link> */}
                 <Link className='header' to={'/signup'}>SignUp</Link>
               </>
@@ -252,7 +253,7 @@ const Header = () => {
                 <input type="search" className="form-control" placeholder='Search' onChange={handleChange} />
                 {/* <label className="form-label" for="form1"></label> */}
               </div>
-              <Button type="button" style={{ backgroundColor: '#c26afc' }} onClick={() => searchProduct()}>
+              <Button type="button" style={{ backgroundColor: '#fc94af',marginLeft:'5px' }} onClick={() => searchProduct()}>
                 <SearchIcon style={{ color: 'white' }}></SearchIcon>
               </Button>
             </div>
