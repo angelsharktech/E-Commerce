@@ -28,7 +28,7 @@ const SearchProduct = () => {
         <div  className='product-style'>
             <Grid container spacing={3} sx={{ marginTop: '2%' }} >
 
-          {uniqueData?.map((prod) => (
+          {uniqueData.length > 0 ? uniqueData?.map((prod) => (
 
             <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
                       <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
@@ -43,7 +43,18 @@ const SearchProduct = () => {
                         </p>
                       </Link>
                     </Grid>
-          ))}
+          )) :
+          <div
+            style={{
+              textAlign: 'center',
+              // marginTop: '20px',
+              width: '100%',
+              fontSize: '1.5rem',
+              color: '#f44336'
+            }}>
+            <img src="/no-data.jpg" alt="Loading..." style={{  width: '50%' }} />
+          </div>
+          }
         </Grid>
       </div>
 

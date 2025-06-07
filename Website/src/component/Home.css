@@ -217,11 +217,11 @@ text-align: center;
   border-radius: 16px;
   background: #fff;
   margin-bottom: 12px;
-  border: 3px solid #f9d423;
+  border: 3px solid #fc94af;
   box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
 }
 .title {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #ff4e50;
   font-weight: bold;
   margin: 6px 0;
@@ -229,7 +229,7 @@ text-align: center;
 }
 h1 {
   font-size: 2.5rem;
-  color: #d844fd;
+  /* color: #d844fd; */
   margin-bottom: 20px;
   letter-spacing: 2px;
   font-family: 'Baloo Bhai 2', cursive, sans-serif;
@@ -246,10 +246,37 @@ h1 {
   flex-direction: column;
   align-items: center;
 }
-
 .box:hover {
   transform: translateY(-8px) scale(1.04) rotate(-2deg);
   box-shadow: 10 8px 32px rgba(255, 78, 80, 0.22);
+}
+.category-box{
+  background: linear-gradient(90deg, #f7688e 0%, #f7c8d4 100% );
+  border-radius: 270px;
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+  margin: 8px;
+  padding: 18px 10px 24px 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 150px;
+  width: 11%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.category-box:hover {
+  transform: scale(1.2) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
+  background: linear-gradient(90deg, #f7688e 0%, #f7c8d4 100% );
+}
+.cat-title{
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: bold;
+  margin: 6px 0;
+  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+  text-align: center;
+  margin-top: 35px;
 }
 .product-style{
 text-align: center;
@@ -264,8 +291,8 @@ text-align: center;
 }
 
 .discount-badge {
-  background: #8632d4;
-  color: #fff;
+  background: #fc94af;
+  color: black;
   font-weight: bold;
   border-radius: 12px;
   padding: 2px 10px;

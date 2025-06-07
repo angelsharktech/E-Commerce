@@ -129,7 +129,7 @@ const Buynow = () => {
             </table>
             <div style={{ width: '50%' }} >
 
-              <Button variant='contained' style={{ float: 'right', backgroundColor: '#c26afc', borderRadius: '50px' }}>Proceed To Pay</Button>
+              <Button variant='contained' style={{ float: 'right', backgroundColor: '#fc94af', borderRadius: '50px' }}>Proceed To Pay</Button>
             </div>
 
 
