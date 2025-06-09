@@ -126,8 +126,11 @@ const ProductDetail = () => {
       console.log(error);
     }
   }
-
-  const items = product.data?.images.map((item, index) => {
+  let images = product.data?.images || [];
+  if (product.data?.thumbnail && !images.includes(product.data.thumbnail)) {
+    images = [product.data.thumbnail, ...images];
+  }
+  const items = images.map((item, index) => {
     const isVideo = item.endsWith('.mp4')
 
     return isVideo ? <video
@@ -135,7 +138,7 @@ const ProductDetail = () => {
       className="item"
       style={{
         height: "350px",
-        width: "70%",
+        width: "80%",
         objectFit: "cover",
         display: "block",
         margin: "20px auto",
@@ -146,7 +149,7 @@ const ProductDetail = () => {
       <img className="item"
         style={{
           height: "350px",
-          width: "70%",
+          width: "80%",
           objectFit: "cover",
           display: "block",
           margin: "20px auto",
