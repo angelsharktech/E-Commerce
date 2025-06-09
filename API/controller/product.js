@@ -53,10 +53,8 @@ export const getProductById = async(req,res,next) =>{
 } 
 export const getProductByName = async(req,res,next) =>{
   try {
-    // const encodedCategory = encodeURIComponent(req.params.name);
-    // console.log(encodedCategory);
     
-    const result = await product.find({title :req.params.name})
+    const result = await product.find({title :{ $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
     res.status(200).json(result)
   } catch (error) {
     console.log(error);
@@ -86,7 +84,7 @@ try {
 }
 export const getProductByCategory = async(req,res,next) =>{
   try {
-    const result = await product.find({category: req.params.name})
+    const result = await product.find({category: { $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
     res.status(200).json(result)
     
     

@@ -134,8 +134,8 @@ const ProductDetail = () => {
       controls
       className="item"
       style={{
-        height: "300px",
-        width: "50%",
+        height: "350px",
+        width: "70%",
         objectFit: "cover",
         display: "block",
         margin: "20px auto",
@@ -145,8 +145,8 @@ const ProductDetail = () => {
     </video> :
       <img className="item"
         style={{
-          height: "300px",
-          width: "50%",
+          height: "350px",
+          width: "70%",
           objectFit: "cover",
           display: "block",
           margin: "20px auto",

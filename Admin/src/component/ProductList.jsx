@@ -9,10 +9,10 @@ const ProductList = () => {
 
     const updateProduct = async (newRow, oldRow) => {
         try {
-
+            
             const actual = parseFloat(newRow.actual_price);
             const selling = parseFloat(newRow.selling_price);
-            const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
+            const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0 ;
             newRow.discount = discount
             const result = await axios.put(`/product/updateProduct/${newRow._id}`, newRow)
 
@@ -35,7 +35,6 @@ const ProductList = () => {
             }
         } catch (error) {
             console.log(error);
-
         }
     }
     const prod_columns = [

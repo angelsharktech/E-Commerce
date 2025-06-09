@@ -84,7 +84,7 @@ const Product = () => {
             <Stack spacing={2}>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField variant='outlined' label='Title' name={'title'} value={data.title} onChange={(e) => setData({ ...data, title: e.target.value })} size='small' fullWidth />
-                <TextField variant='outlined' label='Actual Price' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' fullWidth />
+                <TextField variant='outlined' label='MRP' name={'actual_price'} type='Number' value={data.actual_price} onChange={(e) => setData({ ...data, actual_price: e.target.value })} size='small' fullWidth />
                 <TextField variant='outlined' label='Selling Price' name={'selling_price'} type='Number' value={data.selling_price} onChange={(e) => setData({ ...data, selling_price: e.target.value })} size='small' fullWidth />
                 <Autocomplete
                   sx={{ minWidth: 160 }}
