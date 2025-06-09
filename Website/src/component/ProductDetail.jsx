@@ -149,7 +149,7 @@ const ProductDetail = () => {
       <img className="item"
         style={{
           height: "350px",
-          width: "80%",
+          width: "100%",
           objectFit: "cover",
           display: "block",
           margin: "20px auto",
