@@ -16,6 +16,9 @@ const Profile = () => {
     gst_no: '',
   })
   const [originalData, setOriginalData] = useState({})
+  const [verify, setVerify] = useState({})
+  const [disable,setDisable] = useState(true)
+   const [password,setPassword] = useState({password:'',confirm_password:''})
   const record = useFetch(`/user/getUserById/${user._id}`)
   const userData = record.data
   useEffect(() => {
@@ -51,10 +54,38 @@ const Profile = () => {
     } catch (error) {}
   }
 
+    const verifyPassword = async()=>{
+    try {
+        const resp = await axios.post(`/user/verifyPassword/${user.email}`,verify)
+        alert(resp.data.msg)
+        console.log(resp.data.msg)
+        if(resp.data.msg === 'verified'){
+            setDisable(false)
+        }
+    } catch (error) {
+        console.log(error.response.data.message);
+        setDisable(true)
+    }
+  }
+  const updatePassword = async () => {
+    try {
+       if(password.password === '' || password.confirm_password === ''){
+        alert("Please type Password")
+    }else if(password.password === password.confirm_password){
+       const resp = await axios.post(`/user/updatePassword/${user._id}`,password)
+       setDisable(true)
+       alert(resp?.data?.msg)
+    }else{
+        alert("Password not Match")
+    }
+    } catch (error) {
+      console.log(error);  
+    }
+  }
+
   return (
-    <Box
-     
-    >
+    <Stack  direction={{ xs: 'column', sm: 'row' }}  >
+    <Box>
       <Card sx={{ width: 420, borderRadius: 5, boxShadow: 6 }}>
         <CardContent>
           <Stack alignItems="center" spacing={2} mb={2}>
@@ -138,6 +169,81 @@ const Profile = () => {
         </CardContent>
       </Card>
     </Box>
+
+    <Box sx={{marginLeft: { xs: 0, sm: 2, lg:6 }, marginTop: { xs: 2, sm: 0 } }}>
+    <Card sx={{ width: 420, borderRadius: 5, boxShadow: 6 }}>
+        <CardContent>
+            <Typography variant="h5" fontWeight={600} color="#177bad">
+              Change Password
+            </Typography>
+          <Divider sx={{ mt: 2 }} />
+          <Stack spacing={2} mt={2}>
+            <TextField
+              variant='outlined'
+              label='Current Password'
+              type='password'
+              name='password'
+              onChange={(e)=>setVerify({password:e.target.value})}
+              fullWidth
+            />
+             <Button
+              variant='contained'
+              sx={{
+                background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)',
+                color: 'white',
+                fontWeight: 600,
+                letterSpacing: 1,
+                boxShadow: 2,
+                '&:hover': {
+                  background: 'linear-gradient(90deg, #177bad 0%, #c26afc 100%)',
+                },
+              }}
+             onClick={() => verifyPassword()}
+              fullWidth
+            >
+              Verify
+            </Button>
+            <TextField
+              variant='outlined'
+              label='New Password'
+              type='password'
+              name='password'
+              onChange={(e) => setPassword({ ...password, password: e.target.value })}
+              fullWidth
+              disabled={disable}
+            />
+            <TextField
+              variant='outlined'
+              label='Confirm Password'
+              type='password'
+              onChange={(e) => setPassword({ ...password, confirm_password: e.target.value })}
+              name='password'
+              fullWidth
+              disabled={disable}
+            />
+            <Button
+              variant='contained'
+              sx={{
+                background: 'linear-gradient(90deg, #c26afc 0%, #177bad 100%)',
+                color: 'white',
+                fontWeight: 600,
+                letterSpacing: 1,
+                boxShadow: 2,
+                '&:hover': {
+                  background: 'linear-gradient(90deg, #177bad 0%, #c26afc 100%)',
+                },
+              }}
+              onClick={() => updatePassword()}
+              disabled={disable}
+              fullWidth
+            >
+              Update
+            </Button>
+          </Stack>
+        </CardContent>
+      </Card>
+    </Box>
+    </Stack>
   )
 }
 

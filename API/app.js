@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+import protectedRoutes from './routes/protectedRoute.js';
+import authRoutes from './routes/auth.js'
 import userRoute from './routes/user.js'
 import productRoute from './routes/product.js'
 import categoryRoute from './routes/category.js'
@@ -36,7 +38,9 @@ app.get("/api/test", (req, res, next) => {
   res.send("<h1>Welcome To Nodejs</h1>");
 });
 
+app.use('/api/protected', protectedRoutes);
 app.use("/api/gallery/",express.static("gallery"))
+app.use('/api/auth', authRoutes);
 app.use('/api/user',userRoute)
 app.use('/api/product',productRoute)
 app.use('/api/category', categoryRoute)

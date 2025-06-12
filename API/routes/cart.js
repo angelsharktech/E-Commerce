@@ -2,7 +2,7 @@ import express from 'express'
 import { addToCart, getCartItem, getCartItemCount, UpdateCart } from '../controller/Cart.js'
 
 
-const router = express.Router()
+const router = express.Router();
 
 router.post('/addToCart/:wid',addToCart)
 router.get('/getCartItemCount/:wid',getCartItemCount)
