@@ -38,7 +38,8 @@ const ProductDetail = () => {
         setCartCount(res.data.count)
 
       } else {
-        setOpen(true)
+        // setOpen(true)
+        navigate('/signup')
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +116,8 @@ const ProductDetail = () => {
       if (webuser) {
         navigate(`/buynow/${prdodData._id}`)
       } else {
-        setOpen(true)
+        // setOpen(true)
+        navigate('/signup')
       }
     } catch (error) {
       console.log(error);
