@@ -12,9 +12,9 @@ const Login = () => {
   const [cred, setCred] =useState({})
 
 
-  const login = async() =>{
+  const signup = async() =>{
     try {
-      const result = await axios.post('/webuser/login', cred)
+      const result = await axios.post('/webuser/signup', cred)
             
                 if (result.data.msg === 'Login Successfully') {
                     
@@ -41,7 +41,7 @@ const Login = () => {
 
               <TextField variant='standard' label='Email Address' name={'email'}  onChange={(e) => setCred({ ...cred, email: e.target.value })}  sx={{ width: 300 }} />
               <TextField variant='standard' label='Password' type='password' name={'password'} onChange={(e) => setCred({ ...cred, password: e.target.value })} sx={{ width: 300 }} />
-              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }} onClick={() => login()}>LOGIN</Button>
+              <Button variant='contained'  sx={{ backgroundColor: '#c26afc', color: 'white' }} onClick={() => signup()}>LOGIN</Button>
               {/* <Button variant="text" sx={{  color: '#c26afc' }} onClick={() => signUp()}>Register For New User</Button> */}
               </Stack>
 

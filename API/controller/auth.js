@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import otpGenerator from 'otp-generator';
 import twilio from 'twilio';
+import webuser from '../model/webuser.js';
 
 export const sendOtp = async (req, res, next) => {
   const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
@@ -33,21 +34,37 @@ export const sendOtp = async (req, res, next) => {
 };
 
 export const verifyOtp = async (req, res) => {
-    console.log("Verifying OTP for:", req.body);
+    // console.log("Verifying OTP for:", req.body);
     
   const phone = '+91' + req.body.phone;
   const otp = req.body.otp;
   const hashedOtp = crypto.createHash('sha256').update(otp).digest('hex');
 //   const hashedOtp = otp;
-
   const otpRecord = await Otp.findOne({ phone });
-  console.log(otpRecord);
   
   if (!otpRecord || otpRecord.otp !== hashedOtp) {
     return res.status(401).json({ success: false, message: 'Invalid or expired OTP' });
   }
-
-  const token = jwt.sign({ phone }, process.env.JWT, { expiresIn: '1h' });
+  const token = jwt.sign({ phone }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  res.cookie("access_token", token,{
+    httpOnly: true,
+    secure: false,
+    // secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    sameSite: 'strict', // Adjust as necessary for your application
+    maxAge: 3600000 // 1 hour in milliseconds
+   
+  })
+  res.json({ success: true, token: token, phone: phone });
   await Otp.deleteOne({ phone });
-  res.json({ success: true, token: token });
+  
+};
+
+export const getMe = async (req, res) => {
+  try {
+    // console.log("Fetching user data for:", req.user);
+    const user = await webuser.findOne({ mob_no: req.user.phone });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch user" });
+  }
 };

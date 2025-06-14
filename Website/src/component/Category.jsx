@@ -9,12 +9,10 @@ import Footer from '../pages/Footer'
 
 const Category = () => {
   const { name } = useParams()
-  console.log('catName:',name);
   
   const product = useFetch(`/product/getProductByCategory/${name}`)
   const [productsWithDiscount, setProductsWithDiscount] = useState([]);
-  console.log('product:', product);
-
+  
     useEffect(() => {
       if (product.data && Array.isArray(product.data)) {
         

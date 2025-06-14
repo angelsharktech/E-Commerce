@@ -11,7 +11,6 @@ import Footer from '../pages/Footer'
 
 const Cart = () => {
   const { webuser } = useContext(userInformation)
-  console.log('web::',webuser);
   const data = useFetch(`/cart/getCartItem/${webuser._id}`)
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -19,7 +18,6 @@ const Cart = () => {
   useEffect(() => {
   if (data?.data?.cart) {
     setCartItems(data.data.cart);
-    console.log('***',data.data.cart);
 
    
   let tempTotal = 0;
@@ -42,7 +40,6 @@ const Cart = () => {
   );
   
   setCartItems(updatedCart);
-  console.log('updatedCart::',updatedCart);
   
   try {
      const updatedItem = updatedCart.find(item => item._id === cartId);
@@ -53,7 +50,6 @@ const Cart = () => {
       price : updatedItem.price
     });
     data.refetch(`/cart/getCartItem/${webuser._id}`)
-    // console.log('updatedCart::',updatedCart);
   } catch (error) {
     console.log(error);
   }
@@ -66,7 +62,6 @@ const Cart = () => {
   );
   
   setCartItems(updatedCart);
-  console.log('updatedCart::',updatedCart);
   
   try {
      const updatedItem = updatedCart.find(item => item._id === cartId);
@@ -77,7 +72,6 @@ const Cart = () => {
       price : updatedItem.price
     });
     data.refetch(`/cart/getCartItem/${webuser._id}`)
-    // console.log('updatedCart::',updatedCart);
   } catch (error) {
     console.log(error);
   }

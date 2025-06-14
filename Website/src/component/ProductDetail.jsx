@@ -27,7 +27,6 @@ const ProductDetail = () => {
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm()
   const product = useFetch(`/product/getProductById/${pid}`)
-  console.log(product);
 
   const addToCart = async (data) => {
     try {
@@ -35,8 +34,6 @@ const ProductDetail = () => {
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
-        console.log('result:', result);
-        console.log('res:', res);
 
         setCartCount(res.data.count)
 
@@ -60,8 +57,7 @@ const ProductDetail = () => {
   }
   const registerUser = async (data) => {
     try {
-      console.log('webData::', data);
-
+    
       const result = await axios.post('/webuser/register', data)
       if (result.data.msg === 'User Created Successfully') {
         setOpen(false)
@@ -70,8 +66,8 @@ const ProductDetail = () => {
           email: data.email,
           password: data.password,
         }
-        const res = await axios.post('/webuser/login', cred)
-        console.log('res::', res);
+        const res = await axios.post('/webuser/signup', cred)
+      
         if (res.data.msg === 'Login Successfully') {
           dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details })
           res.data.details ? navigate('/home') : alert(res.data.msg)
@@ -91,14 +87,13 @@ const ProductDetail = () => {
 
   const loginUser = async () => {
     try {
-      console.log('login::', email, password);
-
+    
       const cred = {
         email: email,
         password: password,
       }
 
-      const result = await axios.post('/webuser/login', cred)
+      const result = await axios.post('/webuser/signup', cred)
 
       if (result.data.msg === 'Login Successfully') {
 
@@ -126,10 +121,12 @@ const ProductDetail = () => {
       console.log(error);
     }
   }
+
   let images = product.data?.images || [];
   if (product.data?.thumbnail && !images.includes(product.data.thumbnail)) {
     images = [product.data.thumbnail, ...images];
   }
+
   const items = images.map((item, index) => {
     const isVideo = item.endsWith('.mp4')
 
@@ -149,7 +146,7 @@ const ProductDetail = () => {
       <img className="item"
         style={{
           height: "350px",
-          width: "100%",
+          width: "80%",
           objectFit: "cover",
           display: "block",
           margin: "20px auto",
@@ -173,6 +170,7 @@ const ProductDetail = () => {
               items={items}
               disableButtonsControls={true}
             />
+
           </div>
           {product.data && (
             <div className="product-info">

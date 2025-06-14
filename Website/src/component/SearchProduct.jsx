@@ -18,7 +18,7 @@ const SearchProduct = () => {
   const uniqueData = Array.from(
     new Map(mergedData.map(item => [item._id, item])).values()
   );
-  console.log(uniqueData);
+  
 
   return (
     <>

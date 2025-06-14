@@ -35,17 +35,17 @@ export const login = async (req, res, next) => {
         req.body.password.trim(),
         User.password.trim()
       );
-      const token = jwt.sign(
-        { userId: user._id }, // or any payload you want
-        process.env.JWT_SECRET,
-        { expiresIn: "1h" }
-      );
+      // const token = jwt.sign(
+      //   { userId: user._id }, // or any payload you want
+      //   process.env.JWT_SECRET,
+      //   { expiresIn: "1h" }
+      // );
       if (result === false)
         return res.status(200).json({ msg: "Invalid Credential" });
       const { password, ...restOfDetails } = User._doc;
       res
         .status(200)
-        .json({ msg: "Login Successfully", details: restOfDetails, token: token });
+        .json({ msg: "Login Successfully", details: restOfDetails });
     }
   } catch (error) {
     next(error);

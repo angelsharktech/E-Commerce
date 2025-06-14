@@ -51,16 +51,6 @@ export const getProductById = async(req,res,next) =>{
     
   }
 } 
-export const getProductByName = async(req,res,next) =>{
-  try {
-    
-    const result = await product.find({title :{ $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
-    res.status(200).json(result)
-  } catch (error) {
-    console.log(error);
-    
-  }
-} 
 
 export const updateProduct = async(req,res,next) =>{
 try {
@@ -73,26 +63,16 @@ try {
 }
 }
 export const deleteProduct = async(req,res,next) =>{
-try {
-  const result = await product.findByIdAndDelete({_id:req.params.id}, req.body )
-  res.status(200).json({msg:"Product Deleted successfully..."})
-  
-} catch (error) {
-  console.log(error);
-  
-}
-}
-export const getProductByCategory = async(req,res,next) =>{
   try {
-    const result = await product.find({category: { $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
-    res.status(200).json(result)
-    
+    const result = await product.findByIdAndDelete({_id:req.params.id}, req.body )
+    res.status(200).json({msg:"Product Deleted successfully..."})
     
   } catch (error) {
     console.log(error);
     
   }
 }
+
 export const getProductByShop = async(req,res,next) =>{
   try {
     const result = await product.find({productBy: req.params.shop})
@@ -104,3 +84,24 @@ export const getProductByShop = async(req,res,next) =>{
     
   }
 }
+export const getProductByCategory = async(req,res,next) =>{
+  try {
+    const result = await product.find({category: { $regex: `^${req.params.name}$`, $options: 'i' }})   //IGNORE CASE SENSITIVITY
+    res.status(200).json(result)
+    
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+export const getProductByName = async(req,res,next) =>{
+  try {
+        
+    const result = await product.find({title :{ $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
+    res.status(200).json(result)
+  } catch (error) {
+    console.log(error);
+    
+  }
+} 

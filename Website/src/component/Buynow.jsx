@@ -17,8 +17,6 @@ const Buynow = () => {
   const { webuser, dispatch } = useContext(userInformation)
   const product = useFetch(`/product/getProductById/${pid}`)
   const [productWithQty, setProductWithQty] = useState(0);
-
-  console.log('webuser:',webuser);
   
 
   useEffect(() => {
@@ -30,8 +28,7 @@ const Buynow = () => {
 
   const increaseCount = async (prodId) => {
     try {
-      // console.log('Qty:', productWithQty._id, prodId);
-
+    
       if (productWithQty._id === prodId) {
         const newQty = productWithQty.quantity + 1
         const updatedProduct = {
@@ -41,7 +38,6 @@ const Buynow = () => {
         };
 
         setProductWithQty(updatedProduct);
-        // console.log('updatedCart::', updatedProduct);
       }
     } catch (error) {
       console.log(error);
@@ -50,8 +46,7 @@ const Buynow = () => {
 
   const decreaseCount = async (prodId) => {
     try {
-      // console.log('Qty:', productWithQty._id, prodId);
-
+    
       if (productWithQty._id === prodId) {
         const newQty = productWithQty.quantity - 1
         const updatedProduct = {
@@ -61,7 +56,6 @@ const Buynow = () => {
         };
 
         setProductWithQty(updatedProduct);
-        // console.log('updatedCart::', updatedProduct);
       }
     } catch (error) {
       console.log(error);

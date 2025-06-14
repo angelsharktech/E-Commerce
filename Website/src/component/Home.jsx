@@ -10,7 +10,6 @@ import Footer from '../pages/Footer'
 const Home = () => {
   const { data } = useFetch('/product/getProduct')
   const category  = useFetch('/category/getCategory')
-  console.log('category data:',category);
  const displayedProducts = data?.slice(0, 5)
   return (
     <>
