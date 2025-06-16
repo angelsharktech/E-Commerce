@@ -13,8 +13,8 @@ export const sendOtp = async (req, res, next) => {
   //   const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
-  //   const hashedOtp = otp;
+  // const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
+    const hashedOtp = otp;
   await Otp.findOneAndUpdate(
     { phone },
     { otp: hashedOtp, createdAt: Date.now() },
@@ -40,11 +40,12 @@ export const verifyOtp = async (req, res) => {
     console.log("Verifying OTP for:", req.body);
     const phone = "+91" + req.body.phone;
     const otp = req.body.otp;
-    const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
-    //   const hashedOtp = otp;
+    // const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
+      const hashedOtp = otp;
     const otpRecord = await Otp.findOne({ phone });
 console.log("otpRecord:", otpRecord);
     if (!otpRecord || otpRecord.otp !== hashedOtp) {
+      console.log('otpRecord:',otpRecord , 'otp:',otpRecord.otp , 'hashedOtp:',hashedOtp);
       console.log('****otp not matched');
       
       return res
