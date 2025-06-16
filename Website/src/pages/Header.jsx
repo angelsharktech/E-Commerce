@@ -147,7 +147,7 @@ const Header = () => {
             </ListItemButton>
             <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }} component={Link} to="/">
+                <ListItemButton sx={{ pl: 4 }} component={Link} to="/profile">
                   <ListItemIcon><PermIdentityIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
                   <ListItemText className='menu-link' primary="Profile" />
                 </ListItemButton>
@@ -215,7 +215,7 @@ const Header = () => {
                   {/* <Link className='header' >{webuser.name}</Link> */}
                   <h6 className="header"><AccountCircleIcon />{webuser.name}</h6>
                   <ul className="dropdown-menu">
-                    <li><Link to={`/`}><PermIdentityIcon />Profile</Link></li>
+                    <li><Link to={`/profile`}><PermIdentityIcon />Profile</Link></li>
                     <li><Link to={`/signOut`} ><ExitToAppIcon />SignOut</Link></li>
                   </ul>
                 </li>

@@ -16,6 +16,7 @@ import Signup from './component/Signup'
 import NewSignUp from './component/NewSignUp'
 import Buynow from './component/Buynow'
 import ContactUs from './component/ContactUs'
+import Profile from './component/Profile'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path='/searchProduct/:name' element={<SearchProduct />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/signup' element={<NewSignUp />} />
+            <Route path='/profile' element={<Profile/>} />
             <Route path='/buynow/:pid' element={<Buynow />} />
             <Route path='/contactus' element={<ContactUs />} />
           </Routes>
