@@ -210,7 +210,7 @@ const Header = () => {
           <div className="header-actions">
             {webuser ? (
               <>
-                <Link className='header' to={'/cart'}><ShoppingBagIcon /> Bag <sup>{cartCount}</sup></Link>
+                <Link className='header' to={'/cart'}><ShoppingBagOutlinedIcon /> Bag <sup>{cartCount}</sup></Link>
                 <li className="header dropdown">
                   {/* <Link className='header' >{webuser.name}</Link> */}
                   <h6 className="header"><AccountCircleIcon />{webuser.name}</h6>

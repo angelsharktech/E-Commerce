@@ -37,31 +37,25 @@ export const sendOtp = async (req, res, next) => {
 
 export const verifyOtp = async (req, res) => {
   try {
-    console.log("Verifying OTP for:", req.body);
+    // console.log("Verifying OTP for:", req.body);
     const phone = "+91" + req.body.phone;
     const otp = req.body.otp;
-    // const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
-      const hashedOtp = otp;
+    const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
+      // const hashedOtp = otp;
     const otpRecord = await Otp.findOne({ phone, otp: hashedOtp });
-    console.log('otpRecord:',otpRecord , 'phone:',phone , 'hashedOtp:',hashedOtp);
 
     if (!otpRecord ) {
-      console.log('****otp not matched');
       
       return res
         .status(401)
         .json({
           success: false,
           message: "Invalid or expired OTP",
-          otpRecord: otpRecord,
-          otp: otpRecord.otp,
-          hashedOtp: hashedOtp,
         });
     }
     const token = jwt.sign({ phone }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    console.log('token::',token);
     
     res.cookie("access_token", token, {
       httpOnly: true,
@@ -69,7 +63,6 @@ export const verifyOtp = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 3600000,
     });
-    console.log('******************************');
     
     res.json({ success: true, token: token, phone: phone });
     await Otp.deleteOne({ phone });
