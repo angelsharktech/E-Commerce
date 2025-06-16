@@ -17,6 +17,7 @@ Install any new dependencies (if package.json changed):
 
 Copy
 npm install
+(git pull --no-rebase)
 Restart your backend with PM2:
 
 Copy
