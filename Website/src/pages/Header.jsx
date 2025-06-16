@@ -142,7 +142,7 @@ const Header = () => {
 
             <ListItemButton onClick={() => setOpenUserDropdown(true)}>
               <ListItemIcon><AccountCircleIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
-              <ListItemText className='menu-link' primary={webuser.name} />
+              <ListItemText className='menu-link' primary={webuser.mob_no} />
               {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
@@ -213,7 +213,7 @@ const Header = () => {
                 <Link className='header' to={'/cart'}><ShoppingBagOutlinedIcon /> Bag <sup>{cartCount}</sup></Link>
                 <li className="header dropdown">
                   {/* <Link className='header' >{webuser.name}</Link> */}
-                  <h6 className="header"><AccountCircleIcon />{webuser.name}</h6>
+                  <h6 className="header"><AccountCircleIcon />{webuser.mob_no}</h6>
                   <ul className="dropdown-menu">
                     <li><Link to={`/profile`}><PermIdentityIcon />Profile</Link></li>
                     <li><Link to={`/signOut`} ><ExitToAppIcon />SignOut</Link></li>
