@@ -43,7 +43,8 @@ export const verifyOtp = async (req, res) => {
   const otpRecord = await Otp.findOne({ phone });
   
   if (!otpRecord || otpRecord.otp !== hashedOtp) {
-    return res.status(401).json({ success: false, message: 'Invalid or expired OTP' });
+    return res.status(401).json({ success: false, message: 'Invalid or expired OTP' ,
+      otpRecord:otpRecord,otp:otpRecord.otp,hashedOtp:hashedOtp});
   }
   const token = jwt.sign({ phone }, process.env.JWT_SECRET, { expiresIn: '1h' });
   res.cookie("access_token", token, {
