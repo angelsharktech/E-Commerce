@@ -43,8 +43,10 @@ export const verifyOtp = async (req, res) => {
     const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
     //   const hashedOtp = otp;
     const otpRecord = await Otp.findOne({ phone });
-
+console.log("otpRecord:", otpRecord);
     if (!otpRecord || otpRecord.otp !== hashedOtp) {
+      console.log('****otp not matched');
+      
       return res
         .status(401)
         .json({
@@ -58,12 +60,16 @@ export const verifyOtp = async (req, res) => {
     const token = jwt.sign({ phone }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
+    console.log('token::',token);
+    
     res.cookie("access_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 3600000,
     });
+    console.log('******************************');
+    
     res.json({ success: true, token: token, phone: phone });
     await Otp.deleteOne({ phone });
 
