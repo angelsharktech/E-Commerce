@@ -32,16 +32,18 @@ const NewSignUp = () => {
   const signUpUser = async () => {
     try {
 
-      const result = await axios.post(`/auth/verifyotp`, mobNo,{withCredentials: true});
-    
+      const result = await axios.post(`/auth/verifyotp`, mobNo, { withCredentials: true });
+      console.log('new Signup:', result);
+
       if (result.data.success === true) {
         setOpen(false);
-        // alert('Sign Up Successful');
+        alert('Sign Up Successful');
         const res = await axios.post(`/webuser/signup`, { phone: result.data.phone });
+        console.log('res:', res);
         if (res.data.msg === 'Login Successfully') {
-       
-          dispatch({ type: 'LOGIN_SUCCESS', payload:  res.data.details});
-          
+
+          dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details });
+
           res.data.details ? navigate('/home') : alert(res.data.msg)
           setMobNo({ phone: '', otp: '' });
         }
