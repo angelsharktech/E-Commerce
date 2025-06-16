@@ -42,10 +42,10 @@ export const verifyOtp = async (req, res) => {
     const otp = req.body.otp;
     // const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
       const hashedOtp = otp;
-    const otpRecord = await Otp.findOne({ phone: phone, otp: hashedOtp });
+    const otpRecord = await Otp.findOne({ phone, otp: hashedOtp });
 console.log("otpRecord:", otpRecord);
+console.log('otpRecord:',otpRecord , 'otp:',otpRecord.otp , 'hashedOtp:',hashedOtp);
     if (!otpRecord ) {
-      console.log('otpRecord:',otpRecord , 'otp:',otpRecord.otp , 'hashedOtp:',hashedOtp);
       console.log('****otp not matched');
       
       return res
