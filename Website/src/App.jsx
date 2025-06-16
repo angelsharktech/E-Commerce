@@ -13,6 +13,7 @@ import SignOut from './component/SignOut'
 import Home from './component/Home'
 import { CartProvider } from './context/CartContext'
 import Signup from './component/Signup'
+import NewSignUp from './component/NewSignUp'
 import Buynow from './component/Buynow'
 import ContactUs from './component/ContactUs'
 
@@ -35,7 +36,7 @@ function App() {
             <Route path='/category/:name' element={<Category />} />
             <Route path='/searchProduct/:name' element={<SearchProduct />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/signup' element={<Signup />} />
+            <Route path='/signup' element={<NewSignUp />} />
             <Route path='/buynow/:pid' element={<Buynow />} />
             <Route path='/contactus' element={<ContactUs />} />
           </Routes>
