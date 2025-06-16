@@ -35,8 +35,8 @@ export const sendOtp = async (req, res, next) => {
 
 export const verifyOtp = async (req, res) => {
     // console.log("Verifying OTP for:", req.body);
-    
-  const phone = '+91' + req.body.phone;
+    try {
+      const phone = '+91' + req.body.phone;
   const otp = req.body.otp;
   const hashedOtp = crypto.createHash('sha256').update(otp).digest('hex');
 //   const hashedOtp = otp;
@@ -46,16 +46,18 @@ export const verifyOtp = async (req, res) => {
     return res.status(401).json({ success: false, message: 'Invalid or expired OTP' });
   }
   const token = jwt.sign({ phone }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.cookie("access_token", token,{
-    httpOnly: true,
-    secure: false,
-    // secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-    sameSite: 'strict', // Adjust as necessary for your application
-    maxAge: 3600000 // 1 hour in milliseconds
-   
-  })
+  res.cookie("access_token", token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 'none' for cross-site cookies in production, 'lax' for dev/local
+  maxAge: 3600000 // 1 hour in milliseconds
+});
   res.json({ success: true, token: token, phone: phone });
   await Otp.deleteOne({ phone });
+    } catch (error) {
+       res.status(500).json({ success: false, message: 'Server error', error: error.message });
+    }
+  
   
 };
 
