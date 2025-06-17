@@ -16,7 +16,8 @@ import cartRoute from './routes/cart.js'
 const app = express();
 const port = process.env.PORT || 3000;
 
-const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
+const allowedOrigins = ['https://starbasket.in', 'https://admin.starbasket.in'];
+// const allowedOrigins = ['https://toyshop.sbs', 'https://admin.toyshop.sbs'];
 
 const corsOptions = {
       origin: function (origin, callback) {

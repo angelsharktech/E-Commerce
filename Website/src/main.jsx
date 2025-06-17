@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://api.toyshop.sbs/api';
+axios.defaults.baseURL = 'https://api.starbasket.in/api';
+// axios.defaults.baseURL = 'https://api.toyshop.sbs/api';
 
 
 
