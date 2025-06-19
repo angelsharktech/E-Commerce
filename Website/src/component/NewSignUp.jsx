@@ -59,11 +59,11 @@ const NewSignUp = () => {
       <Header />
       <div className='signup-container'>
         <div className='box-style'>
-          <h1 style={{ color: '#fc94af' }}>SignUP</h1>
+          <h1 style={{ color: '#471396' }}>SignUP</h1>
           {/* <form> */}
           <Stack item direction={'column'} spacing={2} style={{ justifyContent: 'center', alignItems: 'center', marginTop: '15px' }}>
             <TextField variant='standard' label='Mobile Number' name={'mob_no'} onChange={(e) => setMobNo({ ...mobNo, phone: e.target.value })} sx={{ width: 300 }} required />
-            <Button variant='contained' sx={{ backgroundColor: '#fc94af', color: 'white' }} type='submit' onClick={() => getOtp()}>Sign Up</Button>
+            <Button variant='contained' sx={{ backgroundColor: '#471396', color: 'white' }} type='submit' onClick={() => getOtp()}>Sign Up</Button>
           </Stack>
           {/* </form> */}
         </div>
@@ -75,12 +75,12 @@ const NewSignUp = () => {
             <div style={{ textAlign: 'right' }}>
               <Button onClick={() => setOpen(false)}> <Close /> </Button>
             </div>
-            <h1 style={{ color: '#fc94af' }}>SignUP</h1>
+            <h1 style={{ color: '#471396' }}>SignUP</h1>
             {/* <form onSubmit={handleSubmit(signUpUser)}> */}
             <Stack item direction={'column'} spacing={2} style={{ justifyContent: 'center', alignItems: 'center', marginTop: '15px' }}>
               <TextField variant='standard' label='Mobile Number' value={mobNo.phone} name={'mob_no'} sx={{ width: 300 }} />
               <TextField variant='standard' label='OTP' name={'otp'} onChange={(e) => setMobNo({ ...mobNo, otp: e.target.value })} sx={{ width: 300 }} />
-              <Button variant='contained' sx={{ backgroundColor: '#fc94af', color: 'white' }} onClick={() => signUpUser()}>Continue</Button>
+              <Button variant='contained' sx={{ backgroundColor: '#471396', color: 'white' }} onClick={() => signUpUser()}>Continue</Button>
             </Stack>
             {/* </form> */}
           </Box>

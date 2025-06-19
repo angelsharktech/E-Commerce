@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom'
 import './Home.css'
 import axios from 'axios'
 import Footer from '../pages/Footer'
+import NewFooter from '../pages/NewFooter'
 
 const Category = () => {
   const { name } = useParams()
@@ -64,11 +65,11 @@ const Category = () => {
             flexDirection: 'column'
           }}
         >
-          <img src="/no_data.gif" alt="Loading..." style={{ marginTop: '21%', width: '50%' }} />
+          <img src="/no-data.jpg" alt="Loading..." style={{ marginTop: '5%', width: '50%' }} />
         </div>
       )}
       </div>
-      <Footer />
+      <NewFooter />
     </>
   )
 }

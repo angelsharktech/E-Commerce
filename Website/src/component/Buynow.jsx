@@ -10,6 +10,7 @@ import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutl
 import axios from 'axios';
 import './Buynow.css'
 import Footer from '../pages/Footer'
+import NewFooter from '../pages/NewFooter'
 
 
 const Buynow = () => {
@@ -123,14 +124,14 @@ const Buynow = () => {
             </table>
             <div style={{ width: '50%' }} >
 
-              <Button variant='contained' style={{ float: 'right', backgroundColor: '#fc94af', borderRadius: '50px' }}>Proceed To Pay</Button>
+              <Button variant='contained' style={{ float: 'right', backgroundColor: '#471396', borderRadius: '50px' }}>Proceed To Pay</Button>
             </div>
 
 
           </div>
         </Stack>
       </Stack>
-     <Footer />
+     <NewFooter />
     </>
   )
 }

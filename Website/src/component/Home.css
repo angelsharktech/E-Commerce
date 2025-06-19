@@ -217,7 +217,7 @@ text-align: center;
   border-radius: 16px;
   background: #fff;
   margin-bottom: 12px;
-  border: 3px solid #fc94af;
+  border: 3px solid #471396;
   box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
 }
 .title {
@@ -251,23 +251,24 @@ h1 {
   box-shadow: 10 8px 32px rgba(255, 78, 80, 0.22);
 }
 .category-box{
-  background: linear-gradient(90deg, #f7688e 0%, #f7c8d4 100% );
-  border-radius: 270px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
-  margin: 8px;
+  min-width: 120px;
+  height: 150px; /* Use the larger height */
+  width: 150px;  background: #471396;
+  border-radius: 270px; /* More rounded */
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
+  margin: 8px auto;
   padding: 18px 10px 24px 10px;
   transition: transform 0.2s, box-shadow 0.2s;
-  height: 150px;
-  width: 11%;
   display: flex;
   flex-direction: column;
   align-items: center;
+ 
   
 }
 .category-box:hover {
   transform: scale(1.2) rotate(-2deg);
   box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
-  background: linear-gradient(90deg, #f7688e 0%, #f7c8d4 100% );
+  background: linear-gradient(90deg, #471396 0%, #f7c8d4 50% ,#471396 100%);
 }
 .cat-title{
   font-size: 1.2rem;
@@ -291,8 +292,8 @@ text-align: center;
 }
 
 .discount-badge {
-  background: #fc94af;
-  color: black;
+  background: #471396;
+  color: #fffbe7;
   font-weight: bold;
   border-radius: 12px;
   padding: 2px 10px;
@@ -300,5 +301,12 @@ text-align: center;
   font-size: 0.95rem;
   box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
 }
-
+/* Hide horizontal scrollbar for the whole page */
+body, html {
+  overflow-x: hidden;
+  /* overflow-y: hidden; */
+}
+.slick-slider {
+  overflow: visible !important;
+}
 }

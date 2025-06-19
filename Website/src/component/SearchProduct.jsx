@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch'
 import axios from 'axios'
 import Footer from '../pages/Footer'
 import './Home.css'
+import NewFooter from '../pages/NewFooter'
 
 const SearchProduct = () => {
   const { name } = useParams()
@@ -58,7 +59,7 @@ const SearchProduct = () => {
         </Grid>
       </div>
 
-      <Footer />
+      <NewFooter />
     </>
   )
 }

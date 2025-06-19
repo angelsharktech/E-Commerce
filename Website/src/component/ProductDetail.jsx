@@ -14,6 +14,7 @@ import Footer from '../pages/Footer'
 import './ProductDetail.css'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
+import NewFooter from '../pages/NewFooter'
 
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
@@ -215,14 +216,14 @@ const ProductDetail = () => {
             <div style={{ textAlign: 'right' }}>
               <Button onClick={() => setOpen(false)}> <Close /> </Button>
             </div>
-            <h1 style={{ color: '#fc94af' }}>Login</h1>
+            <h1 style={{ color: '#471396' }}>Login</h1>
             {/* <form onSubmit={}> */}
             <Stack direction={'column'} spacing={2} style={{ justifyContent: 'center', alignItems: 'center', marginTop: '15px' }}>
 
               <TextField variant='standard' label='Email Address' name={'email'} onChange={(e) => setEmail(e.target.value)} sx={{ width: 300 }} />
               <TextField variant='standard' label='Password' type='password' name={'password'} onChange={(e) => setPassword(e.target.value)} sx={{ width: 300 }} />
-              <Button variant='contained' sx={{ backgroundColor: '#fc94af', color: 'white' }} onClick={loginUser} >LOGIN</Button>
-              <Button variant="text" sx={{ color: '#fc94af' }} onClick={() => signUp()}>Register For New User</Button>
+              <Button variant='contained' sx={{ backgroundColor: '#471396', color: 'white' }} onClick={loginUser} >LOGIN</Button>
+              <Button variant="text" sx={{ color: '#471396' }} onClick={() => signUp()}>Register For New User</Button>
             </Stack>
 
             {/* </form> */}
@@ -239,7 +240,7 @@ const ProductDetail = () => {
             <div style={{ textAlign: 'right' }}>
               <Button onClick={() => setSignup(false)}> <Close /> </Button>
             </div>
-            <h1 style={{ color: '#fc94af' }}>Register</h1>
+            <h1 style={{ color: '#471396' }}>Register</h1>
             <form onSubmit={handleSubmit(registerUser)}>
               <Stack item direction={'column'} spacing={2} style={{ justifyContent: 'center', alignItems: 'center', marginTop: '15px' }}>
 
@@ -249,7 +250,7 @@ const ProductDetail = () => {
                 <TextField variant='standard' label='Address' name={'address'} {...register('address')} sx={{ width: 300 }} />
                 <TextField variant='standard' label='Pin Code' name={'pincode'} {...register('pincode')} sx={{ width: 300 }} />
                 <TextField variant='standard' label='Password' type='password' name={'password'} {...register('password')} sx={{ width: 300 }} />
-                <Button variant='contained' sx={{ backgroundColor: '#fc94af', color: 'white' }} type='submit'>Register</Button>
+                <Button variant='contained' sx={{ backgroundColor: '#471396', color: 'white' }} type='submit'>Register</Button>
               </Stack>
 
             </form>
@@ -258,7 +259,7 @@ const ProductDetail = () => {
 
       </Modal>
 
-      <Footer />
+      <NewFooter />
     </>
   )
 }

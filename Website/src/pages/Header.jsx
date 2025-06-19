@@ -85,21 +85,21 @@ console.log('web::', webuser);
       <List>
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/home">
-            <ListItemIcon><HomeIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+            <ListItemIcon><HomeIcon sx={{ color: '#471396' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Home" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/product">
-            <ListItemIcon><AppsIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+            <ListItemIcon><AppsIcon sx={{ color: '#471396' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Product" />
           </ListItemButton>
         </ListItem>
 
         {/* Category Dropdown */}
         <ListItemButton onClick={() => setOpenCategoryDropdown(true)}>
-          <ListItemIcon ><CategoryIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+          <ListItemIcon ><CategoryIcon sx={{ color: '#471396' }} /></ListItemIcon>
           <ListItemText className='menu-link' primary="Category" />
           {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
         </ListItemButton>
@@ -120,14 +120,14 @@ console.log('web::', webuser);
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/">
-            <ListItemIcon><InfoOutlineIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+            <ListItemIcon><InfoOutlineIcon sx={{ color: '#471396' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="About Us" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/contactus">
-            <ListItemIcon><PhoneIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+            <ListItemIcon><PhoneIcon sx={{ color: '#471396' }} /></ListItemIcon>
             <ListItemText className='menu-link' primary="Contact Us" />
           </ListItemButton>
         </ListItem>
@@ -136,23 +136,23 @@ console.log('web::', webuser);
         {webuser ? (
           <>
             <ListItemButton component={Link} to="/cart">
-              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#471396' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary={`Cart (${cartCount})`} />
             </ListItemButton>
 
             <ListItemButton onClick={() => setOpenUserDropdown(true)}>
-              <ListItemIcon><AccountCircleIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+              <ListItemIcon><AccountCircleIcon sx={{ color: '#471396' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary={webuser.mob_no} />
               {openUserDropdown ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse in={openUserDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <ListItemButton sx={{ pl: 4 }} component={Link} to="/profile">
-                  <ListItemIcon><PermIdentityIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+                  <ListItemIcon><PermIdentityIcon sx={{ color: '#471396' }} /></ListItemIcon>
                   <ListItemText className='menu-link' primary="Profile" />
                 </ListItemButton>
                 <ListItemButton sx={{ pl: 4 }} component={Link} to="/signOut">
-                  <ListItemIcon><ExitToAppIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+                  <ListItemIcon><ExitToAppIcon sx={{ color: '#471396' }} /></ListItemIcon>
                   <ListItemText className='menu-link' primary="Sign Out" />
                 </ListItemButton>
               </List>
@@ -161,15 +161,15 @@ console.log('web::', webuser);
         ) : (
           <>
             <ListItemButton component={Link} to="/cart">
-              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+              <ListItemIcon><ShoppingBagOutlinedIcon sx={{ color: '#471396' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary="Cart" />
             </ListItemButton>
             {/* <ListItemButton component={Link} to="/login">
-          <ListItemIcon><LoginIcon  sx={{color:'#fc94af'}}/></ListItemIcon>
+          <ListItemIcon><LoginIcon  sx={{color:'#471396'}}/></ListItemIcon>
             <ListItemText  className='menu-link' primary="Login" />
           </ListItemButton> */}
             <ListItemButton component={Link} to="/signup">
-              <ListItemIcon><PersonAddAltIcon sx={{ color: '#fc94af' }} /></ListItemIcon>
+              <ListItemIcon><PersonAddAltIcon sx={{ color: '#471396' }} /></ListItemIcon>
               <ListItemText className='menu-link' primary="Sign Up" />
             </ListItemButton>
           </>
@@ -184,7 +184,7 @@ console.log('web::', webuser);
     <>
       <div className='container'>
         {/* <div className="header-wrapper" style={{ position: 'fixed', top: 0, zIndex: 1200 }}> */}
-        <AppBar style={{ height: '60px' }}>
+        <AppBar style={{ height: '60px'  }}>
           <h3 style={{ marginTop: '12px', marginLeft: "50px" }}>
             Radhakrishn Toy Shop
           </h3>
@@ -240,7 +240,6 @@ console.log('web::', webuser);
             <h5 className="header-base">Category</h5>
             <ul className="dropdown-menu">
               {category.data?.map((category) => (
-
                 <li key={category.categoryName}><Link to={`/category/${category.categoryName}`}>{category.categoryName}</Link></li>
               ))}
             </ul>
@@ -253,7 +252,7 @@ console.log('web::', webuser);
                 <input type="search" className="form-control" placeholder='Search' onChange={handleChange} />
                 {/* <label className="form-label" for="form1"></label> */}
               </div>
-              <Button type="button" style={{ backgroundColor: '#fc94af',marginLeft:'5px' }} onClick={() => searchProduct()}>
+              <Button type="button" style={{ backgroundColor: '#471396',marginLeft:'5px' }} onClick={() => searchProduct()}>
                 <SearchIcon style={{ color: 'white' }}></SearchIcon>
               </Button>
             </div>
