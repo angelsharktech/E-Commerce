@@ -82,6 +82,26 @@ const Home = () => {
            </Grid> */}
         </Grid>
         </div>
+         {/* <AliceCarousel
+        mouseTracking
+        items={items}
+        paddingLeft={50}
+        paddingRight={50}
+        responsive={{
+    0: { items: 1 },
+    600: { items: 3 },
+    1024: { items: 1 } 
+  }}
+    >
+{category.data?.map((cat) => (
+        <Grid item xs={6} sm={6} md={3} key={cat._id} className='category-box'>
+              <Link style={{ textDecoration: 'none' }} to={`/category/${cat.categoryName}`}>
+                <p className='cat-title'>{cat.categoryName}</p>
+              </Link>
+            </Grid>
+       
+      ))}
+      </AliceCarousel> */}
       <Footer />
 
     </>
