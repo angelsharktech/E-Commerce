@@ -311,7 +311,7 @@ h3 {
   /* padding: 1%; */
   
   /* border-radius: 40%; */
- transform: scale(1.10) ;
+ /* transform: scale(1.10) ; */
 }
 .header.dropdown, .header-base.dropdown {
   position: relative;
