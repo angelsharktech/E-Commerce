@@ -279,7 +279,7 @@ const Header = () => {
               <>
                 <Link className="header" to={"/"}>
                   <ShoppingBagOutlinedIcon />
-                  Bag
+                  Cart
                 </Link>
                 {/* <Link className='header' to={'/login'}>Login</Link> */}
                 <Link className="header" to={"/signup"}>

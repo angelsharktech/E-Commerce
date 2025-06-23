@@ -193,7 +193,7 @@ const ProductDetail = () => {
                   onClick={() => addToCart(product.data)}
                 >
                   <ShoppingBagOutlinedIcon style={{ marginRight: '8px' }} />
-                  Add To Bag
+                  Add To Cart
                 </Button>
                 <Button
                   variant="contained"
