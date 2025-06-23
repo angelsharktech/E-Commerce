@@ -24,7 +24,7 @@ const Home = () => {
           id="carouselExampleInterval"
           className="carousel slide"
           data-bs-ride="carousel"
-          data-bs-interval="100" // 0.5 seconds
+          data-bs-interval="0.1" // 0.5 seconds
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
@@ -173,6 +173,7 @@ const Home = () => {
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
                   to={`/category/${cat.categoryName}`}
+                  // to={`/category/${cat.mainCategory}`}
                 >
                   <p className="cat-title">{cat.categoryName}</p>
                 </Link>
@@ -182,26 +183,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      {/* <AliceCarousel
-        mouseTracking
-        items={items}
-        paddingLeft={50}
-        paddingRight={50}
-        responsive={{
-    0: { items: 1 },
-    600: { items: 3 },
-    1024: { items: 1 } 
-  }}
-    >
-{category.data?.map((cat) => (
-        <Grid item xs={6} sm={6} md={3} key={cat._id} className='category-box'>
-              <Link style={{ textDecoration: 'none' }} to={`/category/${cat.categoryName}`}>
-                <p className='cat-title'>{cat.categoryName}</p>
-              </Link>
-            </Grid>
-       
-      ))}
-      </AliceCarousel> */}
+    
       <NewFooter />
     </>
   );

@@ -4,41 +4,42 @@ import useFetch from '../hooks/useFetch'
 import { Grid } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import './Home.css'
+// import './Category.css'
 import axios from 'axios'
-import Footer from '../pages/Footer'
 import NewFooter from '../pages/NewFooter'
 
 const Category = () => {
   const { name } = useParams()
-  
+  // const category = useFetch(`/category/getCategoryByMainCategory/${name}`);
   const product = useFetch(`/product/getProductByCategory/${name}`)
-  const [productsWithDiscount, setProductsWithDiscount] = useState([]);
+  // console.log('main Category::',product);
   
-    useEffect(() => {
-      if (product.data && Array.isArray(product.data)) {
-        
-        const updatedProducts = product.data.map((prod) => {
-          
-          const actual = parseFloat(prod.actual_price);
-          const selling = parseFloat(prod.selling_price);
-          const discount = actual && selling ? Math.round(((actual - selling) / actual) * 100) : 0;
-          return { ...prod, discount };
-        });
-        setProductsWithDiscount(updatedProducts);
-      }
-    }, [product.data]);
-
   return (
     <>
       <Header />
+    {/* Subcategory bar */}
+    
+{/* <div className="category-bar">
+  {category.data?.result?.map((cat) =>
+    cat.subCategories?.map((sub, idx) => (
+      <Link
+        key={cat._id + '-' + idx}
+        to={`/subcategory/${cat.mainCategory}/${sub}`}
+        className="category-item"
+      >
+        {sub}
+  
+      </Link>
+    ))
+  )}
+</div> */}
+
        <div  className='product-style'>
-      {productsWithDiscount && productsWithDiscount.length > 0 ? (
+      {product.data?.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: '1%', marginLeft: '3%' }}>
           <Grid container spacing={12} >
-            {productsWithDiscount.map((prod) => 
-            (
-
-              <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
+             {product.data?.map((prod) => (
+                    <Grid item xs={12} sm={6} md={3} key={prod._id} className='box'>
                       <Link style={{ color: 'black', textDecoration: 'none' }} to={`/prodDetail/${prod._id}`}>
                         <img src={axios.defaults.baseURL + prod.thumbnail} className='img-style' alt={prod.title} />
                         <p className='title'>{prod.title}</p>
@@ -51,7 +52,7 @@ const Category = () => {
                         </p>
                       </Link>
                     </Grid>
-            ))}
+                  ))}
           </Grid>
         </div>
       ) : (
@@ -65,7 +66,10 @@ const Category = () => {
             flexDirection: 'column'
           }}
         >
-          <img src="/no-data.jpg" alt="Loading..." style={{ marginTop: '5%', width: '50%' }} />
+
+          <img src="/not_found.gif" alt="Loading..." style={{ width: '60%',height:'100%' }} />
+          <h3 style={{color:'#471396'}}>NO DATA FOUND</h3>
+       
         </div>
       )}
       </div>

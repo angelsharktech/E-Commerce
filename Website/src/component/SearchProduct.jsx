@@ -12,7 +12,8 @@ const SearchProduct = () => {
   const { name } = useParams()
   const product = useFetch(`/product/getProductByName/${name}`)
   const category = useFetch(`/product/getProductByCategory/${name}`)
-  const mergedData = [...(product.data || []), ...(category.data || [])];
+  const subCategory = useFetch(`/product/getProductBySubCategory/${name}`)
+  const mergedData = [...(product.data || []), ...(category.data || []), ...(subCategory.data || [])];
 
 
   // Remove duplicates by _id
@@ -47,13 +48,16 @@ const SearchProduct = () => {
           )) :
           <div
             style={{
+              display: 'flex',
               textAlign: 'center',
-              // marginTop: '20px',
               width: '100%',
-              fontSize: '1.5rem',
-              color: '#f44336'
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '50vh', // adjust height as needed
+            flexDirection: 'column'
             }}>
-            <img src="/no-data.jpg" alt="Loading..." style={{  width: '50%' }} />
+             <img src="/not_found.gif" alt="Loading..." style={{ width: '60%',height:'100%' }} />
+          <h3 style={{color:'#471396'}}>NO DATA FOUND</h3>
           </div>
           }
         </Grid>

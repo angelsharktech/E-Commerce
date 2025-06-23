@@ -13,11 +13,14 @@ import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import ProductList from './ProductList';
+import NewCategory from './NewCategory';
+import CategoryList from './CategoryList';
 
 const menuItems = [
   { label: 'Product List', value: 'ProductList', icon: <ListAltOutlinedIcon /> },
   { label: 'Upload Product', value: 'Product', icon: <Inventory2OutlinedIcon /> },
   { label: 'Add Category', value: 'Category', icon: <CategoryOutlinedIcon /> },
+  // { label: 'Category List', value: 'CategoryList', icon: <ListAltOutlinedIcon /> },
   { label: 'Profile Manager', value: 'Profile', icon: <PersonOutlineOutlinedIcon /> },
 ];
 
@@ -118,6 +121,8 @@ const Dashboard = () => {
                 Home: <Home />,
                 Product: <Product />,
                 ProductList: <ProductList />,
+                // Category: <NewCategory />,
+                // CategoryList: <CategoryList />,
                 Category: <Category />,
                 About: <AboutUs />,
                 Contact: <ContactUs />,
