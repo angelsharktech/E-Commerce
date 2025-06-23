@@ -88,3 +88,8 @@ e-commerce>
 sudo rm /etc/nginx/sites-enabled/toyshop.sbs.conf
 sudo rm /etc/nginx/sites-available/admin.toyshop.sbs.conf
 sudo rm /etc/nginx/sites-available/api.toyshop.sbs.conf
+
+
+
+
+V3LJVPGPEF1QA2NVU44DGBFR
