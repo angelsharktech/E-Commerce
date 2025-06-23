@@ -6,6 +6,7 @@ import { Close } from '@mui/icons-material'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { userInformation } from '../context/AuthContext'
+import NewFooter from '../pages/NewFooter'
 
 const NewSignUp = () => {
   const { dispatch } = useContext(userInformation)
@@ -67,7 +68,7 @@ const NewSignUp = () => {
           </Stack>
           {/* </form> */}
         </div>
-
+      <NewFooter/>
       </div >
       <Modal open={open} style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
         <div >
