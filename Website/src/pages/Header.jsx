@@ -45,7 +45,7 @@ const Header = () => {
   const prod = useFetch("/product/getProduct");
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
   const [openUserDropdown, setOpenUserDropdown] = useState(false);
-  console.log("web::", webuser);
+  // console.log("web::", webuser);
   const navigate = useNavigate();
   const { cartCount, setCartCount } = useCart();
 

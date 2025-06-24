@@ -1,9 +1,6 @@
 /* Base styles for all screen sizes */
 .product-detail-bg {
-  /* min-height: 100vh; */
-  /* background: linear-gradient(135deg, #f9d423 0%, #c26afc 100%); */
-  /* padding: 40px 0 60px 0; */
-  font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
+   font-family: 'Baloo Bhai 2', 'Comic Sans MS', cursive, sans-serif;
 }
 
 .product-title {
@@ -81,24 +78,23 @@
     flex-direction: column;
     gap: 10px;
   }
+    
   .product-card {
-  border-radius: 28px;
-  box-shadow: 0 8px 32px rgba(194, 106, 252, 0.18);
-  max-width: 600px;
-  margin: 40px auto 0 auto;
-  padding: 32px 36px 28px 36px;
-  text-align: center;
-  position: relative;
-}
-  .discount-badge {
+    /* max-width: 580px; */
+    margin: 20px 0 20px  0;
+    /* padding: 32px 24px 28px 24px; */
+    text-align: center;
+    flex: 1 1 50%;
+  }
+ .discount {
     display: inline-block;
-  background: #8632d4;
-  color: #fff;
+  background: #471396;
+  color: #fffbe7;
   font-weight: bold;
   border-radius: 15px;
   padding: 2px 10px;
   margin-left: 8px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
   animation: headShake 1.2s infinite !important;
   }
@@ -114,12 +110,7 @@
     font-size: 1.2rem;
   }
   .product-card {
-  /* background: #fffbe7; */
-  /* border-radius: 28px; */
-  /* box-shadow: 0 8px 32px rgba(194, 106, 252, 0.18); */
   max-width: 600px;
-  /* margin: 40px auto 0 auto; */
-  /* padding: 32px 36px 28px 36px; */
   text-align: center;
   position: relative;
 }
@@ -151,15 +142,15 @@
     min-height: 340px;
     text-align: left;
   }
-    .discount-badge {
+   .discount {
     display: inline-block;
-  background: #8632d4;
-  color: #fff;
+  background: #471396;
+  color: #fffbe7;
   font-weight: bold;
   border-radius: 15px;
   padding: 2px 10px;
   margin-left: 8px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
   animation: headShake 1.2s infinite !important;
   }

@@ -35,3 +35,32 @@ export const placeOrder = async (req, res, next) => {
     res.status(500).json({ error: "Failed to save order" });
   }
 };
+export const getOrder = async (req, res, next) => {
+  try {
+    
+    const result = await order.find().populate('products.product');
+    
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get order" });
+  }
+};
+export const getOrderById = async (req, res, next) => {
+  try {
+    
+    const result = await order.find({user: req.params.id}).populate('products.product');
+    
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get order" });
+  }
+};
+export const updateOrderStatus =  async (req, res) => {
+  try {
+    
+    const result = await order.findByIdAndUpdate({_id:req.params.id}, req.body , {new:true});
+    res.status(200).json({msg:"Product Updated successfully...", result});
+  } catch (error) {
+    console.log(error)
+  }
+};

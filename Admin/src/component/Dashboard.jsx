@@ -15,6 +15,9 @@ import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import ProductList from './ProductList';
 import NewCategory from './NewCategory';
 import CategoryList from './CategoryList';
+import Order from './Order';
+import ReorderOutlinedIcon from '@mui/icons-material/ReorderOutlined';
+import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
 const menuItems = [
   { label: 'Product List', value: 'ProductList', icon: <ListAltOutlinedIcon /> },
@@ -22,6 +25,8 @@ const menuItems = [
   { label: 'Add Category', value: 'Category', icon: <CategoryOutlinedIcon /> },
   // { label: 'Category List', value: 'CategoryList', icon: <ListAltOutlinedIcon /> },
   { label: 'Profile Manager', value: 'Profile', icon: <PersonOutlineOutlinedIcon /> },
+  { label: 'Orders', value: 'Orders', icon: <ReorderOutlinedIcon />  },
+  { label: 'Feedback', value: 'Feedback' , icon: <FeedbackOutlinedIcon /> },
 ];
 
 const selected = {
@@ -124,6 +129,7 @@ const Dashboard = () => {
                 // Category: <NewCategory />,
                 // CategoryList: <CategoryList />,
                 Category: <Category />,
+                Orders: <Order />,
                 About: <AboutUs />,
                 Contact: <ContactUs />,
                 Profile: <Profile />,

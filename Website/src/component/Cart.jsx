@@ -23,7 +23,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  console.log('cart::',data);
+  // console.log('cart::',data);
   
   useEffect(() => {
     if (data?.data?.cart) {

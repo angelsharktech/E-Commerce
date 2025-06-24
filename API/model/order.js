@@ -24,6 +24,8 @@ const orderSchema = new mongoose.Schema({
     mob_no: { type: String, required: true },
     email: { type: String, required: true },
     address: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
     pincode: { type: String, required: true },
   },
 
@@ -45,11 +47,11 @@ const orderSchema = new mongoose.Schema({
     signature: { type: String },
   },
 
-  // orderStatus: {
-  //   type: String,
-  //   enum: ['Processing', 'Shipped', 'Delivered', 'Cancelled'],
-  //   default: 'Processing',
-  // },
+  orderStatus: {
+    type: String,
+    
+    default: 'Processing',
+  },
 
   totalAmount: {
     type: Number,

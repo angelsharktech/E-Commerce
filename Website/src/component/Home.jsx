@@ -108,7 +108,7 @@ const Home = () => {
                     }}
                   >
                     {prod.selling_price} RS.
-                  </span>
+                  </span><br/>
                   {prod.discount > 0 && (
                     <span className="discount-badge">{prod.discount}% OFF</span>
                   )}
@@ -132,7 +132,7 @@ const Home = () => {
               className="discount-badge"
               style={{
                 textDecoration: "none",
-                "&:hover": { transform: "scale(1.1)" },
+              
               }}
             >
               View More
@@ -143,7 +143,7 @@ const Home = () => {
 
       <div
         style={{
-          marginLeft: "2%",
+          // marginLeft: "2%",
           textAlign: "center",
           marginTop: "2%",
           width: "100%",
@@ -168,7 +168,6 @@ const Home = () => {
             <div key={cat._id} style={{ padding: 8 }}>
               <div
                 className="category-box"
-                
               >
                 <Link
                   style={{ textDecoration: "none", color: "black" }}
@@ -182,8 +181,6 @@ const Home = () => {
           ))}
         </Slider>
       </div>
-
-    
       <NewFooter />
     </>
   );

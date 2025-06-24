@@ -32,6 +32,8 @@ const ProductDetail = () => {
   const addToCart = async (data) => {
     try {
       if (webuser) {
+        console.log('prod_data::',data);
+        
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
@@ -145,13 +147,14 @@ const ProductDetail = () => {
       }}>
       <source src={axios.defaults.baseURL + item} type="video/mp4" />
     </video> :
-      <img className="item"
+      <img 
+      // className="item"
         style={{
           height: "350px",
-          width: "80%",
+          width: "100%",
           objectFit: "cover",
-          display: "block",
-          margin: "20px auto",
+          // display: "block",
+          // margin: "20px auto",
           borderRadius: "10px"
         }}
         //  data-value={index + 1} 
