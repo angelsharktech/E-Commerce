@@ -9,7 +9,6 @@ import axios from "axios";
 const Order = () => {
   const { webuser } = useContext(userInformation);
   const orders = useFetch(`/order/getOrderById/${webuser?._id}`);
-  console.log("web order::", orders);
   const cancelOrder = async (id) => {
     try {
       const res = await axios.put(`/order/updateOrderStatus/${id}`, {

@@ -250,6 +250,9 @@ const Header = () => {
           <div className="header-actions">
             {webuser ? (
               <>
+              <Link className="header" to={"/orders"}>
+                  <ShoppingBagOutlinedIcon /> Orders
+                </Link>
                 <Link className="header" to={"/cart"}>
                   <ShoppingBagOutlinedIcon /> Bag <sup>{cartCount}</sup>
                 </Link>
@@ -277,6 +280,9 @@ const Header = () => {
               </>
             ) : (
               <>
+              <Link className="header" to={"/signup"}>
+                  <ShoppingBagOutlinedIcon /> Orders
+                </Link>
                 <Link className="header" to={"/"}>
                   <ShoppingBagOutlinedIcon />
                   Cart
