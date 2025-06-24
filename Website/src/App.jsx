@@ -43,6 +43,7 @@ function App() {
             <Route path='/profile' element={<Profile/>} />
             <Route path='/buynow/:pid' element={<Buynow />} />
             <Route path='/contactus' element={<ContactUs />} />
+            <Route path='/orders' element={<Order />} />
           </Routes>
         </BrowserRouter>
         </CartProvider>
