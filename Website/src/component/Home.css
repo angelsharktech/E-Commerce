@@ -4,19 +4,23 @@
   overflow: hidden;
   margin-top: 1%;
 }
-
 .carousel-container img {
   height: 100%;
   object-fit: cover;
 }
-
 .carousel-control-prev,
 .carousel-control-next {
   transform: translateY(-30%);
 }
+.slick-list {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
 
-
-
+.slick-track {
+  margin-left: 0 !important;
+  /* transform: translate3d(16px, 0px, 0px) !important; */
+}
 .title {
   font-size: 1.1rem;
   color: #ff4e50;
@@ -24,7 +28,6 @@
   margin: 6px 0;
   font-family: 'Baloo Bhai 2', cursive, sans-serif;
 }
-
 h1 {
   font-size: 2.5rem;
   /* color: #d844fd; */
@@ -32,39 +35,26 @@ h1 {
   letter-spacing: 2px;
   font-family: 'Baloo Bhai 2', cursive, sans-serif;
 }
-
-
-
 .box:hover {
   transform: translateY(-8px) scale(1.04) rotate(-2deg);
   box-shadow: 0 8px 32px rgba(255, 78, 80, 0.22);
 }
-
-
-
 .category-box:hover {
   transform: scale(1.2) rotate(-2deg);
   box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
   background: linear-gradient(90deg, #471396 0%, #f7c8d4 50%, #471396 100%);
 }
-
-
-
 .product-style {
   text-align: center;
   margin-top: 2%;
   margin-left: 3%;
 }
-
 .price-label {
   color: #888;
   font-size: 1rem;
   text-decoration: line-through;
   margin-right: 6px;
 }
-
-
-
 body, html {
   overflow-x: hidden;
 }
@@ -85,16 +75,33 @@ color: #43a047;
     margin-top: 1%;
   }
 
-  .img-style {
-    max-width: 180px;
-    height: 180px;
-  }
+ .img-style {
+    width: 100px;
+  max-width: 200px;
+   height: 100px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #fff;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border: 3px solid #471396;
+  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
+}
 
-  .box {
-    min-height: 340px;
-    margin: 18px;
-    padding: 18px 10px 24px 10px;
-  }
+.box {
+  background: #fffbe7;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+  /* margin: 8px; */
+  /* padding: 18px 10px 24px 10px; */
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   width: 30%; /* 3 cards with gap (~90%) */
+    height: 120px;
+}
   .discount-badge {
  background: #471396;
   color: #fff;
@@ -119,6 +126,7 @@ color: #43a047;
   flex-direction: column;
   align-items: center;
 }
+
 .cat-title {
   font-size: 1.2rem;
   color: #fff;
@@ -273,7 +281,7 @@ color: #43a047;
   background: #471396;
   border-radius: 270px;
   box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
-  margin: 8px auto;
+  /* margin: 8px auto; */
   padding: 18px 10px 24px 10px;
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;

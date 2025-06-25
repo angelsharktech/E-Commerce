@@ -17,6 +17,7 @@ import NewSignUp from './component/NewSignUp'
 import Buynow from './component/Buynow'
 import ContactUs from './component/ContactUs'
 import Profile from './component/Profile'
+import Order from './component/Order'
 
 function App() {
 

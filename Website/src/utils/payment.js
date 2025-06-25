@@ -10,7 +10,6 @@ export const startRazorpayPayment = async ({
   onSuccess = () => {},
   onFailure = () => {},
 }) => {
- 
   try {
     const res = await axios.post("/order/createOrder", {
       amount,
@@ -44,6 +43,8 @@ export const startRazorpayPayment = async ({
             name: data.name,
             mob_no: data.mob_no,
             email: data.email,
+            address: data.address,
+            city: data.city,
             address: data.address,
             pincode: data.pincode,
           },
@@ -101,7 +102,7 @@ export const cashOnDeliveryPayment = async ({
   onSuccess = () => {},
   onFailure = () => {},
 }) => {
-  console.log('COD product:',product);
+  console.log("COD product:", product);
   const productList = Array.isArray(product) ? product : [product];
 
   // Build product items array
@@ -113,10 +114,10 @@ export const cashOnDeliveryPayment = async ({
   console.log("product array before totalAmount:", productItems);
 
   // Calculate total amount
-   const totalAmount = productList.reduce((acc, item) => {
-    console.log('totalAmount:',acc);
-    
-    return acc +  item.price;
+  const totalAmount = productList.reduce((acc, item) => {
+    console.log("totalAmount:", acc);
+
+    return acc + item.price;
   }, 0);
 
   // console.log('COD product:',productItems);
@@ -128,14 +129,16 @@ export const cashOnDeliveryPayment = async ({
       mob_no: data.mob_no,
       email: data.email,
       address: data.address,
+      city: data.city,
+      address: data.address,
       pincode: data.pincode,
     },
     paymentMethod: "COD",
     paymentStatus: "Pending",
     totalAmount: totalAmount,
   };
-  console.log('cart COD:',orderData);
-  
+  console.log("cart COD:", orderData);
+
   try {
     const saveRes = await axios.post("/order/placeOrder", orderData);
     //   alert("Order placed successfully with Cash on Delivery!");

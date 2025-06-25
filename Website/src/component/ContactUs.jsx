@@ -35,7 +35,7 @@ const ContactUs = () => {
   return (
     <>
       <Header />
-      <Box sx={{ display: "flex", justifyContent: "center", gap: "1px" }}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Stack direction={{ xs: "column", sm: "row" }}>
           <Stack sx={{ width: "100%", marginTop: "2%", pr: { sm: 5, xs: 0 } }}>
             <img src="/teddy-bear-toys.jpg" style={{ height: "100%" }} />
@@ -44,7 +44,7 @@ const ContactUs = () => {
             direction={{ xs: "column", sm: "row" }}
             justifyContent="flex-end"
             alignItems="flex-start"
-            sx={{ width: "100%", marginTop: "2%", pr: { sm: 8, xs: 0 } }}
+            sx={{ width: "100%", marginTop: "2%", pr: { sm: 8, xs: 0 } ,ml:{xs:15} }}
           >
             <Card sx={{ width: 420, borderRadius: 5, boxShadow: 6 }}>
               <CardContent>

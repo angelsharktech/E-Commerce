@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
 import "./Home.css";
 import useFetch from "../hooks/useFetch";
-import { Grid } from "@mui/material";
+import { Box, Grid, Pagination, Paper, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import NewFooter from "../pages/NewFooter";
@@ -11,82 +11,83 @@ import NewFooter from "../pages/NewFooter";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import Carousel from "react-material-ui-carousel";
 
 const Home = () => {
   const { data } = useFetch("/product/getProduct");
   const category = useFetch("/category/getCategory");
-  const displayedProducts = data?.slice(0, 5);
+  
+const itemsPerPage = 70
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(data?.length / itemsPerPage)
+
+  // Slice products for current page
+  const currentProducts = data?.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value)
+    window.scrollTo({ top: 0, behavior: 'smooth' }) // optional: scroll to top
+  }
+  const items = [
+  { src: '/car.jpg', alt: 'First slide' },
+  { src: '/new.png', alt: 'Second slide' },
+  { src: '/Toy-Names-For-Kids.jpg', alt: 'Third slide' },
+  { src: '/educational_toys.jpg', alt: 'Fourth slide' },
+]
   return (
     <>
       <Header />
-      <div className="carousel-container">
-        <div
-          id="carouselExampleInterval"
-          className="carousel slide"
-          data-bs-ride="carousel"
-          data-bs-interval="0.1" // 0.5 seconds
+       <div
+        style={{
+          // marginLeft: "2%",
+          textAlign: "center",
+          marginTop: "2%",
+          width: "100%",
+        }}
+      >
+        <h1>Category</h1>
+        <Slider
+         initialSlide={0}
+         centerMode={false}
+          dots={false}
+          // infinite={false}
+          speed={500}
+          slidesToShow={6}
+          slidesToScroll={2}
+          swipeToSlide={true}
+          arrows={true}
+          responsive={[
+            { breakpoint: 1200, settings: { slidesToShow: 8 } },
+            { breakpoint: 900, settings: { slidesToShow: 5 } },
+            { breakpoint: 600, settings: { slidesToShow: 3 } },
+          ]}
         >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                className="d-block w-100"
-                src="/car.jpg"
-                alt="First slide"
-              />
+          {category.data?.map((cat) => (
+            <div className="slice-track" key={cat._id} style={{ padding: 8 }}>
+              <div
+                className="category-box"
+              >
+                <Link
+                  style={{ textDecoration: "none", color: "black" }}
+                  to={`/category/${cat.categoryName}`}
+                  // to={`/category/${cat.mainCategory}`}
+                >
+                  <p className="cat-title">{cat.categoryName}</p>
+                </Link>
+              </div>
             </div>
-            <div className="carousel-item">
-              <img
-                className="d-block w-100"
-                src="new.png"
-                alt="Second slide"
-              />
-            </div>
-            <div className="carousel-item">
-              <img
-                className="d-block w-100"
-                src="/Toy-Names-For-Kids.jpg"
-                alt="Third slide"
-              />
-            </div>
-            <div className="carousel-item">
-              <img
-                className="d-block w-100"
-                src="/educational_toys.jpg"
-                alt="Fourth slide"
-              />
-            </div>
-          </div>
-          <a
-            className=" carousel-control-prev"
-            href="#carouselExampleInterval"
-            role="button"
-            data-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              style={{ alignItems: "center" }}
-            >
-              {" "}
-            </span>
-            <span className="sr-only">Previous</span>
-          </a>
-          <a
-            className=" carousel-control-next"
-            href="#carouselExampleInterval"
-            role="button"
-            data-slide="next"
-          >
-            <span className="carousel-control-next-icon"></span>
-            <span className="sr-only">Next</span>
-          </a>
-        </div>
+          ))}
+        </Slider>
       </div>
-
+     
       <div style={{ marginLeft: "2% ", textAlign: "center", marginTop: "2%" }}>
         <h1>Products</h1>
 
         <Grid container spacing={3} sx={{ marginTop: "2%" }}>
-          {displayedProducts?.map((prod) => (
+          {currentProducts?.map((prod) => (
             <Grid item xs={6} sm={6} md={3} key={prod._id} className="box">
               <Link
                 style={{ color: "black", textDecoration: "none" }}
@@ -116,71 +117,40 @@ const Home = () => {
               </Link>
             </Grid>
           ))}
-          <Grid
-            item
-            xs={6}
-            sm={6}
-            md={3}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Link
-              to={"/product"}
-              className="discount-badge"
-              style={{
-                textDecoration: "none",
-              
-              }}
-            >
-              View More
-            </Link>
-          </Grid>
         </Grid>
+         <Stack spacing={2} sx={{ my: 4, alignItems: 'center' }}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={handleChange}
+          color="#471396"
+        />
+      </Stack>
       </div>
 
-      <div
-        style={{
-          // marginLeft: "2%",
-          textAlign: "center",
-          marginTop: "2%",
-          width: "100%",
-        }}
+
+        {/* carousel Slider */}
+ {/* <Box className="carousel-container" sx={{ maxWidth: '100%', overflow: 'hidden' }}>
+      <Carousel
+        autoPlay={true} 
+        // navButtonsAlwaysVisible
+        animation="slide"
+        indicators={false}
+        interval={2000}
+        duration={500}
       >
-        <h1>Category</h1>
-        <Slider
-          dots={false}
-          infinite={false}
-          speed={500}
-          slidesToShow={6}
-          slidesToScroll={2}
-          swipeToSlide={true}
-          arrows={true}
-          responsive={[
-            { breakpoint: 1200, settings: { slidesToShow: 4 } },
-            { breakpoint: 900, settings: { slidesToShow: 3 } },
-            { breakpoint: 600, settings: { slidesToShow: 2 } },
-          ]}
-        >
-          {category.data?.map((cat) => (
-            <div key={cat._id} style={{ padding: 8 }}>
-              <div
-                className="category-box"
-              >
-                <Link
-                  style={{ textDecoration: "none", color: "black" }}
-                  to={`/category/${cat.categoryName}`}
-                  // to={`/category/${cat.mainCategory}`}
-                >
-                  <p className="cat-title">{cat.categoryName}</p>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+        {items.map((item, i) => (
+          <Paper key={i} elevation={3}>
+            <img
+              src={item.src}
+              alt={item.alt}
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </Paper>
+        ))}
+      </Carousel>
+    </Box> */}
+     
       <NewFooter />
     </>
   );
