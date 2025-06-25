@@ -88,3 +88,33 @@ export const UpdateCart = async(req,res,next) =>{
     next(error)
   }
 }
+export const deleteCart =async(req,res,next) =>{
+  try {
+     const result = await cart.findByIdAndDelete({_id:req.params.id}, req.body )     
+     res.status(200).json({msg:'Cart is empty'})
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const deleteCartItem = async (req, res) => {
+  const { userId, cartId } = req.params;
+  try {
+    const updatedCart = await cart.findOneAndUpdate(
+      { webuser: userId },
+      {
+        $pull: {
+          cart: { _id: cartId }
+        }
+      },
+      { new: true }
+    );
+    if (!updatedCart) {
+      return res.status(404).json({ message: "Cart not found for user" });
+    }
+
+    res.status(200).json({ message: "Item removed from cart", cart: updatedCart });
+  } catch (error) {
+    console.error("Error removing cart item:", error);
+    res.status(500).json({ message: "Server error while removing item" });
+  }
+};

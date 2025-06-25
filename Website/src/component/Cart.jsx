@@ -41,15 +41,15 @@ const Cart = () => {
 
   // console.log("cartItems:", cartItems);
 
-  const increaseCount = async (cartId) => {
+ const increaseCount = async (cartId) => {
     // setCartCount
+    try {
     const updatedCart = cartItems.map((item) =>
       item._id === cartId ? { ...item, quantity: item.quantity + 1 } : item
     );
 
     setCartItems(updatedCart);
 
-    try {
       const updatedItem = updatedCart.find((item) => item._id === cartId);
       const result = await axios.put(`/cart/UpdateCart/${webuser._id}`, {
         _id: updatedItem._id,
@@ -63,6 +63,18 @@ const Cart = () => {
   };
 
   const decreaseCount = async (cartId) => {
+     const item = cartItems.find((item) => item._id === cartId);
+
+  if (!item) return;
+
+  if (item.quantity <= 1) {
+    try {
+      await axios.delete(`/cart/deleteCartItem/${webuser._id}/${cartId}`);
+      data.refetch(`/cart/getCartItem/${webuser._id}`);
+    } catch (error) {
+      console.error("Failed to remove item from cart:", error);
+    }
+  } else {
     // setCartCount
     const updatedCart = cartItems.map((item) =>
       item._id === cartId ? { ...item, quantity: item.quantity - 1 } : item
@@ -78,9 +90,11 @@ const Cart = () => {
         price: updatedItem.price,
       });
       data.refetch(`/cart/getCartItem/${webuser._id}`);
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
     }
+  }
   };
 
    const handlePaymentMethod = () => {
