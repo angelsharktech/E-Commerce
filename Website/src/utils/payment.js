@@ -127,7 +127,8 @@ export const cashOnDeliveryPayment = async ({
     paymentMethod: "COD",
     paymentStatus: "Pending",
     totalAmount: totalAmount,
-  };
+  }
+  
   try {
     const saveRes = await axios.post("/order/placeOrder", orderData);
     //   alert("Order placed successfully with Cash on Delivery!");
