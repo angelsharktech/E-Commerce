@@ -32,7 +32,6 @@ const Cart = () => {
       let tempTotal = 0;
       data.data.cart.map((item) => {
         tempTotal += item.price;
-
         return null;
       });
 
