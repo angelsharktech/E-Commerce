@@ -26,46 +26,49 @@ export const startRazorpayPayment = async ({
       description: "Order Payment",
       // image: "/logo.png",
       order_id: order.id,
-      handler: async function (response) {
-        // This is called on successful payment
-        console.log("Payment successful:", response);
-        alert("Payment successful!");
-        const orderData = {
-          user: webuser._id,
-          products: [
-            {
-              product: product._id,
-              quantity: product.quantity,
-              price: product.selling_price,
-            },
-          ],
-          shippingInfo: {
-            name: data.name,
-            mob_no: data.mob_no,
-            email: data.email,
-            address: data.address,
-            city: data.city,
-            address: data.address,
-            pincode: data.pincode,
-          },
-          paymentMethod: "RAZORPAY",
-          paymentStatus: "Paid",
-          razorpayDetails: {
-            orderId: response.razorpay_order_id,
-            paymentId: response.razorpay_payment_id,
-            signature: response.razorpay_signature,
-          },
-          totalAmount: product.price,
-        };
+      handler: function (response) {
+        (async () => {
+          try {
+            console.log("Payment successful:", response);
+            alert("Payment successful!");
 
-        try {
-          const saveRes = await axios.post("/order/placeOrder", orderData);
-          alert("Order placed successfully!");
-          onSuccess(saveRes.data);
-        } catch (err) {
-          console.error("Error saving order:", err);
-          onFailure(err);
-        }
+            const orderData = {
+              user: webuser._id,
+              products: [
+                {
+                  product: product._id,
+                  quantity: product.quantity,
+                  price: product.selling_price,
+                },
+              ],
+              shippingInfo: {
+                name: data.name,
+                mob_no: data.mob_no,
+                email: data.email,
+                address: data.address,
+                city: data.city,
+                state:data.state,
+                pincode: data.pincode,
+              },
+              paymentMethod: "RAZORPAY",
+              paymentStatus: "Paid",
+              razorpayDetails: {
+                orderId: response.razorpay_order_id,
+                paymentId: response.razorpay_payment_id,
+                signature: response.razorpay_signature,
+              },
+              totalAmount: product.price,
+            };
+
+            const saveRes = await axios.post("/order/placeOrder", orderData);
+            alert("Order placed successfully!");
+            onSuccess(saveRes.data);
+          } catch (err) {
+            console.error("Error saving order:", err);
+            alert("Failed to place order after payment.");
+            onFailure(err);
+          }
+        })();
       },
       prefill: {
         name: data.name,
@@ -130,6 +133,7 @@ export const cashOnDeliveryPayment = async ({
       email: data.email,
       address: data.address,
       city: data.city,
+      state:data.state,
       address: data.address,
       pincode: data.pincode,
     },
