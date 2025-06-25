@@ -109,7 +109,6 @@ export const cashOnDeliveryPayment = async ({
   }));
   // Calculate total amount
   const totalAmount = productList.reduce((acc, item) => {
-    console.log("totalAmount:", acc);
     return acc + item.price;
   }, 0);
   const orderData = {
@@ -127,7 +126,7 @@ export const cashOnDeliveryPayment = async ({
     paymentMethod: "COD",
     paymentStatus: "Pending",
     totalAmount: totalAmount,
-  }
+  };
   
   try {
     const saveRes = await axios.post("/order/placeOrder", orderData);
@@ -139,3 +138,4 @@ export const cashOnDeliveryPayment = async ({
     onFailure(err);
   }
 };
+
