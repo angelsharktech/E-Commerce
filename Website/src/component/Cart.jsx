@@ -212,11 +212,11 @@ const Cart = () => {
                         <tr>
                           {/* {cart._id} */}
                           <th>
-                            {" "}
-                            <img
+                            
+                            {/* <img
                               src={axios.defaults.baseURL + cart?.thumbnail}
                               style={{ height: "2%", width: "50%" }}
-                            />
+                            /> */}
                           </th>
                           <th>
                             {cart.title}
