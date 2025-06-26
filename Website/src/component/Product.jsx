@@ -26,7 +26,7 @@ const Product = () => {
                         <p className='title'>{prod.title}</p>
                         <p>
                           <span className="price-label">{prod.actual_price} RS.</span>
-                          <span className='selling_label'>{prod.selling_price} RS.</span>
+                          <span className='selling_label'>{prod.selling_price} RS.</span><br/>
                           {prod.discount > 0 && (
                             <span className="discount-badge">{prod.discount}% OFF</span>
                           )}
