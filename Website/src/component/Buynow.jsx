@@ -134,6 +134,21 @@ const Buynow = () => {
         webuser:webuser,
         onSuccess: (savedOrder) => {
           alert("Order placed successfully!");
+
+          savedOrder.products.map(async (cart, index) => {
+            const res = await axios.get(
+              `/product/getProductById/${cart.product}`
+            );
+            const qty = res.data.avail_qty - cart.quantity;
+            if (res.data) {
+              const result = await axios.patch(
+                `/product/updateProduct/${cart.product}`,
+                { avail_qty: qty }
+              );
+              // console.log('**********qty');
+            }
+          });
+
           navigate('/home')
         },
         onFailure: (err) => {
@@ -155,6 +170,23 @@ const Buynow = () => {
         webuser:webuser,
         onSuccess: (savedOrder) => {
           alert("Order placed successfully!");
+
+           // Quantity logic here
+          savedOrder.products.map(async (cart, index) => {
+            const res = await axios.get(
+              `/product/getProductById/${cart.product}`
+            );
+            const qty = res.data.avail_qty - cart.quantity;
+            if (res.data) {
+              const result = await axios.patch(
+                `/product/updateProduct/${cart.product}`,
+                { avail_qty: qty }
+              );
+              // console.log('**********qty');
+            }
+          });
+
+
           navigate('/home')
         },
         onFailure: (err) => {

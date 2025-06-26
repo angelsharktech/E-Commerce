@@ -15,16 +15,16 @@ import { cashOnDeliveryPayment, startRazorpayPayment } from "../utils/payment";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const RAZORPAY_KEY_ID = "rzp_live_qAVbX1D0dGBDYZ"; // Razorpay key
   const { webuser } = useContext(userInformation);
   const data = useFetch(`/cart/getCartItem/${webuser._id}`);
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   // console.log('cart::',data);
-  
+
   useEffect(() => {
     if (data?.data?.cart) {
       setCartItems(data.data.cart);
@@ -41,14 +41,14 @@ const Cart = () => {
 
   // console.log("cartItems:", cartItems);
 
- const increaseCount = async (cartId) => {
+  const increaseCount = async (cartId) => {
     // setCartCount
     try {
-    const updatedCart = cartItems.map((item) =>
-      item._id === cartId ? { ...item, quantity: item.quantity + 1 } : item
-    );
+      const updatedCart = cartItems.map((item) =>
+        item._id === cartId ? { ...item, quantity: item.quantity + 1 } : item
+      );
 
-    setCartItems(updatedCart);
+      setCartItems(updatedCart);
 
       const updatedItem = updatedCart.find((item) => item._id === cartId);
       const result = await axios.put(`/cart/UpdateCart/${webuser._id}`, {
@@ -63,44 +63,43 @@ const Cart = () => {
   };
 
   const decreaseCount = async (cartId) => {
-     const item = cartItems.find((item) => item._id === cartId);
+    const item = cartItems.find((item) => item._id === cartId);
 
-  if (!item) return;
+    if (!item) return;
 
-  if (item.quantity <= 1) {
-    try {
-      await axios.delete(`/cart/deleteCartItem/${webuser._id}/${cartId}`);
-      data.refetch(`/cart/getCartItem/${webuser._id}`);
-    } catch (error) {
-      console.error("Failed to remove item from cart:", error);
+    if (item.quantity <= 1) {
+      try {
+        await axios.delete(`/cart/deleteCartItem/${webuser._id}/${cartId}`);
+        data.refetch(`/cart/getCartItem/${webuser._id}`);
+      } catch (error) {
+        console.error("Failed to remove item from cart:", error);
+      }
+    } else {
+      // setCartCount
+      const updatedCart = cartItems.map((item) =>
+        item._id === cartId ? { ...item, quantity: item.quantity - 1 } : item
+      );
+
+      setCartItems(updatedCart);
+
+      try {
+        const updatedItem = updatedCart.find((item) => item._id === cartId);
+        const result = await axios.put(`/cart/UpdateCart/${webuser._id}`, {
+          _id: updatedItem._id,
+          quantity: updatedItem.quantity,
+          price: updatedItem.price,
+        });
+        data.refetch(`/cart/getCartItem/${webuser._id}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  } else {
-    // setCartCount
-    const updatedCart = cartItems.map((item) =>
-      item._id === cartId ? { ...item, quantity: item.quantity - 1 } : item
-    );
-
-    setCartItems(updatedCart);
-
-    try {
-      const updatedItem = updatedCart.find((item) => item._id === cartId);
-      const result = await axios.put(`/cart/UpdateCart/${webuser._id}`, {
-        _id: updatedItem._id,
-        quantity: updatedItem.quantity,
-        price: updatedItem.price,
-      });
-      data.refetch(`/cart/getCartItem/${webuser._id}`);
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
   };
 
-   const handlePaymentMethod = () => {
+  const handlePaymentMethod = () => {
     try {
-      console.log('webUser::',webuser);
-      
+      console.log("webUser::", webuser);
+
       if (
         !webuser.name?.trim() ||
         !webuser.email?.trim() ||
@@ -115,7 +114,6 @@ const Cart = () => {
         );
         return;
       } else {
-        
         setIsModalOpen(true);
       }
     } catch (error) {
@@ -133,7 +131,22 @@ const Cart = () => {
         webuser: webuser,
         onSuccess: (savedOrder) => {
           alert("Order placed successfully!");
-          const res = axios.delete(`/cart/deleteCart/${data.data._id}`)
+
+          savedOrder.products.map(async (cart, index) => {
+            const res = await axios.get(
+              `/product/getProductById/${cart.product}`
+            );
+            const qty = res.data.avail_qty - cart.quantity;
+            if (res.data) {
+              const result = await axios.patch(
+                `/product/updateProduct/${cart.product}`,
+                { avail_qty: qty }
+              );
+              // console.log('**********qty');
+            }
+          });
+
+          const res = axios.delete(`/cart/deleteCart/${data.data._id}`);
           console.log(res);
           navigate("/home");
         },
@@ -155,9 +168,25 @@ const Cart = () => {
         webuser: webuser,
         onSuccess: (savedOrder) => {
           alert("Order placed successfully!");
-          const res = axios.delete(`/cart/deleteCart/${data.data._id}`)
+
+          // Quantity logic here
+          savedOrder.products.map(async (cart, index) => {
+            const res = await axios.get(
+              `/product/getProductById/${cart.product}`
+            );
+            const qty = res.data.avail_qty - cart.quantity;
+            if (res.data) {
+              const result = await axios.patch(
+                `/product/updateProduct/${cart.product}`,
+                { avail_qty: qty }
+              );
+              // console.log('**********qty');
+            }
+          });
+
+          const res = axios.delete(`/cart/deleteCart/${data.data._id}`);
           console.log(res);
-          
+
           navigate("/home");
         },
         onFailure: (err) => {
@@ -169,7 +198,7 @@ const Cart = () => {
       alert("Payment success but failed to save order.");
     }
   };
-  
+
   return (
     <>
       <Header />
@@ -212,7 +241,6 @@ const Cart = () => {
                         <tr>
                           {/* {cart._id} */}
                           <th>
-                            
                             {/* <img
                               src={axios.defaults.baseURL + cart?.thumbnail}
                               style={{ height: "2%", width: "50%" }}
@@ -266,7 +294,7 @@ const Cart = () => {
                   backgroundColor: "#471396",
                   borderRadius: "50px",
                 }}
-                  onClick={() => handlePaymentMethod()}
+                onClick={() => handlePaymentMethod()}
               >
                 Proceed To Pay
               </Button>
