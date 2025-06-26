@@ -63,7 +63,7 @@ const Profile = () => {
   return (
     <>
       <Header />
-      <Box sx={{ marginLeft: { xs: 0, sm: 4, lg: 14 }, marginTop: { xs: 2, sm: 0, lg: 5 }, alignContent: 'center' }}>
+      <Box sx={{ marginLeft: { xs:5, sm: 8, lg: 14 }, marginTop: { xs: 12, sm: 18, lg: 25 }, alignContent: 'center' }}>
         <Card sx={{ width: '80%', borderRadius: 5, boxShadow: 6, alignContent: 'center' }}>
           <CardContent>
             <Typography variant="h5" fontWeight={600} color="#177bad" sx={{ textAlign: 'center', marginTop: 2 }}>

@@ -27,6 +27,6 @@ router.get('/getProductById/:id',getProductById)
 router.get('/getProductByName/:name',getProductByName)
 router.get('/getProductByCategory/:name',getProductByCategory)
 router.get('/getProductByShop/:shop',getProductByShop)
-router.put('/updateProduct/:id',updateProduct)
+router.patch('/updateProduct/:id',updateProduct)
 router.delete('/deleteProduct/:id',deleteProduct)
 export default router

@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Box,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -28,7 +29,7 @@ import useFetch from "../hooks/useFetch";
 import axios from "axios";
 import { userInformation } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
-// import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -45,7 +46,6 @@ const Header = () => {
   const prod = useFetch("/product/getProduct");
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
   const [openUserDropdown, setOpenUserDropdown] = useState(false);
-  // console.log("web::", webuser);
   const navigate = useNavigate();
   const { cartCount, setCartCount } = useCart();
 
@@ -114,9 +114,9 @@ const Header = () => {
             <CategoryIcon sx={{ color: "#471396" }} />
           </ListItemIcon>
           <ListItemText className="menu-link" primary="Category" />
-          {/* {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />} */}
+          {openCategoryDropdown ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={openCategoryDropdown} timeout="auto" unmountOnExit>
+        <Collapse in={openCategoryDropdown} timeout="auto">
           <List component="div" disablePadding>
             {category.data?.map((cat) => (
               <ListItemButton
@@ -216,143 +216,146 @@ const Header = () => {
   return (
     <>
       <div className="container">
-        {/* <div className="header-wrapper" style={{ position: 'fixed', top: 0, zIndex: 1200 }}> */}
-        <AppBar style={{ height: "60px" }}>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              marginLeft: "3%",
-              padding: "1%",
-            }}
-          >
-            <h3 style={{ margin: 0 }}>Starbasket</h3>
-          </div>
+        <div style={{ height: "60px", position: "fixed", zIndex: 1300 }}>
+          <AppBar>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                padding: "0 2vw",
+                height: "70px", // must match AppBar height
+              }}
+            >
+              <h3 style={{ margin: 0 }}>Starbasket</h3>
 
-          <div className="menu-button">
-            <React.Fragment key={"right"}>
-              <Button onClick={toggleDrawer("right", true)}>
-                <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
-              </Button>
-              <Drawer
-                anchor="right"
-                open={menu["right"]}
-                onClose={toggleDrawer("right", false)}
-                sx={{ float: "right" }}
-              >
-                {list("right")}
-              </Drawer>
-            </React.Fragment>
-          </div>
+              {/* </div> */}
 
-          <div className="header-actions">
-            {webuser ? (
-              <>
-              <Link className="header" to={"/orders"}>
-                  <ShoppingBagOutlinedIcon /> Orders
-                </Link>
-                <Link className="header" to={"/cart"}>
-                  <ShoppingBagOutlinedIcon /> Bag <sup>{cartCount}</sup>
-                </Link>
-                <li className="header dropdown">
-                  {/* <Link className='header' >{webuser.name}</Link> */}
-                  <h6 className="header">
-                    <AccountCircleIcon />
-                    {webuser?.mob_no}
-                  </h6>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link to={`/profile`}>
-                        <PermIdentityIcon />
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to={`/signOut`}>
-                        <ExitToAppIcon />
-                        SignOut
-                      </Link>
-                    </li>
-                  </ul>
-                </li>
-              </>
-            ) : (
-              <>
-              <Link className="header" to={"/signup"}>
-                  <ShoppingBagOutlinedIcon /> Orders
-                </Link>
-                <Link className="header" to={"/"}>
-                  <ShoppingBagOutlinedIcon />
-                  Cart
-                </Link>
-                {/* <Link className='header' to={'/login'}>Login</Link> */}
-                <Link className="header" to={"/signup"}>
-                  SignUp
-                </Link>
-              </>
-            )}
-          </div>
-        </AppBar>
-
-        <div
-          className="menu-button"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: "7%",
-          }}
-        >
-          <Link className="header-base" to={"/"}>
-            Home
-          </Link>
-          <Link className="header-base" to={"/product"}>
-            Products
-          </Link>
-          {/* <Link className='header-base' to={'/category'}>Category</Link> */}
-          <li className="header-base dropdown">
-            <h5 className="header-base">Category</h5>
-            <ul className="dropdown-menu">
-              {category.data?.map((category) => (
-                <li key={category.categoryName}>
-                  <Link to={`/category/${category.categoryName}`}>
-                    {category.categoryName}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <Link className="header-base" to={"/"}>
-            About Us
-          </Link>
-          <Link className="header-base" to={"/contactus"}>
-            Contact Us
-          </Link>
-          <div className="search-style">
-            <div className="input-group">
-              <div className="form-outline" data-mdb-input-init>
-                <input
-                  type="search"
-                  className="form-control"
-                  placeholder="Search"
-                  onChange={handleChange}
-                />
-                {/* <label className="form-label" for="form1"></label> */}
+              <div className="menu-button">
+                <React.Fragment key={"right"}>
+                  <Button onClick={toggleDrawer("right", true)}>
+                    <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
+                  </Button>
+                  <Drawer
+                    anchor="right"
+                    open={menu["right"]}
+                    onClose={toggleDrawer("right", false)}
+                    sx={{ float: "right" }}
+                  >
+                    {list("right")}
+                  </Drawer>
+                </React.Fragment>
               </div>
-              <Button
-                type="button"
-                style={{ backgroundColor: "#471396", marginLeft: "5px" }}
-                onClick={() => searchProduct()}
-              >
-                <SearchIcon style={{ color: "white" }}></SearchIcon>
-              </Button>
+
+              <Box className="header-actions">
+                {webuser ? (
+                  <>
+                    <Link className="header" to={"/orders"}>
+                      <ShoppingBagOutlinedIcon /> Orders
+                    </Link>
+                    <Link className="header" to={"/cart"}>
+                      <ShoppingBagOutlinedIcon /> cart <sup>{cartCount}</sup>
+                    </Link>
+                    <li className="header dropdown">
+                      {/* <Link className='header' >{webuser.name}</Link> */}
+                      <h6 className="header">
+                        <AccountCircleIcon />
+                        {webuser?.mob_no}
+                      </h6>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <Link to={`/profile`}>
+                            <PermIdentityIcon />
+                            Profile
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to={`/signOut`}>
+                            <ExitToAppIcon />
+                            SignOut
+                          </Link>
+                        </li>
+                      </ul>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <Link className="header" to={"/signup"}>
+                      Orders
+                    </Link>
+                    <Link className="header" to={"/signup"}>
+                      <ShoppingBagOutlinedIcon />
+                      Cart
+                    </Link>
+                    {/* <Link className='header' to={'/login'}>Login</Link> */}
+                    <Link className="header" to={"/signup"}>
+                      <ExitToAppOutlinedIcon />
+                      SignUp
+                    </Link>
+                  </>
+                )}
+              </Box>
+            </Box>
+          </AppBar>
+        </div>
+        <div className="sticky-menu menu-button ">
+          <Box className="sticky-menu-box">
+            <Link className="header-base" to={"/"}>
+              Home
+            </Link>
+            <Link className="header-base" to={"/product"}>
+              Products
+            </Link>
+            {/* <Link className='header-base' to={'/category'}>Category</Link> */}
+            <li className="header-base dropdown">
+              <h5 className="header-base">Category</h5>
+              <ul className="dropdown-menu">
+                {category.data?.map((category) => (
+                  // <li key={category.mainCategory}>
+                  //   <Link to={`/category/${category.mainCategory}`}>
+                  //     {category.mainCategory}
+                  //   </Link>
+                  // </li>
+                  <li key={category.categoryName}>
+                    <Link to={`/category/${category.categoryName}`}>
+                      {category.categoryName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+
+            <Link className="header-base" to={"/"}>
+              About Us
+            </Link>
+            <Link className="header-base" to={"/contactus"}>
+              Contact Us
+            </Link>
+            <div className="search-style">
+              <div className="input-group">
+                <div className="form-outline" data-mdb-input-init>
+                  <input
+                    type="search"
+                    className="form-control"
+                    placeholder="Search"
+                    onChange={handleChange}
+                  />
+                  {/* <label className="form-label" for="form1"></label> */}
+                </div>
+                <Button
+                  type="button"
+                  style={{ backgroundColor: "#471396", marginLeft: "5px" }}
+                  onClick={() => searchProduct()}
+                >
+                  <SearchIcon style={{ color: "white" }}></SearchIcon>
+                </Button>
+              </div>
             </div>
-          </div>
+          </Box>
         </div>
 
-        {/* </div> */}
+        {/* </Box> */}
       </div>
     </>
   );

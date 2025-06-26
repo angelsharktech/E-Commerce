@@ -9,13 +9,39 @@ import axios from "axios";
 const Order = () => {
   const { webuser } = useContext(userInformation);
   const orders = useFetch(`/order/getOrderById/${webuser?._id}`);
+
   const cancelOrder = async (id) => {
     try {
       const res = await axios.put(`/order/updateOrderStatus/${id}`, {
         orderStatus: "Cancelled",
       });
-      // console.log("order status::", res);
+
       orders.refetch(`/order/getOrderById/${webuser?._id}`);
+      if (res) {
+        const order = await axios.get(`/order/getOrderByOrderId/${id}`);
+        console.log("cancel order:", order);
+
+        order.data?.map(async (cart, index) => {
+          console.log("cancel cart;;", cart);
+          cart?.products?.map(async (item, index) => {
+            console.log("item");
+
+            const res = await axios.get(
+              `/product/getProductById/${item.product}`
+            );
+            console.log("*****", res);
+            const qty = res.data.avail_qty + item.quantity;
+            console.log("cancel qty::", qty);
+            if (res.data) {
+              const result = await axios.patch(
+                `/product/updateProduct/${item.product}`,
+                { avail_qty: qty }
+              );
+              // console.log('**********qty');
+            }
+          });
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -32,88 +58,7 @@ const Order = () => {
   return (
     <>
       <Header />
-      {/* <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "4%",
-          //   width:'90%'
-        }}
-      >
-        {!orders.data ? (
-          <>
-            <h3>No Orders</h3>
-          </>
-        ) : (
-          <>
-            <table border="1" cellPadding="10" cellSpacing="0">
-              <thead>
-                <tr>
-                  <th>Order Date</th>
-                  <th>Payment</th>
-                  <th>Shipping Address</th>
-                  <th>Total Amount</th>
-                  <th>Products</th>
-                  <th>Order Status</th>
-                  <th></th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {orders.data.map((order) => (
-                  <tr key={order._id}>
-                    <td>{moment(order.createdAt).format("DD/MM/YYYY")}</td>
-                    <td>
-                      {order.paymentMethod}
-                      <br />
-                      {order.paymentStatus}
-                    </td>
-
-                    <td>
-                      {order.shippingInfo.name} <br />
-                      {order.shippingInfo.address}, {order.shippingInfo.pincode}
-                      <br />
-                      Mob: {order.shippingInfo.mob_no}
-                    </td>
-
-                    <td>₹{order.totalAmount}</td>
-                    <td>
-                      <ul style={{ listStyle: "none" }}>
-                        {order.products.map((p) => (
-                          <li key={p._id}>
-                            {p.product?.title || "N/A"} <br />
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                    <td>
-                      <span
-                        style={{
-                          color:
-                            order.orderStatus === "Cancelled" ? "red" : "green",
-                        }}
-                      >
-                        <b>{order.orderStatus}</b>
-                      </span>
-                    </td>
-                    <td>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        onClick={() => cancelOrder(order._id)}
-                      >
-                        Cancel Order
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </>
-        )}
-      </div> */}
       <div
         style={{
           display: "flex",
@@ -121,7 +66,7 @@ const Order = () => {
           alignItems: "center",
           width: "50%",
           //   justifyContent: "center",
-          margin: "40px auto",
+          margin: "12% auto",
         }}
       >
         {!orders.data ? (
@@ -218,7 +163,7 @@ const Order = () => {
                       <td style={{ width: columnWidths[6] }}>
                         {order.orderStatus === "Cancelled" ? (
                           <Button variant="outlined" disabled>
-                             Cancel Order
+                            Cancel Order
                           </Button>
                         ) : (
                           <Button

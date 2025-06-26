@@ -35,7 +35,7 @@ const ContactUs = () => {
   return (
     <>
       <Header />
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box className="main-content" sx={{ display: "flex", justifyContent: "center" }}>
         <Stack direction={{ xs: "column", sm: "row" }}>
           <Stack sx={{ width: "100%", marginTop: "2%", pr: { sm: 5, xs: 0 } }}>
             <img src="/teddy-bear-toys.jpg" style={{ height: "100%" }} />

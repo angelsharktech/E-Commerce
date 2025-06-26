@@ -140,7 +140,7 @@ const ProductDetail = () => {
       style={{
         height: "350px",
         width: "80%",
-        objectFit: "cover",
+        objectFit: "fill",
         display: "block",
         margin: "20px auto",
         borderRadius: "10px"
@@ -150,9 +150,9 @@ const ProductDetail = () => {
       <img 
       // className="item"
         style={{
-          height: "350px",
+          height: "100%",
           width: "100%",
-          objectFit: "cover",
+          objectFit: "fill",
           // display: "block",
           // margin: "20px auto",
           borderRadius: "10px"

@@ -26,14 +26,14 @@
   color: #ff4e50;
   font-weight: bold;
   margin: 6px 0;
-  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+  font-family: "Baloo Bhai 2", cursive, sans-serif;
 }
 h1 {
   font-size: 2.5rem;
   /* color: #d844fd; */
   margin-bottom: 20px;
   letter-spacing: 2px;
-  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+  font-family: "Baloo Bhai 2", cursive, sans-serif;
 }
 .box:hover {
   transform: translateY(-8px) scale(1.04) rotate(-2deg);
@@ -44,29 +44,27 @@ h1 {
   box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
   background: linear-gradient(90deg, #471396 0%, #f7c8d4 50%, #471396 100%);
 }
-.product-style {
-  text-align: center;
-  margin-top: 2%;
-  margin-left: 3%;
-}
+
 .price-label {
   color: #888;
   font-size: 1rem;
   text-decoration: line-through;
   margin-right: 6px;
 }
-body, html {
+body,
+html {
   overflow-x: hidden;
+  margin-left: 15px;
+  margin-right: 15px;
 }
-.selling_label{
-color: #43a047;
- font-weight: bold;
+.selling_label {
+  color: #43a047;
+  font-weight: bold;
   font-size: 0.9rem;
 }
 .slick-slider {
   overflow: visible !important;
 }
-
 
 /* ===== Tablet Styles: 646px – 1149px ===== */
 @media (min-width: 646px) and (max-width: 1149px) {
@@ -74,70 +72,79 @@ color: #43a047;
     height: 500px;
     margin-top: 1%;
   }
-
- .img-style {
-    width: 100px;
-  max-width: 200px;
-   height: 100px;
-  object-fit: contain;
-  border-radius: 16px;
-  background: #fff;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  border: 3px solid #471396;
-  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
-}
-
-.box {
-  background: #fffbe7;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
-  /* margin: 8px; */
-  /* padding: 18px 10px 24px 10px; */
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-   width: 30%; /* 3 cards with gap (~90%) */
-    height: 120px;
-}
-  .discount-badge {
- background: #471396;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 12px;
-  padding: 2px 10px;
-  margin-left: 8px;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
-}
-  .category-box {
-  min-width: 120px;
-  height: 150px;
-  width: 150px;
-  background: #471396;
-  border-radius: 270px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
-  margin: 8px auto;
-  padding: 18px 10px 24px 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cat-title {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: bold;
-  margin: 6px 0;
-  font-family: 'Baloo Bhai 2', cursive, sans-serif;
+ .main-content {
+    margin-left: 3%;
+    text-align: center;
+    margin-top: 22%;
+    width: 100%;
+  }
+  .product-style {
   text-align: center;
-  margin-top: 35px;
+  margin-top: 19%;
+  margin-left: 3%;
 }
-}
+  .img-style {
+    width: 100px;
+    max-width: 200px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: #fff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 3px solid #471396;
+    box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
+  }
 
+  .box {
+    background: #fffbe7;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+    /* margin: 8px; */
+    /* padding: 18px 10px 24px 10px; */
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%; /* 3 cards with gap (~90%) */
+    height: 120px;
+  }
+  .discount-badge {
+    background: #471396;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-left: 8px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
+  }
+  .category-box {
+    min-width: 120px;
+    height: 150px;
+    width: 150px;
+    background: #471396;
+    border-radius: 270px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
+    margin: 8px auto;
+    padding: 18px 10px 24px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cat-title {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    margin: 6px 0;
+    font-family: "Baloo Bhai 2", cursive, sans-serif;
+    text-align: center;
+    margin-top: 35px;
+  }
+}
 
 /* ===== Mobile Styles: 100px – 645px ===== */
 @media (min-width: 100px) and (max-width: 645px) {
@@ -145,85 +152,90 @@ color: #43a047;
     height: 200px;
     margin-top: 25%;
   }
-
-.img-style {
+  .main-content {
+    margin-left: 3%;
+    text-align: center;
+    margin-top: 12%;
+    width: 100%;
+  }
+  .product-style {
+  text-align: center;
+  margin-top: 15%;
+  margin-left: 3%;
+}
+  .img-style {
     width: 80px;
-  max-width: 180px;
-   height: 80px;
-  object-fit: contain;
-  border-radius: 16px;
-  background: #fff;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  border: 3px solid #471396;
-  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
-}
+    max-width: 180px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: #fff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 3px solid #471396;
+    box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
+  }
 
-.box {
-  background: #fffbe7;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
-  /* margin: 8px; */
-  /* padding: 18px 10px 24px 10px; */
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-   width: 45%; /* 3 cards with gap (~90%) */
+  .box {
+    background: #fffbe7;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+    /* margin: 8px; */
+    /* padding: 18px 10px 24px 10px; */
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%; /* 3 cards with gap (~90%) */
     height: 120px;
-}
-
+  }
 
   .discount-badge {
- background: #471396;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 12px;
-  padding: 2px 10px;
-  margin-left: 4px;
-  font-size: 0.8rem;
-  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
-}
-
-  .product-style {
-    margin-top: 22%;
-    margin-left: 3%;
+    background: #471396;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-left: 4px;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
   }
-  .price-label {
-  color: #888;
-  font-size: 0.7rem;
-  text-decoration: line-through;
-  margin-right: 6px;
-}
-.selling_label{
-color: #43a047;
- font-weight: bold;
-  font-size: 0.9rem;
-}
-.category-box {
-  min-width: 120px;
-  height: 120px;
-  width: 100px;
-  background: #471396;
-  border-radius: 220px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
-  margin: 8px auto;
-  padding: 18px 10px 24px 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.cat-title {
-  font-size: 0.9rem;
-  color: #fff;
-  /* font-weight: bold; */
-  font-family: 'Baloo Bhai 2', cursive, sans-serif;
-  margin-top: 20px;
-}
-}
 
+ 
+  .price-label {
+    color: #888;
+    font-size: 0.7rem;
+    text-decoration: line-through;
+    margin-right: 6px;
+  }
+  .selling_label {
+    color: #43a047;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  .category-box {
+    min-width: 120px;
+    height: 120px;
+    width: 100px;
+    background: #471396;
+    border-radius: 220px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
+    margin: 8px auto;
+    padding: 18px 10px 24px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cat-title {
+    font-size: 0.9rem;
+    color: #fff;
+    /* font-weight: bold; */
+    font-family: "Baloo Bhai 2", cursive, sans-serif;
+    margin-top: 20px;
+  }
+}
 
 /* ===== Desktop Styles: ≥1150px ===== */
 @media (min-width: 1150px) {
@@ -231,71 +243,84 @@ color: #43a047;
     height: 500px;
     margin-top: 1%;
   }
- .title {
+  .main-content {
+    margin-left: 3%;
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+  }
+  .product-style {
+    
+  text-align: center;
+  margin-top: 10%;
+  margin-left: 3%;
+}
+  .title {
     font-size: 1.3rem;
   }
- .img-style {
-  width: 100%;
-  max-width: 180px;
-  height: 180px;
-  object-fit: contain;
-  border-radius: 16px;
-  background: #fff;
-  margin-bottom: 12px;
-  border: 3px solid #471396;
-  box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
-}
+  .img-style {
+    width: 100%;
+    max-width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 16px;
+    background: #fff;
+    margin-bottom: 12px;
+    border: 3px solid #471396;
+    box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
+  }
 
-.box {
-  background: #fffbe7;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
-  margin: 8px;
-  padding: 18px 10px 24px 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .box {
+    background: #fffbe7;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
+    margin: 8px;
+    padding: 18px 10px 24px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 15%; /* 5 cards with gap (~90%) */
+  }
 
- .discount-badge {
- background: #471396;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 12px;
-  padding: 2px 10px;
-  margin-left: 8px;
-  font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
+  .discount-badge {
+    background: #471396;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 2px 10px;
+    margin-left: 8px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(255, 78, 80, 0.08);
+  }
+  .selling_label {
+    color: #43a047;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .category-box {
+    min-width: 120px;
+    height: 150px;
+    width: 150px;
+    background: #471396;
+    border-radius: 270px;
+    box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
+    /* margin: 8px auto; */
+    padding: 18px 10px 24px 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cat-title {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    margin: 6px 0;
+    font-family: "Baloo Bhai 2", cursive, sans-serif;
+    text-align: center;
+    margin-top: 35px;
+  }
 }
-  .selling_label{
-color: #43a047;
- font-weight: bold;
-  font-size: 1.1rem;
-}
-.category-box {
-  min-width: 120px;
-  height: 150px;
-  width: 150px;
-  background: #471396;
-  border-radius: 270px;
-  box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12), 0 2px 8px #eee;
-  /* margin: 8px auto; */
-  padding: 18px 10px 24px 10px;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.cat-title {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: bold;
-  margin: 6px 0;
-  font-family: 'Baloo Bhai 2', cursive, sans-serif;
-  text-align: center;
-  margin-top: 35px;
-}
-}
-

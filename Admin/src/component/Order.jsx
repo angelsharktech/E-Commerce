@@ -17,7 +17,7 @@ import axios from "axios";
 
 const Order = () => {
   const orders = useFetch("/order/getOrder");
-  const statusOptions = ['Processing', 'Shipped', 'Delivered', 'Cancelled'];
+  const statusOptions = ['Accepted' ,'Shipped', 'Delivered', 'Cancelled'];
   //   console.log("orders::", orders);
 const rows = orders.data?.map((order) => ({
   id: order._id,

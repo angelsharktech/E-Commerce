@@ -21,6 +21,8 @@ export const addProduct = async (req, res, next) => {
       actual_price: req.body.actual_price,
       selling_price: req.body.selling_price,
       avail_qty: req.body.avail_qty,
+      brand: req.body.brand,
+      age_group: req.body.age_group,
       discount: req.body.discount,
       thumbnail: "/gallery/" + singleFile.filename,
       images: images,

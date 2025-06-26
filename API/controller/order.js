@@ -64,3 +64,13 @@ export const updateOrderStatus =  async (req, res) => {
     console.log(error)
   }
 };
+export const getOrderByOrderId = async (req, res, next) => {
+  try {    
+    console.log();
+    
+    const result = await order.find({_id: req.params.oid});
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get order" });
+  }
+};

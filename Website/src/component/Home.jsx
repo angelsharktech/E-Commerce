@@ -39,15 +39,9 @@ const itemsPerPage = 70
 ]
   return (
     <>
+      <div container>
       <Header />
-       <div
-        style={{
-          // marginLeft: "2%",
-          textAlign: "center",
-          marginTop: "2%",
-          width: "100%",
-        }}
-      >
+       <div className="main-content">
         <h1>Category</h1>
         <Slider
          initialSlide={0}
@@ -61,8 +55,9 @@ const itemsPerPage = 70
           arrows={true}
           responsive={[
             { breakpoint: 1200, settings: { slidesToShow: 8 } },
-            { breakpoint: 900, settings: { slidesToShow: 5 } },
+            { breakpoint: 900, settings: { slidesToShow: 4 } },
             { breakpoint: 600, settings: { slidesToShow: 3 } },
+            { breakpoint: 400, settings: { slidesToShow: 2 } },
           ]}
         >
           {category.data?.map((cat) => (
@@ -83,7 +78,7 @@ const itemsPerPage = 70
         </Slider>
       </div>
      
-      <div style={{ marginLeft: "2% ", textAlign: "center", marginTop: "2%" }}>
+      <div style={{ marginLeft: "4% ", textAlign: "center", marginTop: "2%" }}>
         <h1>Products</h1>
 
         <Grid container spacing={3} sx={{ marginTop: "2%" }}>
@@ -129,7 +124,6 @@ const itemsPerPage = 70
       </div>
 
 
-        {/* carousel Slider */}
  {/* <Box className="carousel-container" sx={{ maxWidth: '100%', overflow: 'hidden' }}>
       <Carousel
         autoPlay={true} 
@@ -152,6 +146,7 @@ const itemsPerPage = 70
     </Box> */}
      
       <NewFooter />
+    </div>
     </>
   );
 };

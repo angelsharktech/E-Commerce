@@ -28,14 +28,25 @@ const Product = () => {
     description: "",
     actual_price: "",
     selling_price: "",
-    avail_qty: '',
+    avail_qty: "",
+    brand: "",
+    age_group: "",
     productBy: "",
     // mainCategory: "",
     // subCategory: "",
-    category:"",
+    category: "",
     thumbnail: "",
     images: [],
   });
+
+  const age_groups = [
+    { value: "0 - 1 Yr", label: "Up to 12 months" },
+    { value: "1 - 2 Yr", label: "1 - 2 years" },
+    { value: "3 - 4 Yr", label: "3 - 4 years" },
+    { value: "5 - 7 Yr", label: "5 - 7 years" },
+    { value: "8 - 11 Yr", label: "8 - 11 years" },
+    { value: "12+ Yr", label: "12 years & more" },
+  ];
 
   // useEffect(() => {
   //   const matched = category?.data?.find(
@@ -64,7 +75,9 @@ const Product = () => {
       formData.append("actual_price", data.actual_price);
       formData.append("selling_price", data.selling_price);
       formData.append("discount", data.discount);
-      formData.append('avail_qty', data.avail_qty)
+      formData.append("avail_qty", data.avail_qty);
+      formData.append("brand", data.brand);
+      formData.append("age_group", data.age_group);
       formData.append("thumbnail", data.thumbnail);
       data.images?.forEach((images) => {
         formData.append("images", images);
@@ -84,9 +97,11 @@ const Product = () => {
           description: "",
           actual_price: "",
           selling_price: "",
-          thumbnail : '',
-          category:'',
-          avail_qty: '',
+          thumbnail: "",
+          category: "",
+          avail_qty: "",
+          brand: "",
+          age_group: "",
         });
       }
     } catch (error) {
@@ -185,9 +200,49 @@ const Product = () => {
                 <Autocomplete
                   sx={{ minWidth: 160 }}
                   options={category.data || []}
-                  getOptionLabel={(option) => option?.categoryName || ''}
-                  onChange={(e, newValue) => setData({ ...data, category: newValue?.categoryName || '' })}
-                  renderInput={(params) => <TextField {...params} name='category' label="Category" size="small" />}
+                  getOptionLabel={(option) => option?.categoryName || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, category: newValue?.categoryName || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="category"
+                      label="Category"
+                      size="small"
+                    />
+                  )}
+                />
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={age_groups || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({
+                      ...data,
+                      age_group: newValue?.categoryName || "",
+                    })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="age_group"
+                      label="Age Group"
+                      size="small"
+                    />
+                  )}
+                />
+              </Stack>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                <TextField
+                  variant="outlined"
+                  label="Brand"
+                  name={"brand"}
+                  value={data.brand}
+                  onChange={(e) => setData({ ...data, brand: e.target.value })}
+                  size="small"
+                  // fullWidth
+                  style={{ width: "330px" }}
                 />
                 <TextField
                   variant="outlined"
@@ -199,10 +254,8 @@ const Product = () => {
                     setData({ ...data, avail_qty: e.target.value })
                   }
                   size="small"
-                  fullWidth
+                  style={{ width: "330px" }}
                 />
-              </Stack>
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
                 <TextField
                   variant="outlined"
                   label="Description"
