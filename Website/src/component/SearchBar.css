@@ -41,6 +41,7 @@
   padding: 0;
   list-style: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   color:#471396
 }
 
 .suggestion-item {
@@ -51,7 +52,7 @@
 }
 
 .suggestion-item:hover {
-  background: #e3ddec;
-    color: #471396;
+  background: #471396;
+    color: #e3ddec;
     padding: 2%;
 }
