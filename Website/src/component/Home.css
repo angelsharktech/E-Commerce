@@ -82,6 +82,9 @@ html {
   text-align: center;
   margin-top: 19%;
   margin-left: 3%;
+  flex: 1;
+  padding: 1rem;
+  min-height: 500px;
 }
   .img-style {
     width: 100px;
@@ -108,7 +111,7 @@ html {
     flex-direction: column;
     align-items: center;
     width: 30%; /* 3 cards with gap (~90%) */
-    height: 120px;
+    height: 1%;
   }
   .discount-badge {
     background: #471396;
@@ -148,6 +151,16 @@ html {
 
 /* ===== Mobile Styles: 100px – 645px ===== */
 @media (min-width: 100px) and (max-width: 645px) {
+      .mobile-menu{
+        margin-top: 15%;
+    display: flex;
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    justify-content: space-evenly;
+    /* text-align: center; */
+    /* gap: 50px; */
+}
   .carousel-container {
     height: 200px;
     margin-top: 25%;
@@ -160,7 +173,7 @@ html {
   }
   .product-style {
   text-align: center;
-  margin-top: 15%;
+  margin-top: 20%;
   margin-left: 3%;
 }
   .img-style {
@@ -243,17 +256,15 @@ html {
     height: 500px;
     margin-top: 1%;
   }
-  .main-content {
-    margin-left: 3%;
-    text-align: center;
-    margin-top: 10%;
-    width: 100%;
-  }
+  
   .product-style {
     
   text-align: center;
-  margin-top: 10%;
+  margin-top: 9%;
   margin-left: 3%;
+  flex: 1;
+  padding: 1rem;
+  min-height: 500px;
 }
   .title {
     font-size: 1.3rem;
@@ -269,7 +280,12 @@ html {
     border: 3px solid #471396;
     box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
   }
-
+.main-content {
+    margin-left: 3%;
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+  }
   .box {
     background: #fffbe7;
     border-radius: 18px;

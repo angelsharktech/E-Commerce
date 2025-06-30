@@ -80,7 +80,7 @@ const SearchProduct = () => {
   }, [filters]);
 
   return (
-    <>
+     <>
       <Header />
       <Stack direction={"row"}>
         <SideBar filters={filters} onFilterChange={updateFilters} />
