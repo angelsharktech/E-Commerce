@@ -8,6 +8,7 @@ import axios from "axios";
 import Footer from "../pages/Footer";
 import NewFooter from "../pages/NewFooter";
 import SideBar from "./SideBar";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const Product = () => {
   // const { data } = useFetch('/product/getProduct')
