@@ -47,7 +47,12 @@
     margin-left: 2px;
   }
   .search-style {
-    display: none;
+    /* display: none; */
+      margin-right: 15%;
+    display: flex;
+    align-items: start;
+    /* justify-content: center; */
+    width: 40%;
   }
   .dropdown {
     position: relative;
@@ -243,10 +248,11 @@
   }
 
   .search-style {
-    margin-top: 8%;
-    margin-left: 18px;
-    /* display: flex; */
-    /* align-items: center; */
+       margin-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
   }
 
   .form-control {
@@ -429,9 +435,11 @@
   }
 
   .search-style {
-    margin-left: 18px;
+   margin-left: 10%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 50%;
   }
 
   .form-control {

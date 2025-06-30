@@ -140,9 +140,11 @@ const Header = () => {
         {webuser ? (
           <>
             <ListItemButton component={Link} to="/orders">
-          <ListItemIcon><LoginIcon  sx={{color:'#471396'}}/></ListItemIcon>
-            <ListItemText  className='menu-link' primary="Orders" />
-          </ListItemButton>
+              <ListItemIcon>
+                <LoginIcon sx={{ color: "#471396" }} />
+              </ListItemIcon>
+              <ListItemText className="menu-link" primary="Orders" />
+            </ListItemButton>
             <ListItemButton component={Link} to="/cart">
               <ListItemIcon>
                 <ShoppingBagOutlinedIcon sx={{ color: "#471396" }} />
@@ -186,9 +188,11 @@ const Header = () => {
               <ListItemText className="menu-link" primary="Cart" />
             </ListItemButton>
             <ListItemButton component={Link} to="/signup">
-          <ListItemIcon><LoginIcon  sx={{color:'#471396'}}/></ListItemIcon>
-            <ListItemText  className='menu-link' primary="Orders" />
-          </ListItemButton>
+              <ListItemIcon>
+                <LoginIcon sx={{ color: "#471396" }} />
+              </ListItemIcon>
+              <ListItemText className="menu-link" primary="Orders" />
+            </ListItemButton>
             <ListItemButton component={Link} to="/signup">
               <ListItemIcon>
                 <PersonAddAltIcon sx={{ color: "#471396" }} />
@@ -219,15 +223,20 @@ const Header = () => {
               <h3 style={{ margin: 0 }}>Starbasket</h3>
 
               {/* </div> */}
+              <div className="search-style">
+                <div className="input-group">
+                  <SearchBar />
+                </div>
+              </div>
 
               <div className="menu-button">
                 <React.Fragment key={"right"}>
-                  <div className="search-and-menu">
-                    <SearchBar />
-                    <Button onClick={toggleDrawer("right", true)}>
+                  {/* <div className="search-and-menu"> */}
+                    {/* <SearchBar /> */}
+                    <Button onClick={toggleDrawer("right", true)} >
                       <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
                     </Button>
-                  </div>
+                  {/* </div> */}
 
                   <Drawer
                     anchor="right"
@@ -324,11 +333,11 @@ const Header = () => {
             <Link className="header-base" to={"/contactus"}>
               Contact Us
             </Link>
-            <div className="search-style">
+            {/* <div className="search-style">
               <div className="input-group">
                 <SearchBar />
               </div>
-            </div>
+            </div> */}
           </Box>
         </div>
 

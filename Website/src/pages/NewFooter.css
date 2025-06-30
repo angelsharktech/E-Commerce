@@ -1,12 +1,10 @@
+/* Base Footer Styles */
 .footer {
-  /* background: #cae7c9; */
-  /* background: #cab3eb; */
   background: #172337;
-  /* color: #471396; */
   color: #fff;
   font-size: 14px;
-  /* margin-top: 80px; */
   padding-top: 32px;
+  height: fit-content !important;
 }
 
 .footer-main {
@@ -16,6 +14,7 @@
   max-width: 1200px;
   margin: auto;
   padding: 0 32px;
+  height: fit-content;
 }
 
 .footer-section {
@@ -25,8 +24,6 @@
 }
 
 .footer-section h4 {
-  /* color: #2D4F2B; */
-  /* color: #471396; */
   color: #878787;
   font-size: 13px;
   margin-bottom: 12px;
@@ -63,4 +60,61 @@
   color: #b0b0b0;
   font-size: 13px;
   margin-top: 16px;
+}
+
+/* 💻 Desktop: ≥1150px */
+@media (min-width: 1150px) {
+  .footer-main {
+    flex-direction: row;
+    padding: 0 32px;
+  }
+
+  .footer-section {
+    min-width: 180px;
+    flex: 1 1 180px;
+    margin-bottom: 24px;
+  }
+}
+
+/* 📱 Tablet: 646px–1149px */
+@media (min-width: 646px) and (max-width: 1149px) {
+  .footer-main {
+    flex-wrap: wrap;
+    padding: 0 16px;
+  }
+
+  .footer-section {
+    min-width: 140px;
+    flex: 1 1 140px;
+  }
+}
+
+/* 📱 Mobile: 100px–645px */
+@media (min-width: 100px) and (max-width: 645px) {
+
+  .footer-main {
+     flex-wrap: wrap;
+     flex-direction: row !important;
+    padding: 0 16px;
+  }
+
+  .footer-section {
+    min-width: 100%;
+    flex: 1 1 100%;
+    margin-bottom: 16px;
+  }
+
+  .footer-section h4 {
+    font-size: 15px;
+  }
+
+  .footer-section a,
+  .footer-section p {
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    padding: 12px 0;
+  }
 }
