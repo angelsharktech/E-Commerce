@@ -89,7 +89,7 @@ export const getProductByShop = async(req,res,next) =>{
 }
 export const getProductByCategory = async(req,res,next) =>{
   try {
-    const result = await product.find({category: { $regex: `^${req.params.name}$`, $options: 'i' }})   //IGNORE CASE SENSITIVITY
+    const result = await product.find({category: { $regex: `.*${req.params.name}.*`, $options: 'i' }})   //IGNORE CASE SENSITIVITY
     // const result = await product.find({mainCategory: { $regex: `^${req.params.name}$`, $options: 'i' }})   //IGNORE CASE SENSITIVITY
     res.status(200).json(result)
   } catch (error) {
@@ -116,9 +116,78 @@ export const getProductByAllCategory = async(req,res,next) =>{
 }
 export const getProductByName = async(req,res,next) =>{
   try {   
-    const result = await product.find({title :{ $regex: `^${req.params.name}$`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
+    const result = await product.find({title :{ $regex: `.*${req.params.name}.*`, $options: 'i' }})  //IGNORE CASE SENSITIVITY
     res.status(200).json(result)
   } catch (error) {
     console.log(error); 
   }
 } 
+export const getProductSuggestions = async (req, res) => {
+  try {
+    const query = req.query.q || '';
+    const regex = new RegExp(query, 'i');
+    const resultProd = await product.find(
+      { title: { $regex: regex } },
+      { title: 1 } // only fetch title to keep it light
+    ).limit(10); // limit to top 10 suggestions
+
+    const resultCat = await product.find(
+      { category: { $regex: regex } },
+      { category: 1, title: 1 } // return title also for UI
+    ).limit(10);
+
+    // Merge and deduplicate by _id
+    const mergedResults = [...resultProd, ...resultCat];
+    const uniqueResults = Array.from(
+      new Map(mergedResults.map(item => [item._id.toString(), item])).values()
+    );
+
+    res.status(200).json(uniqueResults);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch suggestions' });
+  }
+};
+export const filter= async(req,res,next) =>{
+    try {
+      
+    const { ageGroups, brands, categories, priceMin, priceMax,discount } = req.query;
+
+    const query = {};
+
+    if (ageGroups) {
+      const ages = Array.isArray(ageGroups) ? ageGroups : [ageGroups];
+      query.age_group = { $in: ages };
+    }
+
+    if (brands) {
+      const brandList = Array.isArray(brands) ? brands : [brands];
+      query.brand = { $in: brandList };
+    }
+
+    if (categories) {
+      const catList = Array.isArray(categories) ? categories : [categories];
+      query.category = { $in: catList };
+    }
+    if (discount) {
+  const discList = Array.isArray(discount) ? discount : [discount];
+  const minDiscount = Math.min(...discList.map(Number).filter(n => !isNaN(n)));
+  
+  if (!isNaN(minDiscount)) {
+    query.discount = { $gte: minDiscount };
+  }
+}
+
+    if (priceMin || priceMax) {
+      query.selling_price = {};
+      if (priceMin) query.selling_price.$gte = parseInt(priceMin);
+      if (priceMax) query.selling_price.$lte = parseInt(priceMax);
+    }
+    
+    const products = await product.find(query);
+    res.json(products);
+  } catch (err) {
+    console.error('Filter API error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+}

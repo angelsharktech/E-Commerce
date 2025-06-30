@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
 import "./Header.css";
 import { MenuOpen } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -37,16 +36,14 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import SearchBar from "../component/SearchBar";
 
 const Header = () => {
   const { webuser } = useContext(userInformation);
   const [menu, setMenu] = useState({ right: false });
-  const [query, setQuery] = useState("");
   const category = useFetch("/category/getCategory");
-  const prod = useFetch("/product/getProduct");
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
   const [openUserDropdown, setOpenUserDropdown] = useState(false);
-  const navigate = useNavigate();
   const { cartCount, setCartCount } = useCart();
 
   useEffect(() => {
@@ -58,19 +55,6 @@ const Header = () => {
     };
     fetchCount();
   }, [webuser?._id]);
-
-  const handleChange = (e) => {
-    try {
-      setQuery(e.target.value);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const searchProduct = async () => {
-    try {
-      navigate(`/searchProduct/${query}`);
-    } catch (error) {}
-  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -155,6 +139,10 @@ const Header = () => {
         {/* Auth Section */}
         {webuser ? (
           <>
+            <ListItemButton component={Link} to="/orders">
+          <ListItemIcon><LoginIcon  sx={{color:'#471396'}}/></ListItemIcon>
+            <ListItemText  className='menu-link' primary="Orders" />
+          </ListItemButton>
             <ListItemButton component={Link} to="/cart">
               <ListItemIcon>
                 <ShoppingBagOutlinedIcon sx={{ color: "#471396" }} />
@@ -197,10 +185,10 @@ const Header = () => {
               </ListItemIcon>
               <ListItemText className="menu-link" primary="Cart" />
             </ListItemButton>
-            {/* <ListItemButton component={Link} to="/login">
+            <ListItemButton component={Link} to="/signup">
           <ListItemIcon><LoginIcon  sx={{color:'#471396'}}/></ListItemIcon>
-            <ListItemText  className='menu-link' primary="Login" />
-          </ListItemButton> */}
+            <ListItemText  className='menu-link' primary="Orders" />
+          </ListItemButton>
             <ListItemButton component={Link} to="/signup">
               <ListItemIcon>
                 <PersonAddAltIcon sx={{ color: "#471396" }} />
@@ -234,9 +222,13 @@ const Header = () => {
 
               <div className="menu-button">
                 <React.Fragment key={"right"}>
-                  <Button onClick={toggleDrawer("right", true)}>
-                    <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
-                  </Button>
+                  <div className="search-and-menu">
+                    <SearchBar />
+                    <Button onClick={toggleDrawer("right", true)}>
+                      <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
+                    </Button>
+                  </div>
+
                   <Drawer
                     anchor="right"
                     open={menu["right"]}
@@ -334,22 +326,7 @@ const Header = () => {
             </Link>
             <div className="search-style">
               <div className="input-group">
-                <div className="form-outline" data-mdb-input-init>
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    onChange={handleChange}
-                  />
-                  {/* <label className="form-label" for="form1"></label> */}
-                </div>
-                <Button
-                  type="button"
-                  style={{ backgroundColor: "#471396", marginLeft: "5px" }}
-                  onClick={() => searchProduct()}
-                >
-                  <SearchIcon style={{ color: "white" }}></SearchIcon>
-                </Button>
+                <SearchBar />
               </div>
             </div>
           </Box>

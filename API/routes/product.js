@@ -1,5 +1,5 @@
 import express from 'express'
-import { addProduct, deleteProduct, getProduct, getProductByCategory, getProductById, getProductByName, getProductByShop, updateProduct } from '../controller/product.js'
+import { addProduct, deleteProduct, filter, getProduct, getProductByCategory, getProductById, getProductByName, getProductByShop, getProductSuggestions, updateProduct } from '../controller/product.js'
 import multer from 'multer'
 import auth from '../middleware/auth.js'
 
@@ -29,4 +29,7 @@ router.get('/getProductByCategory/:name',getProductByCategory)
 router.get('/getProductByShop/:shop',getProductByShop)
 router.patch('/updateProduct/:id',updateProduct)
 router.delete('/deleteProduct/:id',deleteProduct)
+router.get('/suggest', getProductSuggestions);
+router.get('/filter',filter)
+
 export default router
