@@ -9,6 +9,7 @@ import Footer from "../pages/Footer";
 import NewFooter from "../pages/NewFooter";
 import SideBar from "./SideBar";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import MobileFilterDrawer from "./MobileFilterDrawer";
 
 const Product = () => {
   // const { data } = useFetch('/product/getProduct')
