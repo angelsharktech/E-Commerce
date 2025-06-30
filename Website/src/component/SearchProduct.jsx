@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
-import { Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, Button, useMediaQuery } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
@@ -8,6 +8,8 @@ import Footer from "../pages/Footer";
 import "./Home.css";
 import NewFooter from "../pages/NewFooter";
 import SideBar from "./SideBar";
+import MobileFilterDrawer from "./MobileFilterDrawer";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const SearchProduct = () => {
   const { name } = useParams();
@@ -15,8 +17,6 @@ const SearchProduct = () => {
   // const category = useFetch(`/product/getProductByCategory/${name}`)
   // const subCategory = useFetch(`/product/getProductBySubCategory/${name}`)
   // const mergedData = [...(product.data || []), ...(category.data || [])];
-
-  // console.log('category::',category);
 
   // Remove duplicates by _id
   // const product.data = Array.from(
@@ -32,7 +32,8 @@ const SearchProduct = () => {
     priceMin: "",
     priceMax: "",
   });
-
+  const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //Mobile View
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -66,7 +67,6 @@ const SearchProduct = () => {
 
           if (filters.priceMin) query.append("priceMin", filters.priceMin);
           if (filters.priceMax) query.append("priceMax", filters.priceMax);
-          console.log("query:", query);
 
           const res = await axios.get(`/product/filter?${query.toString()}`);
           setProducts(res.data);
@@ -77,13 +77,46 @@ const SearchProduct = () => {
     };
 
     fetchProducts();
-  }, [filters]);
+  }, [name, filters]);
 
   return (
-     <>
+    <>
       <Header />
+      {isMobile && (
+        <>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{
+              px: 2,
+              pt: 2,
+              position: "fixed",
+              top: "60px",
+              background: "white",
+              zIndex: 100,
+              width: "100%",
+              borderBottom: "1px solid #ccc",
+            }}
+          >
+            <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
+            <Button
+              variant="outlined"
+              startIcon={<FilterListIcon />}
+              onClick={() => setFilterDrawerOpen(true)}
+              sx={{ marginBottom: "10px" }}
+            >
+              Filter
+            </Button>
+          </Stack>
+        </>
+      )}
       <Stack direction={"row"}>
-        <SideBar filters={filters} onFilterChange={updateFilters} />
+        {!isMobile && (
+          <Box sx={{ display: "block", marginTop: "8%" }}>
+            <SideBar filters={filters} onFilterChange={updateFilters} />
+          </Box>
+        )}
         <div className="product-style">
           <Grid container spacing={3}>
             {product ? (
@@ -139,6 +172,13 @@ const SearchProduct = () => {
           </Grid>
         </div>
       </Stack>
+
+      <MobileFilterDrawer
+        open={filterDrawerOpen}
+        onClose={() => setFilterDrawerOpen(false)}
+        filters={filters}
+        onFilterChange={updateFilters}
+      />
       <NewFooter />
     </>
   );

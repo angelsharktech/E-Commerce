@@ -175,11 +175,14 @@ html {
   text-align: center;
   margin-top: 20%;
   margin-left: 3%;
+  flex: 1;
+  padding: 1rem;
+  min-height: 500px;
 }
   .img-style {
-    width: 80px;
+    width: 100px;
     max-width: 180px;
-    height: 80px;
+    height: 100px;
     object-fit: contain;
     border-radius: 16px;
     background: #fff;
@@ -194,14 +197,14 @@ html {
     border-radius: 18px;
     box-shadow: 0 4px 16px rgba(255, 78, 80, 0.12);
     /* margin: 8px; */
-    /* padding: 18px 10px 24px 10px; */
+    padding: 10px 2px 10px 2px;
     transition: transform 0.2s, box-shadow 0.2s;
     min-height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 45%; /* 3 cards with gap (~90%) */
-    height: 120px;
+    /* height: 120px; */
   }
 
   .discount-badge {

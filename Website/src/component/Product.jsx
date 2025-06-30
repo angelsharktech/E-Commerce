@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
-import { Button, Divider, Grid, Stack } from "@mui/material";
+import { Button, Box, Grid, Stack , useMediaQuery,Divider} from "@mui/material";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import "./Home.css";
@@ -23,6 +23,8 @@ const Product = () => {
 
   const [products, setProducts] = useState([]);
 
+ const isMobile = useMediaQuery("(max-width:645px)"); //for mobile
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //for mobile
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -71,15 +73,44 @@ const Product = () => {
   return (
     <>
       <Header />
-      {/* <div className="mobile-menu">
-        <Stack direction={"row"} display={"flex"} justifyContent={"center"}>
-          <Button>Sort</Button>
-          <Button>Filter</Button>
-        </Stack>
-      </div>
-      <Divider sx={{ mb: 3, color: "black" }} /> */}
+       {isMobile && (
+        <>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{
+              px: 2,
+              pt: 2,
+              position: "fixed",
+              top: "60px",
+              background: "white",
+              zIndex: 100,
+              width: "100%",
+               borderBottom: "1px solid #ccc",
+            }}
+          >
+            <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
+            <Button
+              variant="outlined"
+              startIcon={<FilterListIcon />}
+              onClick={() => setFilterDrawerOpen(true)}
+              sx={{marginBottom:'10px'}}
+            >
+              Filter
+            </Button>
+          </Stack>
+
+          {/* <Divider /> */}
+        </>
+      )}
+
       <Stack direction={"row"}>
-        <SideBar filters={filters} onFilterChange={updateFilters} />
+        {!isMobile && (
+          <Box sx={{ display: "block", marginTop: "8%" }}>
+            <SideBar filters={filters} onFilterChange={updateFilters} />
+          </Box>
+        )}
 
         <div className="product-style">
           {products.length === 0 ? (
@@ -121,6 +152,13 @@ const Product = () => {
           )}
         </div>
       </Stack>
+
+       <MobileFilterDrawer
+        open={filterDrawerOpen}
+        onClose={() => setFilterDrawerOpen(false)}
+        filters={filters}
+        onFilterChange={updateFilters}
+      />
       <NewFooter />
     </>
   );

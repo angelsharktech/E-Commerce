@@ -4,8 +4,25 @@ import { Button, Stack } from "@mui/material";
 import useFetch from "../hooks/useFetch";
 
 const Sidebar = ({ filters, onFilterChange }) => {
-    const category = useFetch("/category/getCategory");
-    
+  const isAnyFilterApplied =
+    filters.ageGroups.length > 0 ||
+    filters.brands.length > 0 ||
+    filters.categories.length > 0 ||
+    filters.discount.length > 0 ||
+    filters.priceMin ||
+    filters.priceMax;
+  const handleClearFilters = () => {
+    onFilterChange({
+      ageGroups: [],
+      brands: [],
+      categories: [],
+      discount: [],
+      priceMin: "",
+      priceMax: "",
+    });
+  };
+  const category = useFetch("/category/getCategory");
+
   const age_groups = [
     { value: "0 - 1 years", label: "0 - 1 years" },
     { value: "1 - 2 years", label: "1 - 2 years" },
@@ -23,14 +40,14 @@ const Sidebar = ({ filters, onFilterChange }) => {
     { value: "RATNA'S", label: "RATNA'S" },
     { value: "Toyshine", label: "Toyshine" },
   ];
-   const discount = [
-     { value: "10% Off or more", label: "10" },
-     { value: "25% Off or more", label: "25" },
-     { value: "35% Off or more", label: "35" },
-     { value: "50% Off or more", label: "50" },
-     { value: "60% Off or more", label: "60" },
-     { value: "70% Off or more", label: "70" },
-    ];
+  const discount = [
+    { value: "10% Off or more", label: "10" },
+    { value: "25% Off or more", label: "25" },
+    { value: "35% Off or more", label: "35" },
+    { value: "50% Off or more", label: "50" },
+    { value: "60% Off or more", label: "60" },
+    { value: "70% Off or more", label: "70" },
+  ];
   const handleCheckboxChange = (key, value) => {
     const current = filters[key] || [];
     const updated = current.includes(value)
@@ -82,18 +99,18 @@ const Sidebar = ({ filters, onFilterChange }) => {
             placeholder="Min ₹"
             value={filters?.priceMin}
             onChange={(e) => handlePriceChange("priceMin", e.target.value)}
+            style={{ borderRadius:'14px'}}
           />
           <input
             type="number"
             placeholder="Max ₹"
             value={filters?.priceMax}
             onChange={(e) => handlePriceChange("priceMax", e.target.value)}
-            style={{marginTop:'4px'}}
+            style={{ marginTop: "4px" ,borderRadius:'14px'}}
           />
         </div>
 
-
- {/* Discount */}
+        {/* Discount */}
         <div className="filter-section">
           <h3 className="filter-heading">Discount</h3>
           {discount.map((label) => (
@@ -116,7 +133,9 @@ const Sidebar = ({ filters, onFilterChange }) => {
               <input
                 type="checkbox"
                 checked={filters?.categories?.includes(label.categoryName)} // ✅ proper key
-                onChange={() => handleCheckboxChange("categories", label.categoryName)} // ✅ connected
+                onChange={() =>
+                  handleCheckboxChange("categories", label.categoryName)
+                } // ✅ connected
               />
               <label>{label.categoryName}</label>
             </div>
@@ -124,7 +143,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
         </div>
 
         {/* Brands */}
-      <div className="filter-section">
+        <div className="filter-section">
           <h3 className="filter-heading">Brand</h3>
           {brands.map((label) => (
             <div key={label.value} className="checkbox-row">
@@ -137,8 +156,16 @@ const Sidebar = ({ filters, onFilterChange }) => {
             </div>
           ))}
         </div>
-
-        
+        {isAnyFilterApplied && (
+          <Button
+            sx={{ color: "red", mt: 2 }}
+            variant="outlined"
+            onClick={handleClearFilters}
+            fullWidth
+          >
+            Clear Filters
+          </Button>
+        )}
       </div>
     </>
   );
