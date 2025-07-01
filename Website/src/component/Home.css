@@ -184,10 +184,10 @@ html {
     min-height: 500px;
   }
   .img-style {
-    width: 100px;
+    width: 150px;
     max-width: 180px;
-    height: 100px;
-    object-fit: contain;
+    height: 150px;
+    object-fit: fill;
     border-radius: 16px;
     background: #fff;
     /* margin-bottom: 10px; */

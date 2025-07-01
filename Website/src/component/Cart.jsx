@@ -13,6 +13,7 @@ import PaymentModal from "./PaymentModal";
 import { Close } from "@mui/icons-material";
 import { cashOnDeliveryPayment, startRazorpayPayment } from "../utils/payment";
 import { useNavigate } from "react-router-dom";
+import './Cart.css'
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -203,14 +204,7 @@ const Cart = () => {
     <>
       <Header />
       {/* <div>Cart</div> */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+       <Box className='cart-style'>
         {!data.data ? (
           <>
             <h3>Cart is empty</h3>
@@ -218,8 +212,7 @@ const Cart = () => {
         ) : (
           <>
             <table
-              style={{ marginTop: "2%", width: "50%" }}
-              className="table table-bordered table_bg_white"
+              className="cart-table table table-bordered table_bg_white"
             >
               <thead>
                 <tr>
@@ -301,7 +294,7 @@ const Cart = () => {
             </div>
           </>
         )}
-      </div>
+      </Box>
 
       <NewFooter />
       <Modal open={isModalOpen}>

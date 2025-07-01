@@ -6,6 +6,7 @@ import NewFooter from "../pages/NewFooter";
 import { userInformation } from "../context/AuthContext";
 import { Button } from "@mui/material";
 import axios from "axios";
+import './Order.css'
 const Order = () => {
   const { webuser } = useContext(userInformation);
   const orders = useFetch(`/order/getOrderById/${webuser?._id}`);
@@ -59,27 +60,14 @@ const Order = () => {
     <>
       <Header />
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "50%",
-          //   justifyContent: "center",
-          margin: "12% auto",
-        }}
+      <div className="order-style main-content"
       >
         {!orders.data ? (
           <h3>No Orders</h3>
         ) : (
           <div>
             {/* Header Table */}
-            <table
-              style={{
-                width: "90%",
-                borderCollapse: "collapse",
-                tableLayout: "fixed",
-              }}
+            <table className="table-header"
               border="1"
               cellPadding="10"
               cellSpacing="0"
@@ -105,12 +93,7 @@ const Order = () => {
 
             {/* Scrollable Table Body */}
             <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-              <table
-                style={{
-                  width: "100%",
-                  borderCollapse: "collapse",
-                  tableLayout: "fixed",
-                }}
+              <table className="table-body"
                 border="1"
                 cellPadding="10"
                 cellSpacing="0"
