@@ -101,7 +101,7 @@ const Product = () => {
               marginTop:'8%',
               background: "white",
               zIndex: 100,
-              width: "95%",
+              width: "90%",
               //  borderBottom: "1px solid #ccc",
             }}
           >
