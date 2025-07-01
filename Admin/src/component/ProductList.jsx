@@ -59,6 +59,9 @@ const ProductList = () => {
       if (newRow.title !== oldRow.title) {
         updatedFields.title = newRow.title;
       }
+      if (newRow.category !== oldRow.category) {
+        updatedFields.category = newRow.category;
+      }
       if (newRow.description !== oldRow.description) {
         updatedFields.description = newRow.description;
       }
@@ -68,6 +71,49 @@ const ProductList = () => {
       if (newRow.avail_qty !== oldRow.avail_qty) {
         updatedFields.avail_qty = newRow.avail_qty;
       }
+      if (newRow.no_of_pieces !== oldRow.no_of_pieces) {
+        updatedFields.no_of_pieces = newRow.no_of_pieces;
+      }
+      if (newRow.assembly_req !== oldRow.assembly_req) {
+        updatedFields.assembly_req = newRow.assembly_req;
+      }
+      if (newRow.scale !== oldRow.scale) {
+        updatedFields.scale = newRow.scale;
+      }
+      if (newRow.battery_req !== oldRow.battery_req) {
+        updatedFields.battery_req = newRow.battery_req;
+      }
+      if (newRow.battery_incl !== oldRow.battery_incl) {
+        updatedFields.battery_incl = newRow.battery_incl;
+      }
+      if (newRow.material_type !== oldRow.material_type) {
+        updatedFields.material_type = newRow.material_type;
+      }
+      if (newRow.remote_control !== oldRow.remote_control) {
+        updatedFields.remote_control = newRow.remote_control;
+      }
+      if (newRow.colour !== oldRow.colour) {
+        updatedFields.colour = newRow.colour;
+      }
+      if (newRow.prod_dimensions !== oldRow.prod_dimensions) {
+        updatedFields.prod_dimensions = newRow.prod_dimensions;
+      }
+      if (newRow.manufacturer_recommend_age !== oldRow.manufacturer_recommend_age) {
+        updatedFields.manufacturer_recommend_age = newRow.manufacturer_recommend_age;
+      }
+      if (newRow.manufacturer_name !== oldRow.manufacturer_name) {
+        updatedFields.manufacturer_name = newRow.manufacturer_name;
+      }
+      if (newRow.item_weight !== oldRow.item_weight) {
+        updatedFields.item_weight = newRow.item_weight;
+      }
+      if (newRow.net_qty !== oldRow.net_qty) {
+        updatedFields.net_qty = newRow.net_qty;
+      }
+      if (newRow.packer !== oldRow.packer) {
+        updatedFields.packer = newRow.packer;
+      }
+      
       // Add more comparisons as needed...
 
       const result = await axios.patch(
@@ -130,7 +176,7 @@ const ProductList = () => {
     },
     { field: "title", headerName: "Title", width: 120, editable: true },
     { field: "brand", headerName: "Brand", width: 120, editable: true },
-    // { field: "age_group", headerName: "Age Group", width: 120, editable: true },
+    { field: "category", headerName: "Category", width: 120, editable: true },
     {
       field: "age_group",
       headerName: "Age Group",
@@ -181,6 +227,21 @@ const ProductList = () => {
       width: 120,
       editable: true,
     },
+     { field: "no_of_pieces", headerName: "No Of Pieces", width: 120, editable: true },
+     { field: "assembly_req", headerName: "Assembly Required", width: 120, editable: true },
+     { field: "scale", headerName: "Scale", width: 120, editable: true },
+     { field: "battery_req", headerName: "Batteries Required", width: 120, editable: true },
+     { field: "battery_incl", headerName: "Batteries Included", width: 120, editable: true },
+     { field: "material_type", headerName: "Material Type", width: 120, editable: true },
+     { field: "remote_control", headerName: "Remote Control", width: 120, editable: true },
+     { field: "colour", headerName: "Color", width: 120, editable: true },
+     { field: "prod_dimensions", headerName: "Product Dimensions", width: 120, editable: true },
+     { field: "manufacturer_recommend_age", headerName: "Manf.Recommended Age", width: 120, editable: true },
+     { field: "manufacturer_name", headerName: "Manufacturer", width: 120, editable: true },
+     { field: "item_weight", headerName: "Item Weight", width: 120, editable: true },
+     { field: "net_qty", headerName: "Net Qty", width: 120, editable: true },
+     { field: "packer", headerName: "Packer", width: 120, editable: true },
+
     {
       field: "action",
       headerName: "Delete",

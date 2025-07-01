@@ -14,6 +14,22 @@ const productSchema = mongoose.Schema({
   productBy: String,
   thumbnail: String,
   discount: Number,
+
+  no_of_pieces: Number,
+  assembly_req: String,
+  scale: String,
+  battery_req: String,
+  battery_incl: String,
+  material_type: String,
+  remote_control: String,
+  colour: String,
+  prod_dimensions: String,
+  manufacturer_recommend_age: String,
+  manufacturer_name: String,
+  item_weight: String,
+  net_qty: Number,
+  packer: String,
+
   images: [String],
 });
 

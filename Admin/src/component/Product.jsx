@@ -37,6 +37,20 @@ const Product = () => {
     category: "",
     thumbnail: "",
     images: [],
+    no_of_pieces: "",
+    assembly_req: "",
+    scale: "",
+    battery_req:'',
+    battery_incl:'',
+    material_type:"",
+    remote_control:"",
+    colour:"",
+    prod_dimensions:"",
+    manufacturer_recommend_age:"",
+    manufacturer:"",
+    item_weight:"",
+    net_qty:"",
+    packer:"",
   });
 
   const age_groups = [
@@ -46,6 +60,10 @@ const Product = () => {
     { value: "5 - 7 Yr", label: "5 - 7 years" },
     { value: "8 - 11 Yr", label: "8 - 11 years" },
     { value: "12+ Yr", label: "12 years & more" },
+  ];
+  const options = [
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
   ];
 
   // useEffect(() => {
@@ -79,6 +97,21 @@ const Product = () => {
       formData.append("brand", data.brand);
       formData.append("age_group", data.age_group);
       formData.append("thumbnail", data.thumbnail);
+      formData.append("no_of_pieces", data.no_of_pieces);
+      formData.append("assembly_req", data.assembly_req);
+      formData.append("scale", data.scale);
+      formData.append("battery_req", data.battery_req);
+      formData.append("battery_incl", data.battery_incl);
+      formData.append("material_type", data.material_type);
+      formData.append("remote_control", data.remote_control);
+      formData.append("colour", data.colour);
+      formData.append("prod_dimensions", data.prod_dimensions);
+      formData.append("manufacturer_recommend_age", data.manufacturer_recommend_age);
+      formData.append("manufacturer", data.manufacturer);
+      formData.append("item_weight", data.item_weight);
+      formData.append("net_qty", data.net_qty);
+      formData.append("packer", data.packer);
+
       data.images?.forEach((images) => {
         formData.append("images", images);
       });
@@ -102,6 +135,20 @@ const Product = () => {
           avail_qty: "",
           brand: "",
           age_group: "",
+          no_of_pieces: "",
+          assembly_req: "",
+          scale: "",
+          battery_req:'',
+          battery_incl:"",
+          material_type:"",
+          remote_control:"",
+          colour:"",
+          prod_dimensions:"",
+          manufacturer_recommend_age:"",
+          manufacturer:"",
+          item_weight:"",
+          net_qty:"",
+          packer:"",
         });
       }
     } catch (error) {
@@ -270,6 +317,183 @@ const Product = () => {
                   minRows={4}
                 />
               </Stack>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                <TextField
+                  variant="outlined"
+                  label="Number Of Pieces"
+                  name={"no_of_pieces"}
+                  type="Number"
+                  value={data.no_of_pieces}
+                  onChange={(e) =>
+                    setData({ ...data, no_of_pieces: e.target.value })
+                  }
+                  size="small"
+                  fullwidth
+                />
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={options || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, assembly_req: newValue?.value || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="assembly_req"
+                      label="Assembly Request"
+                      size="small"
+                    />
+                  )}
+                />
+                <TextField
+                  variant="outlined"
+                  label="Scale"
+                  name={"scale"}
+                  type="text"
+                  value={data.scale}
+                  onChange={(e) => setData({ ...data, scale: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={options || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, battery_req: newValue?.value || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="battery_req"
+                      label="Batteries Required"
+                      size="small"
+                    />
+                  )}
+                />
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={options || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, battery_incl: newValue?.value || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="battery_incl"
+                      label="Batteries Included"
+                      size="small"
+                    />
+                  )}
+                />
+              </Stack>
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                <TextField
+                  variant="outlined"
+                  label="Material Type"
+                  name={"material_type"}
+                  type="text"
+                  value={data.material_type}
+                  onChange={(e) =>
+                    setData({ ...data, material_type: e.target.value })
+                  }
+                  size="small"
+                  fullwidth
+                />
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={options || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, remote_control: newValue?.value || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="remote_control"
+                      label="Remote Control"
+                      size="small"
+                    />
+                  )}
+                />
+                <TextField
+                  variant="outlined"
+                  label="Colour"
+                  name={"colour"}
+                  type="text"
+                  value={data.colour}
+                  onChange={(e) => setData({ ...data, colour: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                <TextField
+                  variant="outlined"
+                  label="Product Dimensions"
+                  name={"prod_dimensions"}
+                  type="text"
+                  value={data.prod_dimensions}
+                  onChange={(e) => setData({ ...data, prod_dimensions: e.target.value })}
+                  size="small"
+                  fullwidth
+                />               
+                <TextField
+                  variant="outlined"
+                  label=" Manufacturer "
+                  name={"manufacturer"}
+                  type="text"
+                  value={data.manufacturer}
+                  onChange={(e) => setData({ ...data, manufacturer: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                
+              </Stack>
+              
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                 <TextField
+                  variant="outlined"
+                  label="Manf.  Recommended Age"
+                  name={"manufacturer_recommend_age"}
+                  type="text"
+                  value={data.manufacturer_recommend_age}
+                  onChange={(e) => setData({ ...data, manufacturer_recommend_age: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                 <TextField
+                  variant="outlined"
+                  label="Item Weight"
+                  name={"item_weight"}
+                  type="text"
+                  value={data.item_weight}
+                  onChange={(e) => setData({ ...data, item_weight: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                 <TextField
+                  variant="outlined"
+                  label="Net Quantity"
+                  name={"net_qty"}
+                  type="Number"
+                  value={data.net_qty}
+                  onChange={(e) => setData({ ...data, net_qty: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+                 <TextField
+                  variant="outlined"
+                  label="Packer"
+                  name={"packer"}
+                  type="text"
+                  value={data.packer}
+                  onChange={(e) => setData({ ...data, packer: e.target.value })}
+                  size="small"
+                  fullwidth
+                />
+
+              </Stack>
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 spacing={2}
@@ -294,6 +518,7 @@ const Product = () => {
                   }
                   style={{ marginRight: 16 }}
                 />
+
                 <Button
                   variant="contained"
                   onClick={onSubmit}
@@ -317,3 +542,13 @@ const Product = () => {
 };
 
 export default Product;
+
+// material_type
+// remote_control
+// colour
+// prod_dimensions
+// manufacturer_recommend_age
+// manufacturer_name
+// item_weight
+// net_qty
+// packer
