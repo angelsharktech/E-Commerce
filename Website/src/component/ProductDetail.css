@@ -182,6 +182,7 @@
     padding: 32px 24px 28px 24px;
     text-align: center;
     flex: 1 1 50%;
+    height: 100%;
   }
   .product-title {
     font-size: 2rem;

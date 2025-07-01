@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Header from "../pages/Header";
-import useFetch from "../hooks/useFetch";
-import {
-  Grid,
-  Stack,
-  Box,
-  useMediaQuery,
-  Divider,
-  Button,
-} from "@mui/material";
-import { Link, useParams } from "react-router-dom";
-import "./Home.css";
+import React, { useEffect, useState } from 'react'
+import Header from '../pages/Header'
+import useFetch from '../hooks/useFetch'
+import { Box, Button, Divider, Grid, Stack, useMediaQuery } from '@mui/material'
+import { Link, useParams } from 'react-router-dom'
+import './Home.css'
 // import './Category.css'
-import axios from "axios";
-import NewFooter from "../pages/NewFooter";
-import SideBar from "./SideBar";
+import axios from 'axios'
+import NewFooter from '../pages/NewFooter'
+import SideBar from './SideBar'
 import MobileFilterDrawer from './MobileFilterDrawer'
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 const Category = () => {
-  const { name } = useParams();
+  const { name } = useParams()
   // const category = useFetch(`/category/getCategoryByMainCategory/${name}`);
   // const product = useFetch(`/product/getProductByCategory/${name}`)
-  const [product, setProducts] = useState([]);
+  
+   const [product, setProducts] = useState([]);
   const [filters, setFilters] = useState({
     ageGroups: [],
     brands: [],
@@ -33,7 +27,8 @@ const Category = () => {
   });
 
   const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
-  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //Mobile View
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);  //Mobile View
+
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -51,11 +46,13 @@ const Category = () => {
           !filters.priceMax;
 
         if (noFiltersApplied) {
+
           // No filters => fetch all products
           const res = await axios.get(`/product/getProductByCategory/${name}`);
           setProducts(res.data);
           return;
         } else {
+
           // Else: apply filters
           const query = new URLSearchParams();
 
@@ -81,9 +78,9 @@ const Category = () => {
   return (
     <>
       <Header />
-      {/* Subcategory bar */}
-
-      {/* <div className="category-bar">
+    {/* Subcategory bar */}
+    
+{/* <div className="category-bar">
   {category.data?.result?.map((cat) =>
     cat.subCategories?.map((sub, idx) => (
       <Link
@@ -98,7 +95,7 @@ const Category = () => {
   )}
 </div> */}
 
-      {/* Mobile View */}
+{/* Mobile View */}
       {isMobile && (
         <>
           <Stack
@@ -110,10 +107,11 @@ const Category = () => {
               pt: 2,
               position: "fixed",
               top: "60px",
+              marginTop:'5%',
               background: "white",
               zIndex: 100,
               width: "100%",
-              borderBottom: "1px solid #ccc",
+              // borderBottom: "1px solid #ccc",
             }}
           >
             <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
@@ -125,18 +123,19 @@ const Category = () => {
             >
               Filter
             </Button>
+            
           </Stack>
+          {/* <Divider  /> */}
 
-          {/* <Divider /> */}
         </>
       )}
-      <Stack direction={"row"}>
+    <Stack direction={"row"}>
         {!isMobile && (
           <Box sx={{ display: "block", marginTop: "8%" }}>
             <SideBar filters={filters} onFilterChange={updateFilters} />
           </Box>
         )}
-        <div className="product-style">
+       <div className="product-style">
           {product.length === 0 ? (
             <p style={{ margin: "2rem", fontWeight: "bold" }}>
               No products found for selected filters.
@@ -185,7 +184,7 @@ const Category = () => {
       />
       <NewFooter />
     </>
-  );
-};
+  )
+}
 
-export default Category;
+export default Category

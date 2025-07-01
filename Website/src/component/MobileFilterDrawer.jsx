@@ -4,7 +4,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import Sidebar from "./SideBar"; // same Sidebar you're using in desktop
 
 const MobileFilterDrawer = ({ open, onClose, filters, onFilterChange }) => {
-  console.log("filters:", filters);
   return (
     <>
      <Drawer

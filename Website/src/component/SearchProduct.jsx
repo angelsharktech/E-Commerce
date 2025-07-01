@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
-import { Box, Grid, Stack, Button, useMediaQuery } from "@mui/material";
+import { Box, Grid, Stack,Button, useMediaQuery } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
@@ -32,8 +32,8 @@ const SearchProduct = () => {
     priceMin: "",
     priceMax: "",
   });
-  const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
-  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //Mobile View
+ const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);  //Mobile View
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -77,12 +77,12 @@ const SearchProduct = () => {
     };
 
     fetchProducts();
-  }, [name, filters]);
+  }, [name,filters]);
 
   return (
     <>
       <Header />
-      {isMobile && (
+       {isMobile && (
         <>
           <Stack
             direction="row"
@@ -96,7 +96,8 @@ const SearchProduct = () => {
               background: "white",
               zIndex: 100,
               width: "100%",
-              borderBottom: "1px solid #ccc",
+              marginTop:'5%',
+              //  borderBottom: "1px solid #ccc",
             }}
           >
             <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
@@ -104,14 +105,16 @@ const SearchProduct = () => {
               variant="outlined"
               startIcon={<FilterListIcon />}
               onClick={() => setFilterDrawerOpen(true)}
-              sx={{ marginBottom: "10px" }}
+               sx={{marginBottom:'10px'}}
             >
               Filter
             </Button>
           </Stack>
+
         </>
       )}
       <Stack direction={"row"}>
+       
         {!isMobile && (
           <Box sx={{ display: "block", marginTop: "8%" }}>
             <SideBar filters={filters} onFilterChange={updateFilters} />
@@ -173,7 +176,7 @@ const SearchProduct = () => {
         </div>
       </Stack>
 
-      <MobileFilterDrawer
+       <MobileFilterDrawer
         open={filterDrawerOpen}
         onClose={() => setFilterDrawerOpen(false)}
         filters={filters}

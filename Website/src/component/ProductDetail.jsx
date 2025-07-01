@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch'
 import axios from 'axios'
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { Box, Button, Modal, Stack, TextField } from '@mui/material'
+import { Box, Button, Divider, Modal, Stack, Table, TextField } from '@mui/material'
 import { userInformation } from '../context/AuthContext'
 import { Close } from '@mui/icons-material'
 import { useForm } from 'react-hook-form'
@@ -15,6 +15,8 @@ import './ProductDetail.css'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import NewFooter from '../pages/NewFooter'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 const ProductDetail = () => {
   const { webuser } = useContext(userInformation)
@@ -28,11 +30,11 @@ const ProductDetail = () => {
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm()
   const product = useFetch(`/product/getProductById/${pid}`)
+  
 
   const addToCart = async (data) => {
     try {
       if (webuser) {
-        console.log('prod_data::',data);
         
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data)
         //  navigate(`/cart/`, { state: { prod: data } })
@@ -147,19 +149,21 @@ const ProductDetail = () => {
       }}>
       <source src={axios.defaults.baseURL + item} type="video/mp4" />
     </video> :
+     <Zoom key={index}>
       <img 
       // className="item"
         style={{
           height: "100%",
           width: "100%",
-          objectFit: "fill",
-          // display: "block",
-          // margin: "20px auto",
+          objectFit: "cover",
+          display: "block",
+          margin: "20px auto",
           borderRadius: "10px"
         }}
         //  data-value={index + 1} 
         src={axios.defaults.baseURL + item}
-      />;
+      />
+      </Zoom>
 
   });
   return (
@@ -175,7 +179,6 @@ const ProductDetail = () => {
               items={items}
               disableButtonsControls={true}
             />
-
           </div>
           {product.data && (
             <div className="product-info">
@@ -209,6 +212,13 @@ const ProductDetail = () => {
               </div>
             </div>
           )}
+        </div>
+        <Divider/>
+        <div>
+          {/* <h2>Product Information </h2> */}
+          <Table>
+
+          </Table>
         </div>
       </div>
       {/* Login Button */}

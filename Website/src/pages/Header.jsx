@@ -15,7 +15,7 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
-import { MenuOpen } from "@mui/icons-material";
+import { MenuOpen, MoreVert } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
@@ -40,7 +40,7 @@ import SearchBar from "../component/SearchBar";
 
 const Header = () => {
   const { webuser } = useContext(userInformation);
-  const [menu, setMenu] = useState({ right: false });
+  const [menu, setMenu] = useState({ left: false });
   const category = useFetch("/category/getCategory");
   const [openCategoryDropdown, setOpenCategoryDropdown] = useState(false);
   const [openUserDropdown, setOpenUserDropdown] = useState(false);
@@ -68,7 +68,7 @@ const Header = () => {
 
   const list = (anchor) => (
     <div
-      style={{ width: 250, marginTop: "70px" }}
+      style={{ width: 250, marginTop: "100px" }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
@@ -93,7 +93,7 @@ const Header = () => {
         </ListItem>
 
         {/* Category Dropdown */}
-        <ListItemButton onClick={() => setOpenCategoryDropdown(true)}>
+        {/* <ListItemButton onClick={() => setOpenCategoryDropdown(true)}>
           <ListItemIcon>
             <CategoryIcon sx={{ color: "#471396" }} />
           </ListItemIcon>
@@ -116,7 +116,7 @@ const Header = () => {
               </ListItemButton>
             ))}
           </List>
-        </Collapse>
+        </Collapse> */}
 
         <ListItem disablePadding>
           <ListItemButton component={Link} to="/">
@@ -208,7 +208,7 @@ const Header = () => {
   return (
     <>
       <div className="container">
-        <div style={{ height: "60px", position: "fixed", zIndex: 1300 }}>
+        <div style={{ height: "30px", position: "fixed", zIndex: 1300 }}>
           <AppBar>
             <Box
               sx={{
@@ -224,30 +224,28 @@ const Header = () => {
 
               {/* </div> */}
               <div className="search-style">
-                <div className="input-group">
+                <div>
                   <SearchBar />
                 </div>
               </div>
 
-              <div className="menu-button">
-                <React.Fragment key={"right"}>
-                  {/* <div className="search-and-menu"> */}
-                    {/* <SearchBar /> */}
-                    <Button onClick={toggleDrawer("right", true)} >
-                      <MenuOpen sx={{ color: "#808080", fontSize: 50 }} />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <div className="menu-button">
+                  <React.Fragment key={"left"}>
+                    <Button onClick={toggleDrawer("left", true)}>
+                      <MoreVert sx={{ color: "#808080", fontSize: 50 }} />
                     </Button>
-                  {/* </div> */}
-
-                  <Drawer
-                    anchor="right"
-                    open={menu["right"]}
-                    onClose={toggleDrawer("right", false)}
-                    sx={{ float: "right" }}
-                  >
-                    {list("right")}
-                  </Drawer>
-                </React.Fragment>
-              </div>
+                    <Drawer
+                      anchor="left"
+                      open={menu["left"]}
+                      onClose={toggleDrawer("left", false)}
+                    >
+                      {list("left")}
+                    </Drawer>
+                  </React.Fragment>
+                </div>
+               
+              </Box>
 
               <Box className="header-actions">
                 {webuser ? (
@@ -298,8 +296,15 @@ const Header = () => {
                 )}
               </Box>
             </Box>
+            <div className="searchbar-mobile">
+            <SearchBar />
+          </div>
           </AppBar>
         </div>
+          {/* <Box sx={{ display: "flex", alignItems: "center" }}> */}
+          
+          {/* </Box> */}
+
         <div className="sticky-menu menu-button ">
           <Box className="sticky-menu-box">
             <Link className="header-base" to={"/"}>
@@ -342,6 +347,7 @@ const Header = () => {
         </div>
 
         {/* </Box> */}
+      
       </div>
     </>
   );

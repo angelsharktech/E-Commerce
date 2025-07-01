@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "../pages/Header";
-import { Button, Box, Grid, Stack , useMediaQuery,Divider} from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import "./Home.css";
@@ -8,8 +15,8 @@ import axios from "axios";
 import Footer from "../pages/Footer";
 import NewFooter from "../pages/NewFooter";
 import SideBar from "./SideBar";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import MobileFilterDrawer from "./MobileFilterDrawer";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const Product = () => {
   // const { data } = useFetch('/product/getProduct')
@@ -25,8 +32,8 @@ const Product = () => {
 
   const [products, setProducts] = useState([]);
 
- const isMobile = useMediaQuery("(max-width:645px)"); //for mobile
-  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //for mobile
+  const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);  //Mobile View
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -44,6 +51,7 @@ const Product = () => {
           !filters.priceMax;
 
         if (noFiltersApplied) {
+
           // No filters => fetch all products
           const res = await axios.get("/product/getProduct");
           setProducts(res.data);
@@ -60,6 +68,7 @@ const Product = () => {
 
           if (filters.priceMin) query.append("priceMin", filters.priceMin);
           if (filters.priceMax) query.append("priceMax", filters.priceMax);
+          console.log("query:", query);
 
           const res = await axios.get(`/product/filter?${query.toString()}`);
           setProducts(res.data);
@@ -72,10 +81,13 @@ const Product = () => {
     fetchProducts();
   }, [filters]);
 
+  
+
   return (
     <>
       <Header />
-       {isMobile && (
+      {/* Mobile View */}
+      {isMobile && (
         <>
           <Stack
             direction="row"
@@ -86,34 +98,37 @@ const Product = () => {
               pt: 2,
               position: "fixed",
               top: "60px",
+              marginTop:'5%',
               background: "white",
               zIndex: 100,
-              width: "100%",
-               borderBottom: "1px solid #ccc",
+              width: "95%",
+              //  borderBottom: "1px solid #ccc",
             }}
           >
+            
             <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
             <Button
               variant="outlined"
               startIcon={<FilterListIcon />}
               onClick={() => setFilterDrawerOpen(true)}
-              sx={{marginBottom:'10px'}}
+               sx={{marginBottom:'10px'}}
             >
               Filter
             </Button>
           </Stack>
 
-          {/* <Divider /> */}
+          <Divider />
         </>
       )}
 
       <Stack direction={"row"}>
+        {/* <SideBar filters={filters} onFilterChange={updateFilters} /> */}
+
         {!isMobile && (
           <Box sx={{ display: "block", marginTop: "8%" }}>
             <SideBar filters={filters} onFilterChange={updateFilters} />
           </Box>
         )}
-
         <div className="product-style">
           {products.length === 0 ? (
             <p style={{ margin: "2rem", fontWeight: "bold" }}>
@@ -155,7 +170,7 @@ const Product = () => {
         </div>
       </Stack>
 
-       <MobileFilterDrawer
+      <MobileFilterDrawer
         open={filterDrawerOpen}
         onClose={() => setFilterDrawerOpen(false)}
         filters={filters}

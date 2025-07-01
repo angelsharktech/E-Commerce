@@ -2,8 +2,10 @@ import React from "react";
 import "./Sidebar.css"; // Import the CSS file
 import { Button, Stack } from "@mui/material";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ filters, onFilterChange }) => {
+  const navigate = useNavigate()
   const isAnyFilterApplied =
     filters.ageGroups.length > 0 ||
     filters.brands.length > 0 ||
@@ -11,6 +13,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
     filters.discount.length > 0 ||
     filters.priceMin ||
     filters.priceMax;
+
   const handleClearFilters = () => {
     onFilterChange({
       ageGroups: [],
@@ -20,6 +23,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
       priceMin: "",
       priceMax: "",
     });
+    navigate('/home')
   };
   const category = useFetch("/category/getCategory");
 
@@ -156,9 +160,10 @@ const Sidebar = ({ filters, onFilterChange }) => {
             </div>
           ))}
         </div>
+
         {isAnyFilterApplied && (
           <Button
-            sx={{ color: "red", mt: 2 }}
+            sx={{ color: "red" }}
             variant="outlined"
             onClick={handleClearFilters}
             fullWidth
