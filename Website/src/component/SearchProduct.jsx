@@ -95,8 +95,8 @@ const SearchProduct = () => {
               top: "60px",
               background: "white",
               zIndex: 100,
-              width: "100%",
-              marginTop:'5%',
+              width: "95%",
+              marginTop:'8%',
               //  borderBottom: "1px solid #ccc",
             }}
           >

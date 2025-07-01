@@ -98,7 +98,7 @@ const Product = () => {
               pt: 2,
               position: "fixed",
               top: "60px",
-              marginTop:'5%',
+              marginTop:'8%',
               background: "white",
               zIndex: 100,
               width: "95%",
