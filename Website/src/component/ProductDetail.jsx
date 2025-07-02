@@ -147,10 +147,10 @@ const ProductDetail = () => {
   if (product?.thumbnail && !images.includes(product.thumbnail)) {
     images = [product.thumbnail, ...images];
   }
+  console.log("Image URL:", images);
   const items = images.map((item, index) => {
     const isVideo = item.endsWith(".mp4");
     
-    console.log("Image URL:", axios.defaults.baseURL + item);
     return isVideo ? (
       <video
         controls
