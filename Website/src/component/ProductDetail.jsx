@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../pages/Header";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
@@ -37,8 +37,21 @@ const ProductDetail = () => {
   const [password, setPassword] = useState();
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm();
-  const product = useFetch(`/product/getProductById/${pid}`);
-  
+
+ const [product, setProduct] = useState();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+    try {
+      const res = await axios.get(`/product/getProductById/${pid}`);
+      setProduct(res.data);
+    } catch (error) {
+      console.error("Failed to fetch product:", error);
+    }
+  };
+
+  fetchProduct();
+ }, [pid])
   const isVisible = product.data?.avail_qty < 1 ? true : false;
 
   const addToCart = async (data) => {
