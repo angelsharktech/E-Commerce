@@ -244,6 +244,7 @@ const ProductList = () => {
      { field: "item_weight", headerName: "Item Weight", width: 120, editable: true },
      { field: "net_qty", headerName: "Net Qty", width: 120, editable: true },
      { field: "packer", headerName: "Packer", width: 120, editable: true },
+     { field: "isFavourite", headerName: "isFavourite", width: 120, editable: true },
      
      {
        field: "action",
@@ -260,7 +261,6 @@ const ProductList = () => {
       ),
       width: 120,
     },
-    { field: "isFavourite", headerName: "isFavourite", width: 120, editable: true },
   ];
   return (
     <>
