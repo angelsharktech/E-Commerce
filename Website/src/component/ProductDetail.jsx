@@ -52,7 +52,7 @@ const ProductDetail = () => {
 
   fetchProduct();
  }, [pid])
-  const isVisible = product.data?.avail_qty < 1 ? true : false;
+  const isVisible = product?.avail_qty < 1 ? true : false;
 
   const addToCart = async (data) => {
     try {
@@ -140,9 +140,9 @@ const ProductDetail = () => {
     }
   };
 
-  let images = product.data?.images || [];
-  if (product.data?.thumbnail && !images.includes(product.data.thumbnail)) {
-    images = [product.data.thumbnail, ...images];
+  let images = product?.images || [];
+  if (product?.thumbnail && !images.includes(product.thumbnail)) {
+    images = [product.thumbnail, ...images];
   }
 
   const items = images.map((item, index) => {
@@ -195,14 +195,14 @@ const ProductDetail = () => {
               disableButtonsControls={true}
             />
           </div>
-          {product.data && (
+          {product && (
             <div className="product-info">
-              <div className="product-title">{product.data.title}</div>
-              <div className="product-desc">{product.data.description}</div>
-              {/* <div className="product-price">{product.data.selling_price} Rs.</div> */}
+              <div className="product-title">{product.title}</div>
+              <div className="product-desc">{product.description}</div>
+              {/* <div className="product-price">{product.selling_price} Rs.</div> */}
               <p>
                 <span className="price-label">
-                  {product.data.actual_price} RS.
+                  {product.actual_price} RS.
                 </span>
                 <span
                   style={{
@@ -211,20 +211,20 @@ const ProductDetail = () => {
                     fontSize: "1.3rem",
                   }}
                 >
-                  {product.data.selling_price} RS.
+                  {product.selling_price} RS.
                 </span>
-                {product.data.discount > 0 && (
-                  <span className="discount">{product.data.discount}% OFF</span>
+                {product.discount > 0 && (
+                  <span className="discount">{product.discount}% OFF</span>
                 )}
                 <br />
-                {product.data.avail_qty < 1 ? (
+                {product.avail_qty < 1 ? (
                   <>
                     <span style={{ color: "red" }}>Out Of Stock</span>
                   </>
                 ) : (
                   <>
                     <span style={{ color: "red" }}>
-                      {product.data.avail_qty} items left
+                      {product.avail_qty} items left
                     </span>
                   </>
                 )}
@@ -233,7 +233,7 @@ const ProductDetail = () => {
                 <Button
                   variant="contained"
                   className="product-btn"
-                  onClick={() => addToCart(product.data)}
+                  onClick={() => addToCart(product)}
                 >
                   <ShoppingBagOutlinedIcon style={{ marginRight: "8px" }} />
                   Add To Cart
@@ -243,7 +243,7 @@ const ProductDetail = () => {
                 <Button
                   variant="contained"
                   className="product-btn-outoffStock"
-                  onClick={() => buyNow(product.data)}
+                  onClick={() => buyNow(product)}
                   disabled
                 >
                   <BoltOutlinedIcon style={{ marginRight: "8px" }} />
@@ -253,7 +253,7 @@ const ProductDetail = () => {
                  <Button
                   variant="contained"
                   className="product-btn"
-                  onClick={() => buyNow(product.data)}
+                  onClick={() => buyNow(product)}
                 >
                   <BoltOutlinedIcon style={{ marginRight: "8px" }} />
                   Buy Now
