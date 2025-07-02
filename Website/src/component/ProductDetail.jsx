@@ -52,6 +52,8 @@ const ProductDetail = () => {
 
   fetchProduct();
  }, [pid])
+ console.log('fetchProduct::',product);
+ 
   const isVisible = product?.avail_qty < 1 ? true : false;
 
   const addToCart = async (data) => {
