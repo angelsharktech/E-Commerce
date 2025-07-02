@@ -4,9 +4,9 @@
   }
   .MuiAppBar-root {
     background: #471396 !important;
-    border-radius: 0 0 30px 30px;
+    /* border-radius: 0 0 30px 30px; */
     box-shadow: 0 6px 24px rgba(194, 106, 252, 0.15);
-    min-height: 70px;
+    min-height: 100px;
     display: flex;
     align-items: start;
     position: relative;
@@ -18,8 +18,8 @@
     color: #471396;
     width: 205px;
   }
-  h3 {
-   
+  .heading {
+   text-decoration: none;
     color: #fff;
    font-size: 15px !important;
     letter-spacing: 2px;
@@ -27,7 +27,11 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
+  }
+  .heading:hover{
+    text-decoration: none ;
+   color: #fff;
   }
   .header {
     text-decoration: none !important;
@@ -35,6 +39,9 @@
     color: white;
     margin-top: 2%;
     font-size: 10px;
+  }
+  .header-order{
+    display: none;
   }
   .header-base {
     display: none;
@@ -66,11 +73,7 @@
   }
    .searchbar-mobile {
     display: flex;
-    padding: 10px 36px;
-    margin-top: 60px; 
-    /* background: white; */
-    position: fixed;
-    z-index: 2100;
+    padding: 2px 16px;
     width:100%;
   }
   .dropdown {
@@ -143,7 +146,11 @@
   .sticky-menu-box {
     display: none;
   }
+
+
+ 
 }
+
 @media (min-width: 646px) and (max-width: 1149px) {
   .container {
     font-family: "Baloo Bhai 2", "Comic Sans MS", cursive, sans-serif;
@@ -158,8 +165,9 @@
     align-items: center;
     position: relative;
   }
-  h3 {
-    font-family: "Baloo Bhai 2", cursive;
+  .heading {
+    /* font-family: "Baloo Bhai 2", cursive; */
+    text-decoration: none;
     color: #fff;
     font-size: 2.2rem;
     letter-spacing: 2px;
@@ -168,7 +176,11 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
+  }
+  .heading:hover{
+    text-decoration: none ;
+   color: #fff;
   }
   .menu-button button {
     background: #fffbe7;
@@ -194,6 +206,11 @@
     text-align: end;
     color: white;
     /* margin-top: 2%; */
+  }
+   .header-order{
+     text-decoration: none !important;
+    text-align: end;
+    color: white;
   }
   .header-base {
     margin-top: 9%;
@@ -328,8 +345,9 @@
     align-items: center;
     position: relative;
   }
-  h3 {
+  .heading {
     /* font-family: 'Baloo Bhai 2', cursive; */
+    text-decoration: none ;
     color: #fff;
     font-size: 2.2rem;
     letter-spacing: 2px;
@@ -338,7 +356,11 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
+  }
+  .heading:hover{
+    text-decoration: none ;
+   color: #fff;
   }
   .menu-button button {
     background: #fffbe7;
@@ -364,6 +386,11 @@
     text-align: end;
     color: white;
     margin-top: 2%;
+  }
+  .header-order{
+     text-decoration: none !important;
+    text-align: end;
+    color: white;
   }
   .header-base {
     text-decoration: none !important;

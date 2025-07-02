@@ -107,7 +107,7 @@ const Category = () => {
               pt: 2,
               position: "fixed",
               top: "60px",
-              marginTop:'8%',
+              marginTop:'9%',
               background: "white",
               zIndex: 100,
               width: "90%",

@@ -33,7 +33,7 @@ const Product = () => {
   const [products, setProducts] = useState([]);
 
   const isMobile = useMediaQuery("(max-width:645px)"); //Mobile view
-  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);  //Mobile View
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //Mobile View
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
     setFilters((prev) => ({ ...prev, ...newFilter }));
@@ -51,12 +51,15 @@ const Product = () => {
           !filters.priceMax;
 
         if (noFiltersApplied) {
+          console.log("****");
 
           // No filters => fetch all products
           const res = await axios.get("/product/getProduct");
           setProducts(res.data);
           return;
         } else {
+          console.log("else Product::");
+
           // Else: apply filters
           const query = new URLSearchParams();
 
@@ -81,8 +84,6 @@ const Product = () => {
     fetchProducts();
   }, [filters]);
 
-  
-
   return (
     <>
       <Header />
@@ -98,20 +99,19 @@ const Product = () => {
               pt: 2,
               position: "fixed",
               top: "60px",
-              marginTop:'8%',
+              marginTop: "9%",
               background: "white",
               zIndex: 100,
               width: "90%",
               //  borderBottom: "1px solid #ccc",
             }}
           >
-            
             <Box sx={{ flexGrow: 1 }} /> {/* pushes the button to the right */}
             <Button
               variant="outlined"
               startIcon={<FilterListIcon />}
               onClick={() => setFilterDrawerOpen(true)}
-               sx={{marginBottom:'10px'}}
+              sx={{ marginBottom: "10px" }}
             >
               Filter
             </Button>
@@ -137,31 +137,26 @@ const Product = () => {
           ) : (
             <Grid container spacing={3}>
               {products?.map((prod) => (
-                <Grid item xs={12} sm={6} md={3} key={prod._id} className="box">
+                <Grid item xs={6} sm={4} md={3} key={prod._id} className="box">
                   <Link
-                    style={{ color: "black", textDecoration: "none" }}
                     to={`/prodDetail/${prod._id}`}
+                    style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <img
                       src={axios.defaults.baseURL + prod.thumbnail}
-                      className="img-style"
                       alt={prod.title}
+                      className="img-style"
                     />
                     <p className="title">{prod.title}</p>
                     <p>
-                      <span className="price-label">
-                        {prod.actual_price} RS.
-                      </span>
                       <span className="selling_label">
-                        {prod.selling_price} RS.
-                      </span>
-                      <br />
-                      {prod.discount > 0 && (
-                        <span className="discount-badge">
-                          {prod.discount}% OFF
-                        </span>
-                      )}
+                        ₹{prod.selling_price}
+                      </span>{" "}
+                      <span className="price-label">₹{prod.actual_price}</span>
                     </p>
+                    {prod.discount > 0 && (
+                      <p className="discount-badge">{prod.discount}% OFF</p>
+                    )}
                   </Link>
                 </Grid>
               ))}

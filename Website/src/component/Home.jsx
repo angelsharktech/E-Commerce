@@ -39,8 +39,24 @@ const Home = () => {
   ];
   return (
     <>
+      
       <div container>
-        <Header />
+          <Header />
+        <div className="main-category-bar" >
+                  {category.data?.map((cat) => (
+                    <div key={cat._id}>
+                      <div className="category-box">
+                        <Link
+                          style={{ textDecoration: "none", color: "black" }}
+                          to={`/category/${cat.categoryName}`}
+                          // to={`/category/${cat.mainCategory}`}
+                        >
+                          <p className="cat-title">{cat.categoryName}</p>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
         <div className="main-content">
           <div className="main-category-slider">
             <h1>Category</h1>
@@ -80,30 +96,17 @@ const Home = () => {
               ))}
             </Slider>
           </div>
-          
-          <div className="main-category-bar">
-            {category.data?.map((cat) => (
-              <div  key={cat._id} style={{ padding: 8 }}>
-                <div className="category-box">
-                  <Link
-                    style={{ textDecoration: "none", color: "black" }}
-                    to={`/category/${cat.categoryName}`}
-                    // to={`/category/${cat.mainCategory}`}
-                  >
-                    <p className="cat-title">{cat.categoryName}</p>
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
-
+          
+     
+      
+     
         <div
           style={{ marginLeft: "4% ", textAlign: "center", marginTop: "2%" }}
         >
-          <h1>Products</h1>
 
-          <Grid container spacing={3} sx={{ marginTop: "2%" }}>
+            <h1>Products</h1>
+          <Grid container spacing={3} sx={{ marginTop: "3%" }}  >
             {currentProducts?.map((prod) => (
               <Grid item xs={6} sm={6} md={3} key={prod._id} className="box">
                 <Link
@@ -171,6 +174,7 @@ const Home = () => {
 
         <NewFooter />
       </div>
+      
     </>
   );
 };

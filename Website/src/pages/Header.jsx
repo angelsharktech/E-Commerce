@@ -209,18 +209,18 @@ const Header = () => {
     <>
       <div className="container">
         <div style={{ height: "30px", position: "fixed", zIndex: 1300 }}>
-          <AppBar>
+          <AppBar >
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
                 width: "100%",
-                padding: "0 2vw",
+                // padding: "0 2vw",
                 height: "70px", // must match AppBar height
               }}
             >
-              <h3 style={{ margin: 0 }}>Starbasket</h3>
+              <Link to={"/home"}  className="heading">Starbasket</Link>
 
               {/* </div> */}
               <div className="search-style">
@@ -250,7 +250,7 @@ const Header = () => {
               <Box className="header-actions">
                 {webuser ? (
                   <>
-                    <Link className="header" to={"/orders"}>
+                    <Link className="header-order" to={"/orders"}>
                       <ShoppingBagOutlinedIcon /> Orders
                     </Link>
                     <Link className="header" to={"/cart"}>
@@ -280,7 +280,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Link className="header" to={"/signup"}>
+                    <Link className="header-order" to={"/signup"}>
                       Orders
                     </Link>
                     <Link className="header" to={"/signup"}>
@@ -299,11 +299,10 @@ const Header = () => {
             <div className="searchbar-mobile">
             <SearchBar />
           </div>
+           
           </AppBar>
         </div>
-          {/* <Box sx={{ display: "flex", alignItems: "center" }}> */}
-          
-          {/* </Box> */}
+       
 
         <div className="sticky-menu menu-button ">
           <Box className="sticky-menu-box">
@@ -349,6 +348,8 @@ const Header = () => {
         {/* </Box> */}
       
       </div>
+      
+      
     </>
   );
 };
