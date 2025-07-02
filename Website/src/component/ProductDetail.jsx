@@ -44,6 +44,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
     try {
       const res = await axios.get(`/product/getProductById/${pid}`);
+      console.log("Fetched product:", res.data);
       setProduct(res.data);
     } catch (error) {
       console.error("Failed to fetch product:", error);
@@ -52,7 +53,7 @@ const ProductDetail = () => {
 
   fetchProduct();
  }, [pid])
- console.log('fetchProduct::',product);
+
  
   const isVisible = product?.avail_qty < 1 ? true : false;
 
@@ -146,10 +147,10 @@ const ProductDetail = () => {
   if (product?.thumbnail && !images.includes(product.thumbnail)) {
     images = [product.thumbnail, ...images];
   }
-
   const items = images.map((item, index) => {
     const isVideo = item.endsWith(".mp4");
-
+    
+    console.log("Image URL:", axios.defaults.baseURL + item);
     return isVideo ? (
       <video
         controls
@@ -178,7 +179,8 @@ const ProductDetail = () => {
             borderRadius: "10px",
           }}
           //  data-value={index + 1}
-          src={axios.defaults.baseURL + item}
+          src="https://api.starbasket.in/api/gallery/images_Anam%20Jeep2.jpg"
+          // src={axios.defaults.baseURL + item}
         />
       </Zoom>
     );
