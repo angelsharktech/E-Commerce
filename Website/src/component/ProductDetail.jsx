@@ -39,7 +39,7 @@ const ProductDetail = () => {
   const { register, handleSubmit } = useForm();
   const product = useFetch(`/product/getProductById/${pid}`);
 
-  const isVisible = product.data.avail_qty < 1 ? true : false
+  const isVisible = product.data?.avail_qty < 1 ? true : false
 
   const addToCart = async (data) => {
     try {
