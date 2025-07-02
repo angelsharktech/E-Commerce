@@ -60,7 +60,6 @@
   box-shadow: 0 2px 8px rgba(249, 212, 35, 0.10);
   transition: background 0.2s, transform 0.2s;
 }
-
 .product-btn:hover {
   /* background: #f9d423 !important; */
   color: black !important;
@@ -100,7 +99,7 @@
     justify-content: center;
     gap: -10px;
     max-width: 1200px;
-   margin: 20% auto;
+   margin: 30% auto;
   }
     
   .product-card {

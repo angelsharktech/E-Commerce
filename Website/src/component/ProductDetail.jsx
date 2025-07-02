@@ -38,12 +38,13 @@ const ProductDetail = () => {
   const { setCartCount } = useCart();
   const { register, handleSubmit } = useForm();
   const product = useFetch(`/product/getProductById/${pid}`);
-
-  const isVisible = product.data?.avail_qty < 1 ? true : false
+  
+  const isVisible = product.data?.avail_qty < 1 ? true : false;
 
   const addToCart = async (data) => {
     try {
       if (webuser) {
+
         const result = await axios.post(`/cart/addToCart/${webuser._id}`, data);
         //  navigate(`/cart/`, { state: { prod: data } })
         const res = await axios.get(`/cart/getCartItemCount/${webuser._id}`);
@@ -224,6 +225,7 @@ const ProductDetail = () => {
                   <ShoppingBagOutlinedIcon style={{ marginRight: "8px" }} />
                   Add To Cart
                 </Button>
+               
                 {isVisible ? (<>
                 <Button
                   variant="contained"
@@ -239,8 +241,6 @@ const ProductDetail = () => {
                   variant="contained"
                   className="product-btn"
                   onClick={() => buyNow(product.data)}
-                  disabled={isVisible}
-                  style={isVisible ? { color: "grey" } : undefined}
                 >
                   <BoltOutlinedIcon style={{ marginRight: "8px" }} />
                   Buy Now
