@@ -43,6 +43,7 @@ export const addProduct = async (req, res, next) => {
       item_weight: req.body.item_weight,
       net_qty: req.body.net_qty,
       packer: req.body.packer,
+      isFavourite: req.body.isFavourite,
     };
 
     const result = await new product(obj).save();

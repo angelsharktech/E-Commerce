@@ -40,17 +40,18 @@ const Product = () => {
     no_of_pieces: "",
     assembly_req: "",
     scale: "",
-    battery_req:'',
-    battery_incl:'',
-    material_type:"",
-    remote_control:"",
-    colour:"",
-    prod_dimensions:"",
-    manufacturer_recommend_age:"",
-    manufacturer:"",
-    item_weight:"",
-    net_qty:"",
-    packer:"",
+    battery_req: "",
+    battery_incl: "",
+    material_type: "",
+    remote_control: "",
+    colour: "",
+    prod_dimensions: "",
+    manufacturer_recommend_age: "",
+    manufacturer: "",
+    item_weight: "",
+    net_qty: "",
+    packer: "",
+    isFavourite: "",
   });
 
   const age_groups = [
@@ -106,11 +107,15 @@ const Product = () => {
       formData.append("remote_control", data.remote_control);
       formData.append("colour", data.colour);
       formData.append("prod_dimensions", data.prod_dimensions);
-      formData.append("manufacturer_recommend_age", data.manufacturer_recommend_age);
+      formData.append(
+        "manufacturer_recommend_age",
+        data.manufacturer_recommend_age
+      );
       formData.append("manufacturer", data.manufacturer);
       formData.append("item_weight", data.item_weight);
       formData.append("net_qty", data.net_qty);
       formData.append("packer", data.packer);
+      formData.append("isFavourite", data.isFavourite);
 
       data.images?.forEach((images) => {
         formData.append("images", images);
@@ -138,17 +143,18 @@ const Product = () => {
           no_of_pieces: "",
           assembly_req: "",
           scale: "",
-          battery_req:'',
-          battery_incl:"",
-          material_type:"",
-          remote_control:"",
-          colour:"",
-          prod_dimensions:"",
-          manufacturer_recommend_age:"",
-          manufacturer:"",
-          item_weight:"",
-          net_qty:"",
-          packer:"",
+          battery_req: "",
+          battery_incl: "",
+          material_type: "",
+          remote_control: "",
+          colour: "",
+          prod_dimensions: "",
+          manufacturer_recommend_age: "",
+          manufacturer: "",
+          item_weight: "",
+          net_qty: "",
+          packer: "",
+          isFavourite: "",
         });
       }
     } catch (error) {
@@ -434,55 +440,67 @@ const Product = () => {
                   name={"prod_dimensions"}
                   type="text"
                   value={data.prod_dimensions}
-                  onChange={(e) => setData({ ...data, prod_dimensions: e.target.value })}
+                  onChange={(e) =>
+                    setData({ ...data, prod_dimensions: e.target.value })
+                  }
                   size="small"
                   fullwidth
-                />               
+                />
                 <TextField
                   variant="outlined"
                   label=" Manufacturer "
                   name={"manufacturer"}
                   type="text"
                   value={data.manufacturer}
-                  onChange={(e) => setData({ ...data, manufacturer: e.target.value })}
+                  onChange={(e) =>
+                    setData({ ...data, manufacturer: e.target.value })
+                  }
                   size="small"
                   fullwidth
                 />
-                
               </Stack>
-              
+
               <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-                 <TextField
+                <TextField
                   variant="outlined"
                   label="Manf.  Recommended Age"
                   name={"manufacturer_recommend_age"}
                   type="text"
                   value={data.manufacturer_recommend_age}
-                  onChange={(e) => setData({ ...data, manufacturer_recommend_age: e.target.value })}
+                  onChange={(e) =>
+                    setData({
+                      ...data,
+                      manufacturer_recommend_age: e.target.value,
+                    })
+                  }
                   size="small"
                   fullwidth
                 />
-                 <TextField
+                <TextField
                   variant="outlined"
                   label="Item Weight"
                   name={"item_weight"}
                   type="text"
                   value={data.item_weight}
-                  onChange={(e) => setData({ ...data, item_weight: e.target.value })}
+                  onChange={(e) =>
+                    setData({ ...data, item_weight: e.target.value })
+                  }
                   size="small"
                   fullwidth
                 />
-                 <TextField
+                <TextField
                   variant="outlined"
                   label="Net Quantity"
                   name={"net_qty"}
                   type="Number"
                   value={data.net_qty}
-                  onChange={(e) => setData({ ...data, net_qty: e.target.value })}
+                  onChange={(e) =>
+                    setData({ ...data, net_qty: e.target.value })
+                  }
                   size="small"
                   fullwidth
                 />
-                 <TextField
+                <TextField
                   variant="outlined"
                   label="Packer"
                   name={"packer"}
@@ -492,7 +510,22 @@ const Product = () => {
                   size="small"
                   fullwidth
                 />
-
+                <Autocomplete
+                  sx={{ minWidth: 180 }}
+                  options={options || []}
+                  getOptionLabel={(option) => option?.value || ""}
+                  onChange={(e, newValue) =>
+                    setData({ ...data, isFavourite: newValue?.value || "" })
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      name="isFavourite"
+                      label="Favourite"
+                      size="small"
+                    />
+                  )}
+                />
               </Stack>
               <Stack
                 direction={{ xs: "column", sm: "row" }}

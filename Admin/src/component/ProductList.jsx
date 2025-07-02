@@ -113,6 +113,9 @@ const ProductList = () => {
       if (newRow.packer !== oldRow.packer) {
         updatedFields.packer = newRow.packer;
       }
+      if (newRow.isFavourite !== oldRow.isFavourite) {
+        updatedFields.isFavourite = newRow.isFavourite;
+      }
       
       // Add more comparisons as needed...
 
@@ -241,22 +244,23 @@ const ProductList = () => {
      { field: "item_weight", headerName: "Item Weight", width: 120, editable: true },
      { field: "net_qty", headerName: "Net Qty", width: 120, editable: true },
      { field: "packer", headerName: "Packer", width: 120, editable: true },
-
-    {
-      field: "action",
-      headerName: "Delete",
-      renderCell: (params) => (
-        <>
+     
+     {
+       field: "action",
+       headerName: "Delete",
+       renderCell: (params) => (
+         <>
           <Button
             sx={{ color: " #c26afc" }}
             onClick={() => deleteProduct(params?.row)}
-          >
+            >
             <DeleteIcon />
           </Button>
         </>
       ),
       width: 120,
     },
+    { field: "isFavourite", headerName: "isFavourite", width: 120, editable: true },
   ];
   return (
     <>

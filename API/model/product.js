@@ -29,6 +29,7 @@ const productSchema = mongoose.Schema({
   item_weight: String,
   net_qty: Number,
   packer: String,
+  isFavourite:String,
 
   images: [String],
 });
