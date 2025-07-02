@@ -44,7 +44,6 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
     try {
       const res = await axios.get(`/product/getProductById/${pid}`);
-      console.log("Fetched product:", res.data);
       setProduct(res.data);
     } catch (error) {
       console.error("Failed to fetch product:", error);
@@ -147,7 +146,7 @@ const ProductDetail = () => {
   if (product?.thumbnail && !images.includes(product.thumbnail)) {
     images = [product.thumbnail, ...images];
   }
-  console.log("Image URL:", images);
+
   const items = images.map((item, index) => {
     const isVideo = item.endsWith(".mp4");
     
@@ -179,8 +178,8 @@ const ProductDetail = () => {
             borderRadius: "10px",
           }}
           //  data-value={index + 1}
-          src="https://api.starbasket.in/api/gallery/images_Anam%20Jeep2.jpg"
-          // src={axios.defaults.baseURL + item}
+          // src="https://api.starbasket.in/api/gallery/images_Anam%20Jeep2.jpg"
+          src={axios.defaults.baseURL + item}
         />
       </Zoom>
     );
