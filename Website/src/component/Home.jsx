@@ -98,9 +98,6 @@ const Home = () => {
           </div>
         </div>
           
-     
-      
-     
         <div
           style={{ marginLeft: "4% ", textAlign: "center", marginTop: "2%" }}
         >
@@ -136,6 +133,16 @@ const Home = () => {
                         {prod.discount}% OFF
                       </span>
                     )}
+                    <br/>
+                    {prod.avail_qty < 1 ? (<>
+                      <span style={{color:'red'}}>
+                        Out Of Stock
+                      </span>
+                    </>) : (<>
+                    <span style={{color:'red'}}>
+                        {prod.avail_qty} items left 
+                      </span>
+                      </>)}
                   </p>
                 </Link>
               </Grid>

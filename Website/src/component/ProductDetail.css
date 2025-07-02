@@ -34,9 +34,7 @@
  background: linear-gradient(
   90deg,
   #471396 0%,
-  /* #471396 20%, */
   #fac2d1 50%,
-  /* #471396 70%, */
   #471396 100%
 ) !important;
   color: white !important;
@@ -47,6 +45,22 @@
   box-shadow: 0 2px 8px rgba(249, 212, 35, 0.10);
   transition: background 0.2s, transform 0.2s;
 }
+.product-btn-outoffStock{
+  background: linear-gradient(
+  90deg,
+  #c0c0c0 0%,
+  #424242 50%,
+  #c0c0c0 100%
+) !important;
+  color: white !important;
+  border-radius: 16px !important;
+  font-size: 1.1rem !important;
+  font-family: 'Baloo Bhai 2', cursive !important;
+  padding: 10px 28px !important;
+  box-shadow: 0 2px 8px rgba(249, 212, 35, 0.10);
+  transition: background 0.2s, transform 0.2s;
+}
+
 .product-btn:hover {
   /* background: #f9d423 !important; */
   color: black !important;
