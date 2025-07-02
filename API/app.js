@@ -44,7 +44,12 @@ app.get("/api/test", (req, res, next) => {
 });
 
 app.use('/api/protected', protectedRoutes);
-app.use("/api/gallery/",express.static("gallery"))
+app.use("/api/gallery/",express.static("gallery", {
+  maxAge: '1d',
+  setHeaders: (res, path) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400, must-revalidate');
+  }
+}))
 app.use('/api/auth', authRoutes);
 app.use('/api/user',userRoute)
 app.use('/api/product',productRoute)
