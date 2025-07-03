@@ -29,7 +29,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
   const res = useFetch("/product/getProduct");
  const brands = [
   ...new Set(
-    data.map((item) => item.brand?.trim()).filter(Boolean)
+    res.data?.map((item) => item.brand?.trim()).filter(Boolean)
   ),
 ].sort();
   console.log("brands:", brands);
