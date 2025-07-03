@@ -27,9 +27,11 @@ const Sidebar = ({ filters, onFilterChange }) => {
   };
   const category = useFetch("/category/getCategory");
   const res = useFetch("/product/getProduct");
-  const brands = [
-    ...new Set(res.data?.map((item) => item.brand).filter(Boolean)),
-  ];
+ const brands = [
+  ...new Set(
+    data.map((item) => item.brand?.trim()).filter(Boolean)
+  ),
+].sort();
   console.log("brands:", brands);
   
   const age_groups = [
