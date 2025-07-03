@@ -51,14 +51,12 @@ const Product = () => {
           !filters.priceMax;
 
         if (noFiltersApplied) {
-          console.log("****");
 
           // No filters => fetch all products
           const res = await axios.get("/product/getProduct");
           setProducts(res.data);
           return;
         } else {
-          console.log("else Product::");
 
           // Else: apply filters
           const query = new URLSearchParams();
@@ -71,11 +69,9 @@ const Product = () => {
 
           if (filters.priceMin) query.append("priceMin", filters.priceMin);
           if (filters.priceMax) query.append("priceMax", filters.priceMax);
-          console.log("query:", query);
 
-          const res = await axios.get(`/product/filter?${query.toString()}`);
+          const res = await axios.get(`/product/filter/${query.toString()}`);
           setProducts(res.data);
-          console.log("Filtered products:", products);
         }
       } catch (err) {
         console.error("Error fetching products:", err);

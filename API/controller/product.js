@@ -212,10 +212,8 @@ export const filter = async (req, res, next) => {
       if (priceMin) query.selling_price.$gte = parseInt(priceMin);
       if (priceMax) query.selling_price.$lte = parseInt(priceMax);
     }
-    console.log(query);
     
     const products = await product.find(query);
-    console.log(products);
     
     res.json(products);
   } catch (err) {

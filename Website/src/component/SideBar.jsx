@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ filters, onFilterChange }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const isAnyFilterApplied =
     filters.ageGroups.length > 0 ||
     filters.brands.length > 0 ||
@@ -23,10 +23,13 @@ const Sidebar = ({ filters, onFilterChange }) => {
       priceMin: "",
       priceMax: "",
     });
-    navigate('/home')
+    navigate("/home");
   };
   const category = useFetch("/category/getCategory");
-
+  const res = useFetch("/product/getProduct");
+  const brands = [
+    ...new Set(res.data?.map((item) => item.brand).filter(Boolean)),
+  ];
   const age_groups = [
     { value: "0 - 1 years", label: "0 - 1 years" },
     { value: "1 - 2 years", label: "1 - 2 years" },
@@ -35,15 +38,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
     { value: "8 - 11 years", label: "8 - 11 years" },
     { value: "12+ years", label: "12 years & more" },
   ];
-  const brands = [
-    { value: "Storio", label: "Storio" },
-    { value: "VGRASSP", label: "VGRASSP" },
-    { value: "Toy Imagine", label: "Toy Imagine" },
-    { value: "Cable World", label: "Cable World" },
-    { value: "GRAPHENE", label: "GRAPHENE" },
-    { value: "RATNA'S", label: "RATNA'S" },
-    { value: "Toyshine", label: "Toyshine" },
-  ];
+
   const discount = [
     { value: "10% Off or more", label: "10" },
     { value: "25% Off or more", label: "25" },
@@ -103,14 +98,14 @@ const Sidebar = ({ filters, onFilterChange }) => {
             placeholder="Min ₹"
             value={filters?.priceMin}
             onChange={(e) => handlePriceChange("priceMin", e.target.value)}
-            style={{ borderRadius:'14px'}}
+            style={{ borderRadius: "14px" }}
           />
           <input
             type="number"
             placeholder="Max ₹"
             value={filters?.priceMax}
             onChange={(e) => handlePriceChange("priceMax", e.target.value)}
-            style={{ marginTop: "4px" ,borderRadius:'14px'}}
+            style={{ marginTop: "4px", borderRadius: "14px" }}
           />
         </div>
 
@@ -150,13 +145,13 @@ const Sidebar = ({ filters, onFilterChange }) => {
         <div className="filter-section">
           <h3 className="filter-heading">Brand</h3>
           {brands.map((label) => (
-            <div key={label.value} className="checkbox-row">
+            <div key={label} className="checkbox-row">
               <input
                 type="checkbox"
-                checked={filters?.brands.includes(label.value)} // ✅ proper key
-                onChange={() => handleCheckboxChange("brands", label.value)} // ✅ connected
+                checked={filters?.brands.includes(label)} // ✅ proper key
+                onChange={() => handleCheckboxChange("brands", label)} // ✅ connected
               />
-              <label>{label.value}</label>
+              <label>{label}</label>
             </div>
           ))}
         </div>
