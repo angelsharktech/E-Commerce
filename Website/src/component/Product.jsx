@@ -70,7 +70,7 @@ const Product = () => {
           if (filters.priceMin) query.append("priceMin", filters.priceMin);
           if (filters.priceMax) query.append("priceMax", filters.priceMax);
 
-          const res = await axios.get(`/product/filter/${query.toString()}`);
+          const res = await axios.get(`/product/filter?${query.toString()}`);
           setProducts(res.data);
         }
       } catch (err) {
