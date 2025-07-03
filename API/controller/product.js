@@ -179,6 +179,7 @@ export const filter = async (req, res, next) => {
   try {
     const { ageGroups, brands, categories, priceMin, priceMax, discount } =
       req.query;
+console.log('Filter query params:', brands);
 
     const query = {};
 
