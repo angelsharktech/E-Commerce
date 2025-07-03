@@ -215,6 +215,8 @@ export const filter = async (req, res, next) => {
     console.log(query);
     
     const products = await product.find(query);
+    console.log(products);
+    
     res.json(products);
   } catch (err) {
     console.error("Filter API error:", err);
