@@ -54,16 +54,16 @@ const ProductList = () => {
 
       // Add any other fields that changed
       if (newRow.brand !== oldRow.brand) {
-        updatedFields.brand = newRow.brand?.trim();
+        updatedFields.brand = newRow.brand;
       }
       if (newRow.title !== oldRow.title) {
-        updatedFields.title = newRow.title?.trim();
+        updatedFields.title = newRow.title;
       }
       if (newRow.category !== oldRow.category) {
-        updatedFields.category = newRow.category?.trim();
+        updatedFields.category = newRow.category;
       }
       if (newRow.description !== oldRow.description) {
-        updatedFields.description = newRow.description?.trim();
+        updatedFields.description = newRow.description;
       }
       if (newRow.age_group !== oldRow.age_group) {
         updatedFields.age_group = newRow.age_group?.value;
@@ -75,10 +75,10 @@ const ProductList = () => {
         updatedFields.no_of_pieces = newRow.no_of_pieces;
       }
       if (newRow.assembly_req !== oldRow.assembly_req) {
-        updatedFields.assembly_req = newRow.assembly_req?.trim();
+        updatedFields.assembly_req = newRow.assembly_req;
       }
       if (newRow.scale !== oldRow.scale) {
-        updatedFields.scale = newRow.scale?.trim();
+        updatedFields.scale = newRow.scale;
       }
       if (newRow.battery_req !== oldRow.battery_req) {
         updatedFields.battery_req = newRow.battery_req;
@@ -87,31 +87,31 @@ const ProductList = () => {
         updatedFields.battery_incl = newRow.battery_incl;
       }
       if (newRow.material_type !== oldRow.material_type) {
-        updatedFields.material_type = newRow.material_type?.trim();
+        updatedFields.material_type = newRow.material_type;
       }
       if (newRow.remote_control !== oldRow.remote_control) {
         updatedFields.remote_control = newRow.remote_control;
       }
       if (newRow.colour !== oldRow.colour) {
-        updatedFields.colour = newRow.colour?.trim();
+        updatedFields.colour = newRow.colour;
       }
       if (newRow.prod_dimensions !== oldRow.prod_dimensions) {
-        updatedFields.prod_dimensions = newRow.prod_dimensions?.trim();
+        updatedFields.prod_dimensions = newRow.prod_dimensions;
       }
       if (newRow.manufacturer_recommend_age !== oldRow.manufacturer_recommend_age) {
-        updatedFields.manufacturer_recommend_age = newRow.manufacturer_recommend_age?.trim();
+        updatedFields.manufacturer_recommend_age = newRow.manufacturer_recommend_age;
       }
       if (newRow.manufacturer_name !== oldRow.manufacturer_name) {
-        updatedFields.manufacturer_name = newRow.manufacturer_name?.trim();
+        updatedFields.manufacturer_name = newRow.manufacturer_name;
       }
       if (newRow.item_weight !== oldRow.item_weight) {
-        updatedFields.item_weight = newRow.item_weight?.trim();
+        updatedFields.item_weight = newRow.item_weight;
       }
       if (newRow.net_qty !== oldRow.net_qty) {
         updatedFields.net_qty = newRow.net_qty;
       }
       if (newRow.packer !== oldRow.packer) {
-        updatedFields.packer = newRow.packer?.trim();
+        updatedFields.packer = newRow.packer;
       }
       if (newRow.isFavourite !== oldRow.isFavourite) {
         updatedFields.isFavourite = newRow.isFavourite;
