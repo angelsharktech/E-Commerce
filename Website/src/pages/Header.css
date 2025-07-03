@@ -219,7 +219,7 @@
     font-size: small;
     margin-left: 10px;
   }
-  .header:hover,
+  .header:hover,.header-order:hover,
   .header-base:hover {
     /* background: #f9d423; */
     color: #471396;
@@ -398,7 +398,7 @@
     /* color: #471396; */
     font-size: large;
   }
-  .header:hover,
+  .header:hover,.header-order:hover,
   .header-base:hover {
     background: #e3ddec;
     color: #471396;

@@ -105,7 +105,6 @@ const Buynow = () => {
       
       if (
         !data.name?.trim() ||
-        !data.email?.trim() ||
         !data.mob_no ||
         !data.address?.trim() ||
         !data.pincode?.trim() ||
