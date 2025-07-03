@@ -20,6 +20,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ProductList = () => {
   const product = useFetch("/product/getProduct");
+  const category = useFetch("/category/getCategory");
   const [open, setOpen] = useState(false);
   const [data, setData] = useState(null);
 
@@ -179,7 +180,47 @@ const ProductList = () => {
     },
     { field: "title", headerName: "Title", width: 120, editable: true },
     { field: "brand", headerName: "Brand", width: 120, editable: true },
-    { field: "category", headerName: "Category", width: 120, editable: true },
+    {
+      field: "category",
+      headerName: "Category",
+      width: 200,
+      editable: true,
+      renderEditCell: (params) => (
+        <Autocomplete
+          options={category?.data?.map((cat) => cat.categoryName?.trim()) || []}
+          value={params.value || ""}
+          popupIcon={<ExpandMoreIcon />}
+          onChange={(event, newValue) => {
+            params.api.setEditCellValue({
+              id: params.id,
+              field: params.field,
+              value: newValue,
+            });
+            params.api.stopCellEditMode({
+              id: params.id,
+              field: params.field,
+              reason: GridCellEditStopReasons.enterKeyDown,
+            });
+          }}
+          renderInput={(paramsInput) => (
+            <TextField
+              {...paramsInput}
+              variant="standard"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  params.api.stopCellEditMode({
+                    id: params.id,
+                    field: params.field,
+                    reason: GridCellEditStopReasons.enterKeyDown,
+                  });
+                }
+              }}
+            />
+          )}
+          fullWidth
+        />
+      ),
+    },
     {
       field: "age_group",
       headerName: "Age Group",
