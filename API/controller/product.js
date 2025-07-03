@@ -179,7 +179,6 @@ export const filter = async (req, res, next) => {
   try {
     const { ageGroups, brands, categories, priceMin, priceMax, discount } =
       req.query;
-console.log('Filter query params:', brands);
 
     const query = {};
 
@@ -213,7 +212,6 @@ console.log('Filter query params:', brands);
       if (priceMin) query.selling_price.$gte = parseInt(priceMin);
       if (priceMax) query.selling_price.$lte = parseInt(priceMax);
     }
-    console.log('query:', query);
     
     const products = await product.find(query);
     
