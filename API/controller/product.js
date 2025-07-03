@@ -137,38 +137,70 @@ export const getProductByAllCategory = async (req, res, next) => {
 };
 export const getProductByName = async (req, res, next) => {
   try {
-    const result = await product.find({
-      title: { $regex: `.*${req.params.name}.*`, $options: "i" },
-    }); //IGNORE CASE SENSITIVITY
-    res.status(200).json(result);
+ const name = req.params.name.trim();
+    const regex = new RegExp(`^${name}$`, "i"); // case-insensitive exact match
+
+    const products = await product.find({
+      $or: [
+        { title: { $regex: regex } },
+        { brand: { $regex: regex } },
+        { category: { $regex: regex } }
+      ]
+    });
+
+    res.status(200).json(products);
+
+    // const result = await product.find({
+    //   title: { $regex: `.*${req.params.name}.*`, $options: "i" },  //partial match
+    // }); //IGNORE CASE SENSITIVITY
+    // res.status(200).json(result);
   } catch (error) {
     console.log(error);
   }
 };
+
 export const getProductSuggestions = async (req, res) => {
   try {
-    const query = req.query.q || "";
+    const query = (req.query.q || "").trim();
     const regex = new RegExp(query, "i");
-    const resultProd = await product
-      .find(
-        { title: { $regex: regex } },
-        { title: 1 } // only fetch title to keep it light
-      )
-      .limit(10); // limit to top 10 suggestions
 
-    const resultCat = await product
-      .find(
-        { category: { $regex: regex } },
-        { category: 1, title: 1 } // return title also for UI
-      )
-      .limit(10);
+      const resultProd = await product
+      .find({ title: { $regex: regex } }, { title: 1 })
+      .limit(10)
+      .lean()
+      .then((items) =>
+        items.map((item) => ({
+          label: item.title.trim(),
+          type: "title",
+        }))
+      );
 
-    // Merge and deduplicate by _id
-    const mergedResults = [...resultProd, ...resultCat];
+    const resultBrand = await product
+      .find({ brand: { $regex: regex } }, { brand: 1 })
+      .limit(10)
+      .lean()
+      .then((items) =>
+        items.map((item) => ({
+          label: item.brand.trim(),
+          type: "brand",
+        }))
+      );
+  
+   const resultcat = await category
+      .find({ categoryName: { $regex: regex } }, { categoryName: 1 })
+      .limit(10)
+      .lean()
+      .then((items) =>
+        items.map((item) => ({
+          label: item.categoryName.trim(),
+          type: "category",
+        }))
+      );
+    const mergedResults = [...resultProd, ...resultBrand, ...resultcat];
     const uniqueResults = Array.from(
-      new Map(mergedResults.map((item) => [item._id.toString(), item])).values()
+      new Map(mergedResults.map((item) => [item.label, item])).values()
     );
-
+    
     res.status(200).json(uniqueResults);
   } catch (error) {
     console.error(error);
@@ -177,24 +209,24 @@ export const getProductSuggestions = async (req, res) => {
 };
 export const filter = async (req, res, next) => {
   try {
-    const { ageGroups, brands, categories, priceMin, priceMax, discount } =
-      req.query;
+
+    const { ageGroups, brands, categories, priceMin, priceMax, discount } =req.query;
 
     const query = {};
 
     if (ageGroups) {
       const ages = Array.isArray(ageGroups) ? ageGroups : [ageGroups];
-      query.age_group = { $in: ages };
+      query.age_group = {  $in: ages.map((age) => new RegExp(`^${age}$`, "i")),  }; // Case-insensitive match
     }
 
     if (brands) {
       const brandList = Array.isArray(brands) ? brands : [brands];
-      query.brand = { $in: brandList };
+      query.brand = {  $in: brandList.map((brand) => new RegExp(`^${brand.trim()}$`, "i")),};
     }
 
     if (categories) {
       const catList = Array.isArray(categories) ? categories : [categories];
-      query.category = { $in: catList };
+      query.category = {  $in: catList.map((cat) => new RegExp(`^${cat.trim()}$`, "i")), };
     }
     if (discount) {
       const discList = Array.isArray(discount) ? discount : [discount];
@@ -212,9 +244,8 @@ export const filter = async (req, res, next) => {
       if (priceMin) query.selling_price.$gte = parseInt(priceMin);
       if (priceMax) query.selling_price.$lte = parseInt(priceMax);
     }
-    
+
     const products = await product.find(query);
-    
     res.json(products);
   } catch (err) {
     console.error("Filter API error:", err);

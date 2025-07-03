@@ -120,7 +120,7 @@ const SearchProduct = () => {
         )}
         <div className="product-style">
           <Grid container spacing={3}>
-            {product ? (
+            {product.length > 0 ? (
               product?.map((prod) => (
                 <Grid item xs={12} sm={6} md={3} key={prod._id} className="box">
                   <Link

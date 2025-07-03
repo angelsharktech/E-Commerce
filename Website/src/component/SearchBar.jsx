@@ -45,14 +45,14 @@ const SearchBar = () => {
       />
 
       {suggestions.length > 0 && (
-        <ul className="suggestion-list">
-          {suggestions.map((item) => (
+       <ul className="suggestion-list">
+          {suggestions.map((item,index) => (
             <li
-              key={item._id}
-              onClick={() => handleSelect(item.title)}
+              key={index}
+              onClick={() => handleSelect(item.label)}
               className="suggestion-item"
             >
-              {item.title}
+              {item.label}
             </li>
           ))}
         </ul>
