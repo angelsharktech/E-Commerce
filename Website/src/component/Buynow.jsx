@@ -203,14 +203,14 @@ const Buynow = () => {
       <Header />
       <Box
         sx={{
-          marginLeft: { xs: 0, sm: 4, lg: 14 },
-          marginTop: { xs: 2, sm: 0, lg: 5 },
+          marginLeft: { xs: 0, sm: 4, lg: 8 },
+          marginTop: { xs: 10, sm: 0, lg: 18 },
           alignContent: "center",
         }}
       >
         <Card
           sx={{
-            width: "80%",
+            width: { xs: "100%",  lg: "80%" },
             borderRadius: 5,
             boxShadow: 6,
             alignContent: "center",
