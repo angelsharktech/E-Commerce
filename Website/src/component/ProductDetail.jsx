@@ -153,30 +153,30 @@ const ProductDetail = () => {
     return isVideo ? (
       <video
         controls
-        className="item"
-        style={{
-          height: "350px",
-          width: "80%",
-          objectFit: "fill",
-          display: "block",
-          margin: "20px auto",
-          borderRadius: "10px",
-        }}
+        className="carousel-media"
+        // style={{
+        //   height: "350px",
+        //   width: "80%",
+        //   objectFit: "fill",
+        //   display: "block",
+        //   margin: "20px auto",
+        //   borderRadius: "10px",
+        // }}
       >
         <source src={axios.defaults.baseURL + item} type="video/mp4" />
       </video>
     ) : (
       <Zoom key={index}>
         <img
-          // className="item"
-          style={{
-            height: "100%",
-            width: "100%",
-            objectFit: "cover",
-            display: "block",
-            margin: "20px auto",
-            borderRadius: "10px",
-          }}
+          className="carousel-media"
+          // style={{
+          //   height: "100%",
+          //   width: "100%",
+          //   objectFit: "cover",
+          //   display: "block",
+          //   margin: "20px auto",
+          //   borderRadius: "10px",
+          // }}
           //  data-value={index + 1}
           // src="https://api.starbasket.in/api/gallery/images_Anam%20Jeep2.jpg"
           src={axios.defaults.baseURL + item}
@@ -191,9 +191,9 @@ const ProductDetail = () => {
         <div className="product-detail-flex">
           <div className="product-card">
             <AliceCarousel
-              autoHeight
-              infinite
-              mouseTracking
+              // autoHeight
+              // infinite
+              // mouseTracking
               items={items}
               disableButtonsControls={true}
             />
