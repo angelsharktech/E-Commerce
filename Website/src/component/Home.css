@@ -39,11 +39,6 @@ h1 {
   transform: translateY(-8px) scale(1.04) rotate(-2deg);
   box-shadow: 0 8px 32px rgba(255, 78, 80, 0.22);
 }
-.category-box:hover {
-  transform: scale(1.2) rotate(-2deg);
-  box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
-  background: linear-gradient(90deg, #471396 0%, #f7c8d4 50%, #471396 100%);
-}
 
 .price-label {
   color: #888;
@@ -113,6 +108,7 @@ html {
     width: 30%; /* 3 cards with gap (~90%) */
     height: 1%;
   }
+  
   .discount-badge {
     background: #471396;
     color: #fff;
@@ -140,7 +136,11 @@ html {
     flex-direction: column;
     align-items: center;
   }
-
+.category-box:hover {
+  transform: scale(1.2) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
+  background: linear-gradient(90deg, #471396 0%, #f7c8d4 50%, #471396 100%);
+}
   .cat-title {
     font-size: 1.2rem;
     color: #fff;
@@ -184,9 +184,7 @@ html {
    flex-direction: row;
    /* flex-wrap: nowrap; */
  }
- .category-box:hover{
-   display: none;
- }
+ 
   .main-category-bar {
    display: flex;
   background-color: #471396;
@@ -354,6 +352,11 @@ html {
     flex-direction: column;
     align-items: center;
   }
+  .category-box:hover {
+  transform: scale(1.2) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(194, 106, 252, 0.22);
+  background: linear-gradient(90deg, #471396 0%, #f7c8d4 50%, #471396 100%);
+}
   .cat-title {
     font-size: 1.2rem;
     color: #fff;
