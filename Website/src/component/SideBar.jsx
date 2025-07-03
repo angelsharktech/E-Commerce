@@ -30,6 +30,8 @@ const Sidebar = ({ filters, onFilterChange }) => {
   const brands = [
     ...new Set(res.data?.map((item) => item.brand).filter(Boolean)),
   ];
+  console.log("brands:", brands);
+  
   const age_groups = [
     { value: "0 - 1 years", label: "0 - 1 years" },
     { value: "1 - 2 years", label: "1 - 2 years" },
