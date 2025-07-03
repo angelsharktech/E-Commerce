@@ -75,6 +75,7 @@ const Product = () => {
 
           const res = await axios.get(`/product/filter?${query.toString()}`);
           setProducts(res.data);
+          console.log("Filtered products:", products);
         }
       } catch (err) {
         console.error("Error fetching products:", err);
