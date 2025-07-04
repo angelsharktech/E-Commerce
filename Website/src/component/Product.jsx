@@ -51,13 +51,11 @@ const Product = () => {
           !filters.priceMax;
 
         if (noFiltersApplied) {
-
           // No filters => fetch all products
           const res = await axios.get("/product/getProduct");
           setProducts(res.data);
           return;
         } else {
-
           // Else: apply filters
           const query = new URLSearchParams();
 
@@ -153,6 +151,18 @@ const Product = () => {
                     </p>
                     {prod.discount > 0 && (
                       <p className="discount-badge">{prod.discount}% OFF</p>
+                    )}
+                    <br />
+                    {prod.avail_qty < 1 ? (
+                      <>
+                        <span style={{ color: "red" }}>Out Of Stock</span>
+                      </>
+                    ) : (
+                      <>
+                        <span style={{ color: "red" }}>
+                          {prod.avail_qty} items left
+                        </span>
+                      </>
                     )}
                   </Link>
                 </Grid>
