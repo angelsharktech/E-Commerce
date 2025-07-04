@@ -174,6 +174,15 @@
     min-height: 340px;
     text-align: left;
   }
+  .carousel-media {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
    .discount {
     display: inline-block;
   background: #471396;
@@ -212,7 +221,15 @@
   .product-price {
     font-size: 1.4rem;
   }
- 
+ .carousel-media {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
 .product-info {
     flex: 1 1 50%;
     border-radius: 28px;

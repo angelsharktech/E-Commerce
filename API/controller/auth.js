@@ -23,7 +23,7 @@ export const sendOtp = async (req, res, next) => {
 
   try {
     await twilioClient.messages.create({
-      body: `Your OTP is ${otp}`,
+      body: `Your OTP for Starbasket is ${otp}`,
       from: process.env.TWILIO_PHONE,
       to: phone,
     });

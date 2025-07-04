@@ -138,7 +138,7 @@ export const getProductByAllCategory = async (req, res, next) => {
 };
 export const getProductByName = async (req, res, next) => {
   try {
- const name = req.params.name.trim();
+    const name = req.params.name.trim();
     const regex = new RegExp(`^${name}$`, "i"); // case-insensitive exact match
 
     const products = await product.find({
@@ -148,7 +148,6 @@ export const getProductByName = async (req, res, next) => {
         { category: { $regex: regex } }
       ]
     });
-
     res.status(200).json(products);
 
     // const result = await product.find({

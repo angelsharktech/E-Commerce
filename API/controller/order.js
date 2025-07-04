@@ -74,3 +74,23 @@ export const getOrderByOrderId = async (req, res, next) => {
     res.status(500).json({ error: "Failed to get order" });
   }
 };
+export const getOrderByStatusAndDate = async (req, res, next) => {
+  try {
+     const start = new Date();
+    start.setHours(0, 0, 0, 0); // today at 00:00:00
+
+    const end = new Date();
+    end.setHours(23, 59, 59, 999); // today at 23:59:59
+
+    const result = await order.find({
+      orderStatus: 'Processing',
+      createdAt: {
+        $gte: start,
+        $lte: end
+      }
+    });    
+    res.status(200).json(result.length);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get order" });
+  }
+}

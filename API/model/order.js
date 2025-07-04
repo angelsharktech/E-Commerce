@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
   shippingInfo: {
     name: { type: String, required: true },
     mob_no: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String},
     address: { type: String, required: true },
     city: { type: String, required: true },
     state: { type: String, required: true },
@@ -49,7 +49,6 @@ const orderSchema = new mongoose.Schema({
 
   orderStatus: {
     type: String,
-    
     default: 'Processing',
   },
 
