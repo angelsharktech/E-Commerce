@@ -33,7 +33,7 @@ const Order = () => {
       console.error("Error fetching orders:", error);
     }
   };
-const rows = orders.data?.map((order) => ({
+const rows = orders?.map((order) => ({
   id: order._id,
   createdAt: moment(order.createdAt).format("DD/MM/YYYY"),
   paymentMethod: order.paymentMethod,
