@@ -7,7 +7,7 @@ const NewFooter = () => {
       <div className="footer-main">
         <div className="footer-section">
           <h4>ABOUT</h4>
-          <a href="#">Contact Us</a>
+          <a href="/contactus">Contact Us</a>
           <a href="#">About Us</a>
           
         </div>

@@ -18,6 +18,7 @@ import Buynow from './component/Buynow'
 import ContactUs from './component/ContactUs'
 import Profile from './component/Profile'
 import Order from './component/Order'
+import ScrollToTop from './component/ScrollToTop'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <CartProvider>
           
         <BrowserRouter>
+        <ScrollToTop />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />

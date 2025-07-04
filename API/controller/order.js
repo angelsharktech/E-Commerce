@@ -1,6 +1,7 @@
 import Razorpay from "razorpay";
-import dotenv from "dotenv";
 import order from "../model/order.js";
+import twilio from "twilio";
+import dotenv from "dotenv";
 dotenv.config();
 
 export const createOrder = async (req, res, next) => {
@@ -59,7 +60,17 @@ export const updateOrderStatus =  async (req, res) => {
   try {
     
     const result = await order.findByIdAndUpdate({_id:req.params.id}, req.body , {new:true});
-    res.status(200).json({msg:"Product Updated successfully...", result});
+    if(result.orderStatus === 'Delivered'){
+      // send sms to user
+      const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);
+      
+      await twilioClient.messages.create({
+          body: `Your order with Order ID ${result._id} has been delivered successfully.`,
+          from: process.env.TWILIO_PHONE,
+          to: result.shippingInfo.mob_no
+        });
+    }
+    res.status(200).json({msg:"Order Updated successfully...", result});
   } catch (error) {
     console.log(error)
   }

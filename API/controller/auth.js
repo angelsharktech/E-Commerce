@@ -1,9 +1,10 @@
 import Otp from "../model/otp.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import otpGenerator from "otp-generator";
 import twilio from "twilio";
+import dotenv from "dotenv";
 import webuser from "../model/webuser.js";
+dotenv.config();
 
 export const sendOtp = async (req, res, next) => {
   const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH);

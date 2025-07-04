@@ -260,7 +260,7 @@ const Header = () => {
                       {/* <Link className='header' >{webuser.name}</Link> */}
                       <h6 className="header">
                         <AccountCircleIcon />
-                        {webuser?.mob_no}
+                        {/* {webuser?.mob_no} */}
                       </h6>
                       <ul className="dropdown-menu">
                         <li>

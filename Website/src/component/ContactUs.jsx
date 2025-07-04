@@ -46,7 +46,7 @@ const ContactUs = () => {
             alignItems="flex-start"
             sx={{ width: "100%", marginTop: "2%", pr: { sm: 8, xs: 0 } ,ml:{xs:15} }}
           >
-            <Card sx={{ width: 420, borderRadius: 5, boxShadow: 6 }}>
+            <Card sx={{ width: { sm: 420, xs: 320 }, borderRadius: 5, boxShadow: 6 ,ml:{xs:5}}}>
               <CardContent>
                 <Stack direction="column" spacing={3}>
                   <TextField
