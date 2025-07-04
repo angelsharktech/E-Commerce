@@ -74,6 +74,14 @@ export const getOrderByOrderId = async (req, res, next) => {
     res.status(500).json({ error: "Failed to get order" });
   }
 };
+export const getOrderByStatus = async (req, res, next) => {
+  try {    
+    const result = await order.find({orderStatus: req.params.status}).populate('products.product').sort({ createdAt: 'desc' });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get order" });
+  }
+}
 export const getOrderByStatusAndDate = async (req, res, next) => {
   try {
      const start = new Date();

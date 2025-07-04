@@ -10,15 +10,29 @@ import {
   Grid,
   TextField,
   Typography,
+  Button,
+  Stack,
 } from "@mui/material";
 import { DataGrid, GridCellEditStopReasons } from "@mui/x-data-grid";
 import moment from "moment";
 import axios from "axios";
 
 const Order = () => {
-  const orders = useFetch("/order/getOrder");
+  // const orders = useFetch("/order/getOrder");
   const statusOptions = ['Accepted' ,'Shipped', 'Delivered', 'Cancelled'];
-  //   console.log("orders::", orders);
+
+ const [orders, setOrders] = useState();
+  const [activeStatus, setActiveStatus] = useState("");
+
+  const showOrders = async (status) => {
+    try {
+      setActiveStatus(status);
+      const res = await axios.get(`/order/getOrderByStatus/${status}`);
+      setOrders(res.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
 const rows = orders.data?.map((order) => ({
   id: order._id,
   createdAt: moment(order.createdAt).format("DD/MM/YYYY"),
@@ -101,77 +115,90 @@ const rows = orders.data?.map((order) => ({
     { field: "products", headerName: "Products", width: 300 },
   ];
   return (
-    <>
-       <Box
+     <>
+      <Box
         sx={{
-          height: 400,
-          width: '100%',
-          '& .color-cancel': {
-            bgcolor: (theme) =>
-              theme.palette.mode === 'dark' ? '#f5c1c5' : 'rgb(233, 200, 203)',
-          },
-          '& .color-ship': {
-            bgcolor: (theme) =>
-              theme.palette.mode === 'dark' ? '#f5c1c5' : '#AEC8A4',
-          },
+          borderRadius: 4,
+          boxShadow: 10,
+          background: "white",
+          padding: 3,
         }}
       >
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ width: "70vw", height: "100%" }}
-      >
-        <Grid item xs={12} md={10} lg={8}>
-          <Card
-            sx={{ borderRadius: 4, boxShadow: 10, background: "white", mt: 5 }}
-          >
-            <CardContent>
-              <Typography
-                variant="h5"
-                fontWeight={600}
-                color="#c26afc"
-                gutterBottom
-              >
-                Orders List
-              </Typography>
-              <div style={{ height: "500px", width: "100%" }}>
-                {!orders ? (
-                  <Typography variant="body1" color="text.secondary">
-                    L O A D I N G
-                  </Typography>
-                ) : (
-                  <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={5}
-                    getRowId={(row) => row.id}
-                    sx={{
-                      borderRadius: 2,
-                      boxShadow: 2,
-                      background: "#f9f9fb",
-                      minWidth: 200,
-                    }}
-                    getRowClassName={(params) => {
-                  //if (params?.row?.pay_mode === 'PAYMENT PENDING' || params?.row?.amnt_due !== 0  ) {
-                  if (params?.row?.orderStatus === 'Cancelled'  ) {
-                    return 'color-cancel';
-                  }
-                  if (params?.row?.orderStatus === 'Shipped'  ) {
-                    return 'color-ship';
-                  }
-                  return 'nocolor';
-                }}
-                    processRowUpdate={handleProcessRowUpdate}
-                    experimentalFeatures={{ newEditingApi: true }}
-                  />
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+        <Typography variant="h5" fontWeight={600} color="#c26afc" gutterBottom>
+          Orders List
+        </Typography>
+        <Stack direction="row" gap={2} mt={3}>
+          {[
+            { label: "Processing", color: "primary" },
+            { label: "Accepted", color: "secondary" },
+            { label: "Shipped", color: "inherit" },
+            { label: "Delivered", color: "success" },
+            { label: "Cancelled", color: "error" },
+          ].map(({ label, color }) => (
+            <Button
+              key={label}
+              variant={activeStatus === label ? "contained" : "outlined"}
+              color={color}
+              onClick={() => showOrders(label)}
+            >
+              {label}
+            </Button>
+          ))}
+        </Stack>
       </Box>
+
+      <Box
+        sx={{
+          height: 400,
+          width: "100%",
+        }}
+      >
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          sx={{ width: "70vw", height: "100%" }}
+        >
+          <Grid item xs={12} md={10} lg={8}>
+            <div>
+              {!orders ? (
+                <Typography variant="h3" color="#177bad">
+                  L O A D I N G. . .
+                </Typography>
+              ) : (
+                <Card
+                  sx={{
+                    borderRadius: 4,
+                    boxShadow: 10,
+                    background: "white",
+                    mt: 1,
+                  }}
+                >
+                  <CardContent>
+                    <div style={{ height: "450px", width: "100%" }}>
+                      <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        pageSize={5}
+                        getRowId={(row) => row.id}
+                        sx={{
+                          borderRadius: 2,
+                          boxShadow: 2,
+                          background: "#f9f9fb",
+                          minWidth: 200,
+                        }}
+                        processRowUpdate={handleProcessRowUpdate}
+                        experimentalFeatures={{ newEditingApi: true }}
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </Grid>
+        </Grid>
+      </Box>
+      
     </>
   );
 };
