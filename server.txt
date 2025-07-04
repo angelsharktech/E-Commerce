@@ -26,6 +26,11 @@ Restart your backend with PM2:
 Copy
 pm2 restart project-backend
 
+if you get any conflict in any file at the time of production you should open that file
+and remove conflicts. After that run command 
+git add <File name>
+git commit -m "Resolved merge conflict in <File name>"
+
 
 
 mongodbconnection:

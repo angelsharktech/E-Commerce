@@ -32,6 +32,7 @@ import CategoryList from "./CategoryList";
 import Order from "./Order";
 import ReorderOutlinedIcon from "@mui/icons-material/ReorderOutlined";
 import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
+import axios from "axios";
 
 const menuItems = [
   {
