@@ -37,6 +37,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SearchBar from "../component/SearchBar";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const { webuser } = useContext(userInformation);
@@ -229,12 +230,32 @@ const Header = () => {
                 </div>
               </div>
 
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <div className="menu-button">
+              <div className="menu-button">
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between", // space between menu+logo and other elements (e.g. cart, login)
+                    left: 0,
+                  }}
+                >
                   <React.Fragment key={"left"}>
-                    <Button onClick={toggleDrawer("left", true)}>
-                      <MoreVert sx={{ color: "#808080", fontSize: 50 }} />
-                    </Button>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: -1 }}>
+                      <Button onClick={toggleDrawer("left", true)}>
+                        <MenuIcon sx={{ color: "#ccc", fontSize: 32 }} />
+                      </Button>
+
+                      <Typography
+                        variant="h6"
+                        fontWeight="bold"
+                         color= "#fff"
+                      >
+                        <Link to={"/home"} style={{ color: "#fff", textDecoration: "none" }}>
+                          Starbasket
+                        </Link>
+                      </Typography>
+                    </Box>
+
                     <Drawer
                       anchor="left"
                       open={menu["left"]}
@@ -243,9 +264,9 @@ const Header = () => {
                       {list("left")}
                     </Drawer>
                   </React.Fragment>
-                </div>
-               
-              </Box>
+                </Box>
+              </div>
+
 
               <Box className="header-actions">
                 {webuser ? (
