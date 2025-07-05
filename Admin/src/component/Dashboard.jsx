@@ -28,7 +28,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import ProductList from "./ProductList";
 import NewCategory from "./NewCategory";
-import CategoryList from "./CategoryList";
+import Feedback from "./Feedback";
 import Order from "./Order";
 import ReorderOutlinedIcon from "@mui/icons-material/ReorderOutlined";
 import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
@@ -217,6 +217,7 @@ const Dashboard = () => {
                   About: <AboutUs />,
                   Contact: <ContactUs />,
                   Profile: <Profile />,
+                  Feedback: <Feedback />,
                 }[comp]
               }
             </Box>

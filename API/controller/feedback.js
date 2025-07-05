@@ -8,3 +8,11 @@ export const addFeedback = async (req, res, next) => {
         next(error)
     }
 }
+export const getFeedback = async (req, res, next) => {
+    try {
+        const result = await feedback.find()
+        res.status(200).json(result)
+    } catch (error) {
+        next(error)
+    }
+}
