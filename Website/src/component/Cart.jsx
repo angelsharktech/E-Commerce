@@ -111,7 +111,7 @@ const Cart = () => {
         !webuser?.state?.trim()
       ) {
         alert(
-          "Please fill in all required shipping details before proceeding."
+          "Please fill your profile details for shipping before proceeding."
         );
         return;
       } else {
