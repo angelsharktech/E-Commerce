@@ -35,11 +35,6 @@ h1 {
   letter-spacing: 2px;
   font-family: "Baloo Bhai 2", cursive, sans-serif;
 }
-.box:hover {
-  transform: translateY(-8px) scale(1.04) rotate(-2deg);
-  box-shadow: 0 8px 32px rgba(255, 78, 80, 0.22);
-}
-
 .price-label {
   color: #888;
   font-size: 1rem;
@@ -108,7 +103,10 @@ html {
     width: 30%; /* 3 cards with gap (~90%) */
     height: 1%;
   }
-  
+  .box:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(255, 78, 80, 0.22);
+}
   .discount-badge {
     background: #471396;
     color: #fff;
@@ -319,7 +317,10 @@ html {
     align-items: center;
     width: 15%; /* 5 cards with gap (~90%) */
   }
-
+.box:hover {
+  transform: translateY(-8px) scale(1.04) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(255, 78, 80, 0.22);
+}
   .discount-badge {
     background: #471396;
     color: #fff;
