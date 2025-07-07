@@ -23,7 +23,7 @@ const Sidebar = ({ filters, onFilterChange }) => {
       priceMin: "",
       priceMax: "",
     });
-    navigate("/home");
+    navigate("/product");
   };
   const category = useFetch("/category/getCategory");
   const res = useFetch("/product/getProduct");
