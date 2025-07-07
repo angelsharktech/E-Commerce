@@ -8,7 +8,7 @@ import {
   Stack,
   useMediaQuery,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link ,useSearchParams} from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import "./Home.css";
 import axios from "axios";
@@ -21,13 +21,14 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 const Product = () => {
   // const { data } = useFetch('/product/getProduct')
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
-    ageGroups: [],
-    brands: [],
-    categories: [],
-    discount: [],
-    priceMin: "",
-    priceMax: "",
+    ageGroups: searchParams.getAll("ageGroups"),
+    brands: searchParams.getAll("brands"),
+    categories: searchParams.getAll("categories"),
+    discount: searchParams.getAll("discount"),
+    priceMin: searchParams.get("priceMin") || "",
+    priceMax: searchParams.get("priceMax") || "",
   });
 
   const [products, setProducts] = useState([]);
@@ -36,7 +37,23 @@ const Product = () => {
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false); //Mobile View
   // Handle updates from Sidebar
   const updateFilters = (newFilter) => {
-    setFilters((prev) => ({ ...prev, ...newFilter }));
+        setFilters((prev) => {
+      const updated = { ...prev, ...newFilter };
+
+      const params = new URLSearchParams();
+
+      updated.ageGroups.forEach((v) => params.append("ageGroups", v));
+      updated.brands.forEach((v) => params.append("brands", v));
+      updated.categories.forEach((v) => params.append("categories", v));
+      updated.discount.forEach((v) => params.append("discount", v));
+
+      if (updated.priceMin) params.set("priceMin", updated.priceMin);
+      if (updated.priceMax) params.set("priceMax", updated.priceMax);
+
+      setSearchParams(params); // updates URL
+
+      return updated;
+    });
   };
 
   useEffect(() => {
