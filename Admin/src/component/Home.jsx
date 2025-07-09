@@ -8,8 +8,7 @@ const Home = () => {
     const { user } = useContext(userInformation)
     const total_product = useFetch(`/product/getProductByShop/${user.shop_name}`)
     const total_category = useFetch(`/category/getCategoryByShop/${user.shop_name}`)
-    console.log('total_product',total_product);
-    console.log('total_category',total_category);
+   
   return (
   <Box
   className='home-background'
