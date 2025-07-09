@@ -2,7 +2,6 @@ import salebill from "../model/salebill.js";
 
 export const addSaleBill = async (req, res) => {
     try {
-        console.log(req.body);
         const result = await new salebill(req.body).save();
 
         res.status(201).json({ msg: "Sale Bill added successfully" ,status: "Success",id:result._id });
