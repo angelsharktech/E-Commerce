@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
+  Accordion,
+  AccordionSummary,
   AppBar,
   Box,
   Button,
   Card,
-  Modal,
+  CardContent,
   Grid,
   Toolbar,
   Typography,
@@ -13,6 +15,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Modal,
 } from "@mui/material";
 import Product from "./Product";
 import Category from "./Category";
@@ -27,12 +30,16 @@ import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import ProductList from "./ProductList";
-import NewCategory from "./NewCategory";
 import Feedback from "./Feedback";
+import CategoryList from "./CategoryList";
 import Order from "./Order";
 import ReorderOutlinedIcon from "@mui/icons-material/ReorderOutlined";
 import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
+import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
 import axios from "axios";
+import SaleBill from "./SaleBill";
+import BillReport from "./BillReport";
 
 const menuItems = [
   {
@@ -47,13 +54,15 @@ const menuItems = [
   },
   { label: "Add Category", value: "Category", icon: <CategoryOutlinedIcon /> },
   // { label: 'Category List', value: 'CategoryList', icon: <ListAltOutlinedIcon /> },
+  { label: "Orders", value: "Orders", icon: <ReorderOutlinedIcon /> },
   {
     label: "Profile Manager",
     value: "Profile",
     icon: <PersonOutlineOutlinedIcon />,
   },
-  { label: "Orders", value: "Orders", icon: <ReorderOutlinedIcon /> },
   { label: "Feedback", value: "Feedback", icon: <FeedbackOutlinedIcon /> },
+  { label: "SaleBill", value: "SaleBill", icon: <CurrencyRupeeOutlinedIcon /> },
+  { label: "Bill Report", value: "Report", icon: <SummarizeOutlinedIcon /> },
 ];
 
 const selected = {
@@ -218,13 +227,15 @@ const Dashboard = () => {
                   Contact: <ContactUs />,
                   Profile: <Profile />,
                   Feedback: <Feedback />,
+                  SaleBill: <SaleBill />,
+                  Report: <BillReport />,
                 }[comp]
               }
+              {/* <div><h1>Mansi</h1></div> */}
             </Box>
           </Grid>
         </Grid>
       </Box>
-
       <Modal
         open={open}
         style={{
