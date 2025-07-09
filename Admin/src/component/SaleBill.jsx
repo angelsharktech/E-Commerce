@@ -112,7 +112,10 @@ const SaleBill = () => {
         alert("Please enter transaction number.");
         return;
       }
-
+      if (data.mob_no.length < 10 || data.mob_no.length > 10) {
+        alert("Please enter a valid mobile number.");
+        return;
+      }
       const payload = {
         customer_name: data.customer_name,
         mob_no: data.mob_no,
@@ -136,13 +139,18 @@ const SaleBill = () => {
           );
           const qty = res.data.avail_qty - p.quantity;
           if (res.data) {
-            await axios.patch(`/product/updateProduct/${p.product_detail?._id}`, {
-              avail_qty: qty,
-            });
+            await axios.patch(
+              `/product/updateProduct/${p.product_detail?._id}`,
+              {
+                avail_qty: qty,
+              }
+            );
           }
         }
 
-        const bill = await axios.get(`/salebill/getSaleBillById/${result.data.id}`);
+        const bill = await axios.get(
+          `/salebill/getSaleBillById/${result.data.id}`
+        );
         setBillData(bill.data);
         setShowPrint(true); // Show bill for printing
 
@@ -178,7 +186,12 @@ const SaleBill = () => {
           <Grid item xs={12} md={10} lg={8}>
             <Card sx={{ borderRadius: 4, boxShadow: 10, background: "white" }}>
               <CardContent>
-                <Typography variant="h5" fontWeight={700} color="#c26afc" gutterBottom>
+                <Typography
+                  variant="h5"
+                  fontWeight={700}
+                  color="#c26afc"
+                  gutterBottom
+                >
                   Sale Bill
                 </Typography>
                 <Divider sx={{ mb: 3 }} />
