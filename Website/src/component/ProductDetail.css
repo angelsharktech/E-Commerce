@@ -92,6 +92,18 @@
     flex-direction: column;
     gap: 10px;
   }
+  .product-info {
+    flex: 1 1 50%;
+    border-radius: 28px;
+    box-shadow: 0 8px 32px rgba(194, 106, 252, 0.1);
+    margin: 50px 0 0 0;
+    padding: 32px 36px 28px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 340px;
+    text-align: left;
+  }
    .product-detail-flex {
     
     flex-direction: column;

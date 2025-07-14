@@ -174,7 +174,10 @@ const ProductDetail = () => {
                   </>
                 )}
               </p>
-              <div className="product-actions">
+              
+            </div>
+          )}
+          <div className="product-actions">
                 <Button
                   variant="contained"
                   className="product-btn"
@@ -204,8 +207,6 @@ const ProductDetail = () => {
                   Buy Now
                 </Button></>)}
               </div>
-            </div>
-          )}
         </div>
          <Divider style={{ marginTop: "-8%", marginBottom: "1%" }} />
         <div>
