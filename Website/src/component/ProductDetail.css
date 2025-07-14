@@ -94,6 +94,7 @@
   }
   .product-info {
     flex: 1 1 50%;
+    width:100%;
     border-radius: 28px;
     box-shadow: 0 8px 32px rgba(194, 106, 252, 0.1);
     margin: 50px 0 0 0;
